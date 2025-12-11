@@ -57,7 +57,7 @@ function FAQItem({ item, index, isOpen, onToggle }: { item: FAQItem; index: numb
     >
       <button
         onClick={onToggle}
-        className="w-full flex items-start justify-between gap-4 py-6 text-left group"
+        className="w-full flex items-start justify-between gap-4 py-6 text-left group cursor-pointer"
       >
         <h3 className="text-lg sm:text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-200">
           {item.question}
@@ -83,7 +83,7 @@ function FAQItem({ item, index, isOpen, onToggle }: { item: FAQItem; index: numb
         className="overflow-hidden"
       >
         <div className="pb-6 pr-12">
-          <p className="text-base text-muted-foreground leading-relaxed mb-4">
+          <p className="text-base text-muted-foreground leading-relaxed mb-4 cursor-text select-text">
             {item.answer}
           </p>
           {item.links && item.links.length > 0 && (

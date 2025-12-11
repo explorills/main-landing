@@ -322,10 +322,12 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-background text-foreground pb-16">
-      <ParticleBackground />
-      <FloatingOrbs />
-      <RisingParticles />
+    <div className="relative min-h-screen bg-background text-foreground pb-16">
+      <div className="absolute inset-0 w-full" style={{ minHeight: '100%' }}>
+        <ParticleBackground />
+        <FloatingOrbs />
+        <RisingParticles />
+      </div>
       
       <motion.header
         initial={{ y: -100 }}
