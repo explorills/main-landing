@@ -118,7 +118,7 @@ function TeamMemberCard({ member, index }: { member: TeamMember; index: number }
                 href={member.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border/50 hover:border-[#0077b5] bg-card/30 hover:bg-[#0077b5]/10 transition-all duration-300 group"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border/50 hover:border-[#0077b5] bg-card/30 hover:bg-[#0077b5]/10 transition-all duration-300 group cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >

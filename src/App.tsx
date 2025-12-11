@@ -322,12 +322,10 @@ function App() {
   }, [])
 
   return (
-    <div className="relative min-h-screen bg-background text-foreground pb-16">
-      <div className="absolute inset-0 w-full" style={{ minHeight: '100%' }}>
-        <ParticleBackground />
-        <FloatingOrbs />
-        <RisingParticles />
-      </div>
+    <div className="min-h-screen bg-background text-foreground pb-16">
+      <ParticleBackground />
+      <FloatingOrbs />
+      <RisingParticles />
       
       <motion.header
         initial={{ y: -100 }}
@@ -393,7 +391,7 @@ function App() {
                 href="https://mint.expl.one"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-sm transition-all duration-200"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-sm transition-all duration-200 cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -581,7 +579,7 @@ function App() {
                   href="https://mint.expl.one"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block relative group"
+                  className="inline-block relative group cursor-pointer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.98 }}
                   transition={{ duration: 0.2 }}

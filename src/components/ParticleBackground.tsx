@@ -188,12 +188,11 @@ export function ParticleBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute top-0 left-0 pointer-events-none z-0"
+      className="fixed top-0 left-0 pointer-events-none z-0"
       style={{ 
         opacity: 0.7, 
-        width: '100%', 
-        height: '100%',
-        minHeight: '100vh',
+        width: '100vw', 
+        height: '100vh',
         mixBlendMode: 'screen'
       }}
     />

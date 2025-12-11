@@ -56,7 +56,10 @@ export function Footer() {
                     className="relative group cursor-pointer"
                   >
                     <div className="absolute inset-0 rounded-full bg-primary/50 blur-lg opacity-0 group-hover:opacity-60 transition-opacity duration-300" />
-                    <img src={social.icon} alt={social.name} className="relative w-5 h-5 opacity-60 group-hover:opacity-100 transition-opacity" />
+                    <div className="relative w-5 h-5">
+                      <img src={social.icon} alt={social.name} className="w-full h-full opacity-60 group-hover:opacity-0 transition-opacity duration-300" />
+                      <img src={social.icon} alt={social.name} className="absolute inset-0 w-full h-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ filter: 'brightness(0) saturate(100%) invert(55%) sepia(75%) saturate(3021%) hue-rotate(248deg) brightness(93%) contrast(91%)' }} />
+                    </div>
                   </a>
                 ))}
               </div>
