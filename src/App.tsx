@@ -22,7 +22,6 @@ const ecosystemProjects = [
   { name: 'care', color: '#64748b' },
   { name: 'merch', color: '#ef5609' },
   { name: 'space', color: '#84cc16' },
-  { name: 'ecosystem', color: '#a147e1' },
 ]
 
 type ProjectStatus = 'LIVE' | 'In Progress' | 'Coming Soon'
@@ -333,7 +332,7 @@ function App() {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'backdrop-blur-lg bg-[#1c1c1d]/80' : 'bg-[#1c1c1d]'
+          scrolled ? 'backdrop-blur-lg bg-[#1c1c1d]/60' : 'bg-[#1c1c1d]/70'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -351,7 +350,7 @@ function App() {
               />
               <div className="flex flex-col gap-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-lg sm:text-xl font-bold text-foreground/60">ONE</span>
+                  <span className="text-[22px] sm:text-2xl font-bold text-white">ONE</span>
                   <span className="relative inline-block min-w-[80px] sm:min-w-[120px]">
                     <motion.span
                       key={currentIndex}
@@ -362,12 +361,20 @@ function App() {
                         duration: 0.5,
                         ease: [0.16, 1, 0.3, 1],
                       }}
-                      className="absolute left-0 top-1/2 -translate-y-1/2 text-lg sm:text-xl font-bold whitespace-nowrap"
+                      className="absolute left-0 top-1/2 -translate-y-1/2 text-[22px] sm:text-2xl font-bold whitespace-nowrap"
                       style={{ color: ecosystemProjects[currentIndex].color }}
                     >
-                      {ecosystemProjects[currentIndex].name}
+                      <span className="relative">
+                        {ecosystemProjects[currentIndex].name}
+                        <span
+                          className="absolute inset-0 blur-2xl opacity-50"
+                          style={{ color: ecosystemProjects[currentIndex].color }}
+                        >
+                          {ecosystemProjects[currentIndex].name}
+                        </span>
+                      </span>
                     </motion.span>
-                    <span className="opacity-0 text-lg sm:text-xl font-bold">ecosystem</span>
+                    <span className="opacity-0 text-[22px] sm:text-2xl font-bold">ecosystem</span>
                   </span>
                 </div>
                 <PoweredByExplNodes size="sm" />
@@ -494,7 +501,7 @@ function App() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold leading-tight">
+              <h1 className="text-[50px] sm:text-[74px] md:text-[98px] lg:text-[130px] font-bold leading-tight">
                 <span className="text-foreground/60">ONE</span>{' '}
                 <AnimatedWord />
               </h1>

@@ -47,26 +47,26 @@ const STYLES = {
   
   // Colors (EXACT from CSS variables)
   textColor: '#ffffff', // text-white
-  backgroundColor: 'oklch(0.18 0.04 252)', // bg-card
-  backgroundColorHover: 'oklch(0.18 0.04 252 / 0.8)', // bg-card/80
+  backgroundColor: 'rgba(28, 28, 29, 0.5)', // navbar color transparent
+  backgroundColorHover: 'rgba(28, 28, 29, 0.7)', // navbar color hover
   borderColor: '#a147e1', // theme primary color
   
   // Size variants - EXACT from Tailwind classes
   sizes: {
     sm: {
-      fontSize: '10px',
+      fontSize: '12px',
       paddingX: '8px',   // px-2
       paddingY: '4px',   // py-1
       borderRadius: '4px', // rounded-sm
     },
     md: {
-      fontSize: '12px',  // text-[12px] - EXACT original size
+      fontSize: '14px',
       paddingX: '12px',  // px-3 - EXACT original padding
       paddingY: '6px',   // py-1.5 - EXACT original padding
       borderRadius: '6px', // rounded-md - EXACT original radius
     },
     lg: {
-      fontSize: '14px',
+      fontSize: '16px',
       paddingX: '16px',  // px-4
       paddingY: '8px',   // py-2
       borderRadius: '8px', // rounded-lg
@@ -77,8 +77,8 @@ const STYLES = {
   shadow: {
     // shadow-[0_2px_4px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)]
     default: '0 2px 4px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
-    // hover:shadow-[0_4px_8px_rgba(0,0,0,0.4),0_0_12px_hsl(var(--primary)/0.6),inset_0_1px_0_rgba(255,255,255,0.15)]
-    hover: '0 4px 8px rgba(0,0,0,0.4), 0 0 12px oklch(0.6271 0.1699 149.21 / 0.6), inset 0 1px 0 rgba(255,255,255,0.15)',
+    // hover:shadow-[0_4px_8px_rgba(0,0,0,0.4),0_0_12px_theme-color,inset_0_1px_0_rgba(255,255,255,0.15)]
+    hover: '0 4px 8px rgba(0,0,0,0.4), 0 0 12px rgba(161, 71, 225, 0.6), inset 0 1px 0 rgba(255,255,255,0.15)',
   },
 } as const
 
