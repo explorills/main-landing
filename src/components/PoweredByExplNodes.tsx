@@ -49,7 +49,7 @@ const STYLES = {
   textColor: '#ffffff', // text-white
   backgroundColor: 'oklch(0.18 0.04 252)', // bg-card
   backgroundColorHover: 'oklch(0.18 0.04 252 / 0.8)', // bg-card/80
-  borderColor: 'oklch(0.6271 0.1699 149.21)', // border-primary
+  borderColor: '#a147e1', // theme primary color
   
   // Size variants - EXACT from Tailwind classes
   sizes: {

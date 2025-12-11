@@ -22,6 +22,7 @@ const ecosystemProjects = [
   { name: 'care', color: '#64748b' },
   { name: 'merch', color: '#ef5609' },
   { name: 'space', color: '#84cc16' },
+  { name: 'ecosystem', color: '#a147e1' },
 ]
 
 type ProjectStatus = 'LIVE' | 'In Progress' | 'Coming Soon'
@@ -336,7 +337,7 @@ function App() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-20 gap-4">
+          <div className="flex items-center justify-between py-3 sm:py-4 gap-4">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -348,27 +349,29 @@ function App() {
                 alt="ONE Logo" 
                 className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
               />
-              <div className="flex items-center gap-2">
-                <span className="text-lg sm:text-xl font-bold text-foreground/60">ONE</span>
-                <span className="relative inline-block min-w-[80px] sm:min-w-[120px]">
-                  <motion.span
-                    key={currentIndex}
-                    initial={{ y: 20, opacity: 0, filter: 'blur(4px)' }}
-                    animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-                    exit={{ y: -20, opacity: 0, filter: 'blur(4px)' }}
-                    transition={{
-                      duration: 0.5,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                    className="absolute left-0 top-1/2 -translate-y-1/2 text-lg sm:text-xl font-bold whitespace-nowrap"
-                    style={{ color: ecosystemProjects[currentIndex].color }}
-                  >
-                    {ecosystemProjects[currentIndex].name}
-                  </motion.span>
-                  <span className="opacity-0 text-lg sm:text-xl font-bold">ecosystem</span>
-                </span>
+              <div className="flex flex-col gap-1">
+                <div className="flex items-center gap-2">
+                  <span className="text-lg sm:text-xl font-bold text-foreground/60">ONE</span>
+                  <span className="relative inline-block min-w-[80px] sm:min-w-[120px]">
+                    <motion.span
+                      key={currentIndex}
+                      initial={{ y: 20, opacity: 0, filter: 'blur(4px)' }}
+                      animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+                      exit={{ y: -20, opacity: 0, filter: 'blur(4px)' }}
+                      transition={{
+                        duration: 0.5,
+                        ease: [0.16, 1, 0.3, 1],
+                      }}
+                      className="absolute left-0 top-1/2 -translate-y-1/2 text-lg sm:text-xl font-bold whitespace-nowrap"
+                      style={{ color: ecosystemProjects[currentIndex].color }}
+                    >
+                      {ecosystemProjects[currentIndex].name}
+                    </motion.span>
+                    <span className="opacity-0 text-lg sm:text-xl font-bold">ecosystem</span>
+                  </span>
+                </div>
+                <PoweredByExplNodes size="sm" />
               </div>
-              <PoweredByExplNodes size="sm" className="hidden sm:block" />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 20 }}
@@ -390,7 +393,7 @@ function App() {
         </div>
       </motion.header>
 
-      <main className="pt-16 sm:pt-20">
+      <main className="pt-20 sm:pt-24">
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
           <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
           
