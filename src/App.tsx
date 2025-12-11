@@ -7,7 +7,7 @@ import { ActivityChart } from '@/components/ActivityChart'
 import { FAQSection } from '@/components/FAQSection'
 import { TeamSection } from '@/components/TeamSection'
 import { Footer } from '@/components/Footer'
-import { ParticleBackground, FloatingOrbs, RisingParticles } from '@/components/ParticleBackground'
+import { ParticleBackground, FloatingOrbs, RisingParticles, BottomParticleBackground } from '@/components/ParticleBackground'
 import { PoweredByExplNodes } from '@/components/PoweredByExplNodes'
 import { calculateDaysSinceStart } from '@/lib/github'
 
@@ -324,8 +324,8 @@ function App() {
   return (
     <div className="min-h-screen bg-background text-foreground pb-16">
       <ParticleBackground />
+      <BottomParticleBackground />
       <FloatingOrbs />
-      <RisingParticles />
       <RisingParticles />
       
       <motion.header
@@ -404,7 +404,7 @@ function App() {
       </motion.header>
 
       <main className="pt-10 sm:pt-14">
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 -mt-10">
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 -mt-5">
           <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
           
           <div className="relative z-10 w-full max-w-7xl mx-auto">
