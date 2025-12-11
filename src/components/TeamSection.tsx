@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/card'
 import { Envelope, LinkedinLogo } from '@phosphor-icons/react'
-import giorgioImage from '@/assets/images/giorgio-ricchiari.jpg'
+import giorgioImage from '@/assets/images/giorgio-orb-orbeliani.jpg'
 import likaImage from '@/assets/images/lika-biniashvili.jpeg'
 
 interface TeamMember {

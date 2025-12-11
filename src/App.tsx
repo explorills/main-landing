@@ -8,6 +8,7 @@ import { FAQSection } from '@/components/FAQSection'
 import { TeamSection } from '@/components/TeamSection'
 import { Footer } from '@/components/Footer'
 import { ParticleBackground, FloatingOrbs, RisingParticles } from '@/components/ParticleBackground'
+import { PoweredByExplNodes } from '@/components/PoweredByExplNodes'
 import { calculateDaysSinceStart } from '@/lib/github'
 
 const ecosystemProjects = [
@@ -293,6 +294,15 @@ function ProjectCard({ project, index }: { project: ProjectDetails; index: numbe
 
 function App() {
   const [scrolled, setScrolled] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % ecosystemProjects.length)
+    }, 2000)
+    
+    return () => clearInterval(interval)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -326,29 +336,55 @@ function App() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 sm:h-20">
+          <div className="flex items-center justify-between h-16 sm:h-20 gap-4">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex items-center gap-3 sm:gap-4"
+              className="flex items-center gap-3 sm:gap-4 flex-shrink-0"
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 relative flex-shrink-0">
-                <svg viewBox="0 0 500 500" className="w-full h-full">
-                  <circle cx="250" cy="250" r="200" fill="#d1d5db" />
-                  <ellipse cx="250" cy="250" rx="110" ry="180" fill="#000000" />
-                  <circle cx="425" cy="425" r="25" fill="#a147e1" />
-                </svg>
+              <img 
+                src="/logo.png" 
+                alt="ONE Logo" 
+                className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
+              />
+              <div className="flex items-center gap-2">
+                <span className="text-lg sm:text-xl font-bold text-foreground/60">ONE</span>
+                <span className="relative inline-block min-w-[80px] sm:min-w-[120px]">
+                  <motion.span
+                    key={currentIndex}
+                    initial={{ y: 20, opacity: 0, filter: 'blur(4px)' }}
+                    animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
+                    exit={{ y: -20, opacity: 0, filter: 'blur(4px)' }}
+                    transition={{
+                      duration: 0.5,
+                      ease: [0.16, 1, 0.3, 1],
+                    }}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 text-lg sm:text-xl font-bold whitespace-nowrap"
+                    style={{ color: ecosystemProjects[currentIndex].color }}
+                  >
+                    {ecosystemProjects[currentIndex].name}
+                  </motion.span>
+                  <span className="opacity-0 text-lg sm:text-xl font-bold">ecosystem</span>
+                </span>
               </div>
-              <span className="text-base sm:text-lg font-semibold text-foreground">EXPL.ONE</span>
+              <PoweredByExplNodes size="sm" className="hidden sm:block" />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-xs sm:text-sm text-muted-foreground font-mono"
             >
-              ONE ecosystem <span className="hidden sm:inline">// Powered by <a href="https://mint.expl.one" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline transition-colors duration-200">EXPL Nodes</a></span>
+              <motion.a
+                href="https://mint.expl.one"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-sm transition-all duration-200"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                Get Node
+              </motion.a>
             </motion.div>
           </div>
         </div>
