@@ -384,13 +384,17 @@ function App() {
                   >
                     <motion.div
                       animate={{
-                        y: [0, -8, 0],
+                        y: [0, -12, 0],
                       }}
                       transition={{
-                        duration: 3 + index * 0.2,
+                        duration: 2.5 + index * 0.15,
                         repeat: Infinity,
-                        ease: 'easeInOut',
-                        delay: index * 0.2,
+                        ease: [0.45, 0.05, 0.55, 0.95],
+                        delay: index * 0.15,
+                      }}
+                      style={{
+                        willChange: 'transform',
+                        transform: 'translateZ(0)',
                       }}
                       className="relative group cursor-pointer"
                     >
