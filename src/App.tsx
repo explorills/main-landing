@@ -6,6 +6,7 @@ import { useGitHubData } from '@/hooks/use-github-data'
 import { ActivityChart } from '@/components/ActivityChart'
 import { FAQSection } from '@/components/FAQSection'
 import { TeamSection } from '@/components/TeamSection'
+import { AboutSection } from '@/components/AboutSection'
 import { Footer } from '@/components/Footer'
 import { ParticleBackground, FloatingOrbs, RisingParticles, BottomParticleBackground } from '@/components/ParticleBackground'
 import { PoweredByExplNodes } from '@/components/PoweredByExplNodes'
@@ -295,6 +296,7 @@ function ProjectCard({ project, index }: { project: ProjectDetails; index: numbe
 function App() {
   const [scrolled, setScrolled] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -383,25 +385,62 @@ function App() {
                 <PoweredByExplNodes size="sm" />
               </div>
             </motion.div>
-            <motion.div
+            <motion.nav
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
+              className="hidden md:flex items-center gap-6"
             >
-              <motion.a
-                href="https://mint.expl.one"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-medium text-sm transition-all duration-200 cursor-pointer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                Get Node
-              </motion.a>
-            </motion.div>
+              <a href="#why-node" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Why Node</a>
+              <a href="#projects" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Projects</a>
+              <a href="#about" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">About Us</a>
+              <a href="#team" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Team</a>
+              <a href="https://github.com/explorills" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Contribute</a>
+              <a href="#faq" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">FAQ</a>
+            </motion.nav>
+            <motion.button
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="md:hidden p-2 text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                {mobileMenuOpen ? (
+                  <>
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </>
+                ) : (
+                  <>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                  </>
+                )}
+              </svg>
+            </motion.button>
           </div>
         </div>
       </motion.header>
+      
+      {mobileMenuOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="fixed top-[72px] left-0 right-0 z-40 bg-[#1c1c1d]/95 backdrop-blur-md border-t border-border/30 md:hidden"
+        >
+          <div className="flex flex-col py-4 px-4 gap-4">
+            <a href="#why-node" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Why Node</a>
+            <a href="#projects" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Projects</a>
+            <a href="#about" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">About Us</a>
+            <a href="#team" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Team</a>
+            <a href="https://github.com/explorills" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Contribute</a>
+            <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">FAQ</a>
+          </div>
+        </motion.div>
+      )}
 
       <main className="pt-10 sm:pt-14">
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 -mt-5">
@@ -496,7 +535,7 @@ function App() {
 
 
 
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-20">
+        <section id="why-node" className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-20">
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
             <motion.div
@@ -649,7 +688,7 @@ function App() {
           </div>
         </section>
 
-        <section className="relative min-h-screen py-20 px-4">
+        <section id="projects" className="relative min-h-screen py-20 px-4">
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
           </div>
@@ -702,9 +741,15 @@ function App() {
           </div>
         </section>
 
-        <TeamSection />
+        <AboutSection />
 
-        <FAQSection />
+        <div id="team">
+          <TeamSection />
+        </div>
+
+        <div id="faq">
+          <FAQSection />
+        </div>
       </main>
 
       <Footer />

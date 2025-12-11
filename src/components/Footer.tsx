@@ -46,7 +46,7 @@ export function Footer() {
                 <span className="text-muted-foreground"> © 2025 All rights reserved</span>
               </div>
               
-              <div className="flex items-center gap-4 max-[480px]:ml-auto">
+              <div className="flex items-center gap-4 max-[550px]:ml-auto">
                 {socialLinks.map((social) => (
                   <a
                     key={social.name}
@@ -64,7 +64,7 @@ export function Footer() {
                 ))}
               </div>
 
-              <div className="max-[480px]:hidden">
+              <div className="max-[550px]:hidden">
                 <PoweredByExplNodes size="sm" />
               </div>
             </div>
