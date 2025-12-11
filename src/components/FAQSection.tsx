@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { Plus, Minus } from '@phosphor-icons/react'
+import { CaretDown } from '@phosphor-icons/react'
 
 interface FAQItem {
   question: string
@@ -16,17 +16,12 @@ const faqs: FAQItem[] = [
   {
     question: "How is ONE different?",
     answer: "We're open source, community-driven, and non-capitalistic. No profit-hungry tech giants here - we create what we love because the purpose IS the creation. The community decides what's worth building, not investors or user metrics.",
-    links: [
-      { text: "GitHub", url: "https://github.com/explorills" },
-      { text: "Discord", url: "https://discord.com/invite/RetTCVq7tJ" },
-    ],
   },
   {
     question: "What's an EXPL Node?",
     answer: "Your stake in the entire ecosystem. One Node = shareholder status in ALL 10 projects. It's the backbone of our economy, decentralization, and governance. Plus, you earn 171 EXPL daily for 731 days (125,000 EXPL total per Node).",
     links: [
       { text: "Tokenomics", url: "https://docs.explorills.com/tokenomics/supply/" },
-      { text: "Documentation", url: "https://docs.expl.one" },
     ],
   },
   {
@@ -50,8 +45,7 @@ const faqs: FAQItem[] = [
   },
 ]
 
-function FAQItem({ item, index }: { item: FAQItem; index: number }) {
-  const [isOpen, setIsOpen] = useState(false)
+function FAQItem({ item, index, isOpen, onToggle }: { item: FAQItem; index: number; isOpen: boolean; onToggle: () => void }) {
 
   return (
     <motion.div
@@ -62,7 +56,7 @@ function FAQItem({ item, index }: { item: FAQItem; index: number }) {
       className="border-b border-border/30 last:border-0"
     >
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={onToggle}
         className="w-full flex items-start justify-between gap-4 py-6 text-left group"
       >
         <h3 className="text-lg sm:text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-200">
@@ -74,11 +68,7 @@ function FAQItem({ item, index }: { item: FAQItem; index: number }) {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="text-primary"
           >
-            {isOpen ? (
-              <Minus size={24} weight="bold" />
-            ) : (
-              <Plus size={24} weight="bold" />
-            )}
+            <CaretDown size={20} weight="bold" />
           </motion.div>
         </div>
       </button>
@@ -119,6 +109,12 @@ function FAQItem({ item, index }: { item: FAQItem; index: number }) {
 }
 
 export function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  const handleToggle = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index)
+  }
+
   return (
     <section className="relative min-h-screen py-20 px-4">
       <div className="absolute inset-0">
@@ -168,7 +164,13 @@ export function FAQSection() {
         >
           <div className="space-y-0">
             {faqs.map((faq, index) => (
-              <FAQItem key={index} item={faq} index={index} />
+              <FAQItem 
+                key={index} 
+                item={faq} 
+                index={index} 
+                isOpen={openIndex === index}
+                onToggle={() => handleToggle(index)}
+              />
             ))}
           </div>
         </motion.div>

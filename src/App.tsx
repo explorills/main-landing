@@ -322,7 +322,7 @@ function App() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background text-foreground pb-16">
       <ParticleBackground />
       <FloatingOrbs />
       <RisingParticles />
@@ -332,7 +332,7 @@ function App() {
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? 'backdrop-blur-lg bg-[#1c1c1d]/60' : 'bg-[#1c1c1d]/70'
+          scrolled ? 'backdrop-blur-lg bg-[#1c1c1d]/40' : 'bg-[#1c1c1d]/50'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -343,14 +343,16 @@ function App() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="flex items-center gap-3 sm:gap-4 flex-shrink-0"
             >
-              <img 
-                src="/logo.png" 
-                alt="ONE Logo" 
-                className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
-              />
+              <div className="bg-[#1c1c1d] rounded-lg p-2">
+                <img 
+                  src="/logo.png" 
+                  alt="ONE Logo" 
+                  className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
+                />
+              </div>
               <div className="flex flex-col gap-1">
                 <div className="flex items-center gap-2">
-                  <span className="text-[22px] sm:text-2xl font-bold text-white">ONE</span>
+                  <span className="text-[24px] sm:text-[26px] font-bold text-white">ONE</span>
                   <span className="relative inline-block min-w-[80px] sm:min-w-[120px]">
                     <motion.span
                       key={currentIndex}
@@ -491,23 +493,7 @@ function App() {
           </div>
         </section>
 
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
-          <div className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent" />
-          
-          <div className="relative z-10 w-full max-w-7xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <h1 className="text-[50px] sm:text-[74px] md:text-[98px] lg:text-[130px] font-bold leading-tight">
-                <span className="text-foreground/60">ONE</span>{' '}
-                <AnimatedWord />
-              </h1>
-            </motion.div>
-          </div>
-        </section>
+
 
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-20">
           <div className="absolute inset-0">
