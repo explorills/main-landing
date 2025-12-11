@@ -326,6 +326,7 @@ function App() {
       <ParticleBackground />
       <FloatingOrbs />
       <RisingParticles />
+      <RisingParticles />
       
       <motion.header
         initial={{ y: -100 }}
@@ -402,8 +403,8 @@ function App() {
         </div>
       </motion.header>
 
-      <main className="pt-20 sm:pt-24">
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4">
+      <main className="pt-10 sm:pt-14">
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 -mt-10">
           <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
           
           <div className="relative z-10 w-full max-w-7xl mx-auto">
@@ -450,9 +451,9 @@ function App() {
                         className="absolute inset-0 rounded-full blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-300"
                         style={{ backgroundColor: project.color }}
                       />
-                      <div className="relative px-4 py-2 sm:px-6 sm:py-3 rounded-full border border-border/50 backdrop-blur-sm bg-background/30 group-hover:border-primary/50 transition-all duration-300">
-                        <span className="text-sm sm:text-base lg:text-lg font-medium whitespace-nowrap">
-                          <span className="opacity-60">ONE</span> <span style={{ color: project.color }}>{project.name}</span>
+                      <div className="relative px-4 py-2 sm:px-6 sm:py-3 rounded-full border border-border/50 backdrop-blur-sm bg-background/30 group-hover:border-primary/50 transition-all duration-300 cursor-pointer">
+                        <span className="text-sm sm:text-base lg:text-lg font-medium whitespace-nowrap cursor-pointer">
+                          <span className="opacity-60 cursor-pointer">ONE</span> <span style={{ color: project.color }} className="cursor-pointer">{project.name}</span>
                         </span>
                       </div>
                     </motion.div>

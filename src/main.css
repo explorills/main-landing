@@ -185,13 +185,14 @@
   }
 }
 /* Text selection cursor for all non-interactive text */
-p, h1, h2, h3, h4, h5, h6, span:not([role="button"]) {
+p, h1, h2, h3, h4, h5, h6 {
   cursor: text;
   user-select: text;
 }
 
-/* Override for interactive elements */
-button, a, [role="button"], [onclick] {
+/* Override for interactive elements and their children */
+button, a, [role="button"], [onclick],
+button *, a *, [role="button"] *, [onclick] * {
   cursor: pointer !important;
   user-select: none;
 }
