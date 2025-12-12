@@ -149,3 +149,5 @@ vite.config.ts.timestamp-*
 .env.example
 
 backend
+
+/components-materials
