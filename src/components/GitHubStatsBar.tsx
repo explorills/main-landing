@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { GitCommit, TrendUp, Calendar, Clock } from '@phosphor-icons/react'
+import { io, Socket } from 'socket.io-client'
+
+const API_URL = 'https://api-landing.expl.one'
 
 interface GitHubStats {
   lastCommitDate: string
@@ -10,6 +13,16 @@ interface GitHubStats {
   commitsThisYear: number
   totalCommits: number
   loading: boolean
+}
+
+interface BackendStats {
+  lastUpdate: string
+  today: number
+  thisWeek: number
+  thisMonth: number
+  thisYear: number
+  total: number
+  timestamp: number
 }
 
 export function GitHubStatsBar() {
@@ -22,20 +35,67 @@ export function GitHubStatsBar() {
     totalCommits: 0,
     loading: true,
   })
+  const socketRef = useRef<Socket | null>(null)
 
   useEffect(() => {
-    // Mock data for now - in production, fetch from GitHub API
-    const mockData: GitHubStats = {
-      lastCommitDate: new Date().toISOString().split('T')[0],
-      commitsToday: 12,
-      commitsThisWeek: 84,
-      commitsThisMonth: 342,
-      commitsThisYear: 1247,
-      totalCommits: 3891,
-      loading: false,
+    // Fetch initial stats via REST API
+    const fetchStats = async () => {
+      try {
+        const response = await fetch(`${API_URL}/api/stats`)
+        if (response.ok) {
+          const data: BackendStats = await response.json()
+          updateStats(data)
+        }
+      } catch (error) {
+        console.error('Error fetching stats:', error)
+        setStats(prev => ({ ...prev, loading: false }))
+      }
     }
-    
-    setTimeout(() => setStats(mockData), 500)
+
+    // Update stats from backend format
+    const updateStats = (data: BackendStats) => {
+      setStats({
+        lastCommitDate: data.lastUpdate ? new Date(data.lastUpdate).toLocaleDateString() : '-',
+        commitsToday: data.today,
+        commitsThisWeek: data.thisWeek,
+        commitsThisMonth: data.thisMonth,
+        commitsThisYear: data.thisYear,
+        totalCommits: data.total,
+        loading: false,
+      })
+    }
+
+    // Connect to WebSocket for real-time updates
+    socketRef.current = io(API_URL, {
+      transports: ['websocket', 'polling'],
+      reconnection: true,
+      reconnectionDelay: 1000,
+      reconnectionAttempts: 5
+    })
+
+    socketRef.current.on('connect', () => {
+      console.log('Connected to stats server')
+    })
+
+    socketRef.current.on('stats-update', (data: BackendStats) => {
+      console.log('Received stats update:', data)
+      updateStats(data)
+    })
+
+    socketRef.current.on('connect_error', (error) => {
+      console.error('WebSocket connection error:', error)
+      // Fall back to REST API
+      fetchStats()
+    })
+
+    // Initial fetch
+    fetchStats()
+
+    return () => {
+      if (socketRef.current) {
+        socketRef.current.disconnect()
+      }
+    }
   }, [])
 
   const statItems = [
