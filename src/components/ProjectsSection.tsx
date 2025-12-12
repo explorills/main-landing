@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { CaretDown, ArrowUpRight, GitCommit, Calendar } from '@phosphor-icons/react'
 import { useGitHubData } from '@/hooks/use-github-data'
 import { GitHubStatsBar } from './GitHubStatsBar'
@@ -12,6 +12,36 @@ interface ProjectDetails {
   status: ProjectStatus
   description?: string
   url?: string
+}
+
+// Animated commit count that flashes on update
+function AnimatedCommitCount({ count }: { count: number }) {
+  const [isFlashing, setIsFlashing] = useState(false)
+  const prevCountRef = useRef(count)
+  
+  useEffect(() => {
+    if (count !== prevCountRef.current) {
+      setIsFlashing(true)
+      prevCountRef.current = count
+      const timer = setTimeout(() => setIsFlashing(false), 1000)
+      return () => clearTimeout(timer)
+    }
+  }, [count])
+  
+  return (
+    <motion.span
+      animate={{
+        scale: isFlashing ? [1, 1.3, 1] : 1,
+        color: isFlashing ? '#16a34a' : '#a1a1aa',
+      }}
+      transition={{ duration: 0.4 }}
+      style={{
+        textShadow: isFlashing ? '0 0 10px #16a34a' : 'none',
+      }}
+    >
+      {count}
+    </motion.span>
+  )
 }
 
 const projectsDetails: ProjectDetails[] = [
@@ -123,7 +153,7 @@ function ProjectItem({ project, compact }: { project: ProjectDetails; compact?: 
         <div className="flex items-center gap-3 flex-shrink-0">
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <GitCommit size={12} weight="bold" />
-            <span>{githubData.githubData?.commitCount || 0}</span>
+            <AnimatedCommitCount count={githubData.githubData?.commitCount || 0} />
           </div>
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <Calendar size={12} weight="bold" />
