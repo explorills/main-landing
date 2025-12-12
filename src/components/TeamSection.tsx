@@ -76,8 +76,11 @@ function TeamMemberCard({ member, index }: { member: TeamMember; index: number }
               >
                 <img 
                   src={member.image} 
-                  alt={member.name}
+                  alt={`${member.name} - ${member.title} at EXPL.ONE`}
                   className="w-full h-full object-cover"
+                  loading="lazy"
+                  width="128"
+                  height="128"
                 />
               </div>
             </div>

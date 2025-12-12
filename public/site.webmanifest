@@ -1,0 +1,73 @@
+{
+  "name": "EXPL.ONE - ONE Ecosystem",
+  "short_name": "EXPL.ONE",
+  "description": "Open source, community-driven Web3 ecosystem building ONE perfect tool per category. Join the movement.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#1c1c1d",
+  "theme_color": "#a147e1",
+  "orientation": "portrait-primary",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["technology", "blockchain", "developer tools", "web3"],
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "label": "EXPL.ONE Homepage"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "View Projects",
+      "short_name": "Projects",
+      "description": "See all ONE ecosystem projects",
+      "url": "/#projects"
+    },
+    {
+      "name": "About ONE",
+      "short_name": "About",
+      "description": "Learn about the ONE ecosystem",
+      "url": "/#about"
+    },
+    {
+      "name": "FAQ",
+      "short_name": "FAQ",
+      "description": "Frequently asked questions",
+      "url": "/#faq"
+    }
+  ]
+}

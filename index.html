@@ -1,38 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    
+    <!-- Primary Meta Tags -->
+    <title>EXPL.ONE - Open Source Web3 Ecosystem | ONE Perfect Tool Per Category</title>
+    <meta name="title" content="EXPL.ONE - Open Source Web3 Ecosystem | ONE Perfect Tool Per Category" />
+    <meta name="description" content="Join the ONE ecosystem: open source, community-driven Web3 tools. Build with purpose, own with EXPL Nodes, share 40% of all revenue. Pump, Network, World & more." />
+    <meta name="keywords" content="EXPL ONE, Web3 ecosystem, open source blockchain, decentralized tools, EXPL Nodes, community-driven crypto, pump platform, blockchain network, metaverse world, transparent development" />
+    <meta name="author" content="EXPL.ONE Team" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
     <meta name="theme-color" content="#a147e1" />
-    <meta name="description" content="EXPL.ONE - Building the future of Web3 with one perfect tool per category. Open source, community-driven, and transparent." />
+    <meta name="color-scheme" content="dark" />
+    <meta name="msapplication-TileColor" content="#a147e1" />
+    <meta name="format-detection" content="telephone=no" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://expl.one/" />
+    
+    <!-- Language & Locale -->
+    <meta property="og:locale" content="en_US" />
+    <link rel="alternate" hreflang="en" href="https://expl.one/" />
+    <link rel="alternate" hreflang="x-default" href="https://expl.one/" />
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://expl.one/" />
-    <meta property="og:title" content="EXPL.ONE - ONE Ecosystem" />
-    <meta property="og:description" content="Building the future of Web3 with one perfect tool per category. Open source, community-driven, and transparent." />
+    <meta property="og:site_name" content="EXPL.ONE" />
+    <meta property="og:title" content="EXPL.ONE - Open Source Web3 Ecosystem | ONE Perfect Tool Per Category" />
+    <meta property="og:description" content="Join the ONE ecosystem: open source, community-driven Web3 tools. Build with purpose, own with EXPL Nodes, share 40% of all revenue. Pump, Network, World & more." />
     <meta property="og:image" content="https://expl.one/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="EXPL.ONE - ONE Ecosystem for Web3" />
     
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://expl.one/" />
-    <meta property="twitter:title" content="EXPL.ONE - ONE Ecosystem" />
-    <meta property="twitter:description" content="Building the future of Web3 with one perfect tool per category. Open source, community-driven, and transparent." />
-    <meta property="twitter:image" content="https://expl.one/og-image.png" />
-    
-    <title>EXPL.ONE - ONE Ecosystem</title>
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@explorills_main" />
+    <meta name="twitter:creator" content="@explorills_main" />
+    <meta name="twitter:url" content="https://expl.one/" />
+    <meta name="twitter:title" content="EXPL.ONE - Open Source Web3 Ecosystem" />
+    <meta name="twitter:description" content="Join the ONE ecosystem: open source, community-driven Web3 tools. Build with purpose, own with EXPL Nodes, share 40% of all revenue." />
+    <meta name="twitter:image" content="https://expl.one/og-image.png" />
+    <meta name="twitter:image:alt" content="EXPL.ONE - ONE Ecosystem for Web3" />
     
     <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="32x32" href="/logo.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/logo.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="shortcut icon" href="/logo.png" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#a147e1" />
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="/site.webmanifest" />
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://api-landing.expl.one" crossorigin />
+    <link rel="dns-prefetch" href="https://api-landing.expl.one" />
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    
+    <!-- Styles -->
     <link href="/src/main.css" rel="stylesheet" />
+    
+    <!-- Structured Data: Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://expl.one/#organization",
+        "name": "EXPL.ONE",
+        "alternateName": ["ONE Ecosystem", "Explorills"],
+        "url": "https://expl.one",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://expl.one/logo.png",
+            "width": 512,
+            "height": 512
+        },
+        "description": "Open source, community-driven Web3 ecosystem building ONE perfect tool per category.",
+        "foundingDate": "2024",
+        "sameAs": [
+            "https://github.com/explorills",
+            "https://x.com/explorills_main",
+            "https://discord.com/invite/RetTCVq7tJ"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Community Support",
+            "url": "https://discord.com/invite/RetTCVq7tJ"
+        }
+    }
+    </script>
+    
+    <!-- Structured Data: WebSite with Search -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://expl.one/#website",
+        "name": "EXPL.ONE - ONE Ecosystem",
+        "url": "https://expl.one",
+        "description": "Open source, community-driven Web3 ecosystem building ONE perfect tool per category.",
+        "publisher": {
+            "@id": "https://expl.one/#organization"
+        },
+        "inLanguage": "en-US"
+    }
+    </script>
+    
+    <!-- Structured Data: FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "@id": "https://expl.one/#faq",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Why does ONE exist?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We're escaping digital chaos. Instead of thousands of mediocre apps drowning in AI slop and endless options, we build ONE perfect tool per category. Quality over quantity. Singularity over noise."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How is ONE different?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "We're open source, community-driven, and non-capitalistic. No profit-hungry tech giants here - we create what we love because the purpose IS the creation. The community decides what's worth building, not investors or user metrics."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What's an EXPL Node?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Your stake in the entire ecosystem. One Node = shareholder status in ALL 10 projects. It's the backbone of our economy, decentralization, and governance. Plus, you earn 171 EXPL daily for 731 days (125,000 EXPL total per Node)."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What do Node owners get?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "40% of ALL revenue from every project. Not one app - the entire ecosystem. You're not just a user, you're a co-owner earning from pump, network, world, and everything we build."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How does revenue work?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Simple: 40% to Node owners (you), 50% to ONE care (charity helping the world), 10% to founders. Fair economics powered by Web3 and AI for independence and efficiency."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How many Nodes exist?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "1 million total across three batches: 12k (first), 88k (second), 900k (third). Get in early or miss your chance at ecosystem ownership."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How transparent is ONE?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Fully open source on GitHub. Every line of code, every decision, every commit - public. No hidden agendas, no corporate secrecy. Just pure transparency."
+                }
+            }
+        ]
+    }
+    </script>
+    
+    <!-- Structured Data: SoftwareApplication -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "@id": "https://expl.one/#software",
+        "name": "ONE Ecosystem",
+        "applicationCategory": "DeveloperApplication",
+        "applicationSubCategory": "Blockchain Platform",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "description": "Open source - free to use and contribute"
+        },
+        "author": {
+            "@id": "https://expl.one/#organization"
+        },
+        "description": "Complete Web3 ecosystem featuring decentralized tools: Pump (token launch), Network (blockchain infrastructure), World (metaverse), and more.",
+        "url": "https://expl.one",
+        "downloadUrl": "https://github.com/explorills",
+        "softwareVersion": "1.0.0",
+        "releaseNotes": "Initial release of the ONE ecosystem landing page with real-time GitHub activity tracking."
+    }
+    </script>
+    
+    <!-- Structured Data: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://expl.one/"
+            }
+        ]
+    }
+    </script>
 </head>
 
 <body>

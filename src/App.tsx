@@ -123,8 +123,11 @@ function App() {
               <div className="bg-[#1c1c1d] rounded-lg p-2">
                 <img 
                   src="/logo.png" 
-                  alt="ONE Logo" 
+                  alt="EXPL.ONE - ONE Ecosystem Logo - Open Source Web3 Platform" 
                   className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
+                  loading="eager"
+                  width="48"
+                  height="48"
                 />
               </div>
               <div className="flex flex-col gap-1">
@@ -216,8 +219,11 @@ function App() {
         </motion.div>
       )}
 
-      <main className="pt-10 sm:pt-14">
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 -mt-4">
+      <main className="pt-10 sm:pt-14" role="main">
+        {/* Visually hidden H1 for SEO - critical for page structure */}
+        <h1 className="sr-only">EXPL.ONE - Open Source Web3 Ecosystem: ONE Perfect Tool Per Category</h1>
+        
+        <section aria-label="ONE Ecosystem Overview" className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 -mt-4">
           <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
           
           <div className="relative z-10 w-full max-w-7xl mx-auto">
