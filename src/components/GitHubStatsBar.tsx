@@ -134,24 +134,27 @@ function LiveIndicator({ status }: { status: 'connecting' | 'connected' | 'disco
       animate={{ opacity: 1, y: 0 }}
       className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/60 border border-border/30"
     >
-      <motion.div
-        className="relative flex items-center justify-center"
-        animate={pulse ? { scale: [1, 1.2, 1] } : {}}
-        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-      >
+      <div className="relative flex items-center justify-center w-4 h-4">
         {pulse && (
           <motion.div
-            className="absolute w-3 h-3 rounded-full"
+            className="absolute w-2.5 h-2.5 rounded-full"
             style={{ backgroundColor: color }}
-            animate={{ scale: [1, 2], opacity: [0.6, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: 'easeOut' }}
+            animate={{ 
+              scale: [1, 1.8, 1],
+              opacity: [0.7, 0.2, 0.7]
+            }}
+            transition={{ 
+              duration: 2.5, 
+              repeat: Infinity, 
+              ease: 'easeInOut'
+            }}
           />
         )}
         <div
           className="w-2 h-2 rounded-full"
           style={{ backgroundColor: color }}
         />
-      </motion.div>
+      </div>
       <span className="text-xs font-medium" style={{ color }}>{text}</span>
       <Icon size={14} weight="bold" style={{ color }} />
     </motion.div>

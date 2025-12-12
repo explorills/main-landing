@@ -4,7 +4,7 @@ import { CaretDown, ArrowUpRight, GitCommit, Calendar } from '@phosphor-icons/re
 import { useGitHubData } from '@/hooks/use-github-data'
 import { GitHubStatsBar } from './GitHubStatsBar'
 
-type ProjectStatus = 'LIVE' | 'In Progress' | 'Coming Soon'
+type ProjectStatus = 'Deployed' | 'In Progress' | 'Coming Soon'
 
 interface ProjectDetails {
   name: string
@@ -45,6 +45,13 @@ function AnimatedCommitCount({ count }: { count: number }) {
 }
 
 const projectsDetails: ProjectDetails[] = [
+  {
+    name: 'ecosystem',
+    color: '#a147e1',
+    status: 'Deployed',
+    description: 'Main landing page for the ONE ecosystem',
+    url: 'https://expl.one',
+  },
   {
     name: 'pump',
     color: '#16a34a',
@@ -103,11 +110,11 @@ const projectsDetails: ProjectDetails[] = [
   },
 ]
 
-const statusCategories: ProjectStatus[] = ['LIVE', 'In Progress', 'Coming Soon']
+const statusCategories: ProjectStatus[] = ['Deployed', 'In Progress', 'Coming Soon']
 
 function ProjectItem({ project, compact }: { project: ProjectDetails; compact?: boolean }) {
   const { data: githubData } = useGitHubData(project.name)
-  const hasLink = project.status === 'LIVE' || project.status === 'In Progress'
+  const hasLink = project.status === 'Deployed' || project.status === 'In Progress'
 
   if (compact) {
     return (
@@ -176,11 +183,11 @@ function ProjectItem({ project, compact }: { project: ProjectDetails; compact?: 
 }
 
 function StatusCategory({ status, projects }: { status: ProjectStatus; projects: ProjectDetails[] }) {
-  const [isOpen, setIsOpen] = useState(status === 'In Progress')
+  const [isOpen, setIsOpen] = useState(status === 'In Progress' || status === 'Deployed')
 
   const getStatusColor = () => {
     switch (status) {
-      case 'LIVE':
+      case 'Deployed':
         return '#16a34a'
       case 'In Progress':
         return '#f59e0b'

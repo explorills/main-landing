@@ -22,6 +22,7 @@ const CACHE_DURATION = 60 * 1000 // 1 minute
 
 // Map project names to their actual repo names
 const projectToRepoMap: Record<string, string> = {
+  ecosystem: 'main-landing',
   pump: 'expl-one-pump',
   network: 'expl-nodes-dashboard',
   world: 'world-soon',
