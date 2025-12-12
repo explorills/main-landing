@@ -47,12 +47,15 @@ function AnimatedWord() {
           ease: [0.16, 1, 0.3, 1],
         }}
         className="absolute inset-0 flex items-center justify-center"
-        style={{ color: currentProject.color }}
+        style={{ 
+          color: currentProject.color,
+          textShadow: `0 0 20px ${currentProject.color}, 0 0 40px ${currentProject.color}, 0 0 60px ${currentProject.color}40`
+        }}
       >
         <span className="relative">
           {currentProject.name}
           <span
-            className="absolute inset-0 blur-2xl opacity-50"
+            className="absolute inset-0 blur-2xl opacity-60"
             style={{ color: currentProject.color }}
           >
             {currentProject.name}

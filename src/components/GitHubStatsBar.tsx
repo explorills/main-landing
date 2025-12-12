@@ -136,19 +136,37 @@ function LiveIndicator({ status }: { status: 'connecting' | 'connected' | 'disco
     >
       <div className="relative flex items-center justify-center w-4 h-4">
         {pulse && (
-          <motion.div
-            className="absolute w-2.5 h-2.5 rounded-full"
-            style={{ backgroundColor: color }}
-            animate={{ 
-              scale: [1, 1.8, 1],
-              opacity: [0.7, 0.2, 0.7]
-            }}
-            transition={{ 
-              duration: 2.5, 
-              repeat: Infinity, 
-              ease: 'easeInOut'
-            }}
-          />
+          <>
+            {/* First pulse - starts immediately */}
+            <motion.div
+              className="absolute w-2 h-2 rounded-full"
+              style={{ backgroundColor: color }}
+              animate={{ 
+                scale: [1, 2.5],
+                opacity: [0.6, 0]
+              }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity, 
+                ease: 'easeOut'
+              }}
+            />
+            {/* Second pulse - delayed by 1 second */}
+            <motion.div
+              className="absolute w-2 h-2 rounded-full"
+              style={{ backgroundColor: color }}
+              animate={{ 
+                scale: [1, 2.5],
+                opacity: [0.6, 0]
+              }}
+              transition={{ 
+                duration: 2, 
+                repeat: Infinity, 
+                ease: 'easeOut',
+                delay: 1
+              }}
+            />
+          </>
         )}
         <div
           className="w-2 h-2 rounded-full"

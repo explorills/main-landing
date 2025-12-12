@@ -238,7 +238,7 @@ function StatusCategory({ status, projects }: { status: ProjectStatus; projects:
       >
         <div className="px-4 sm:px-5 pb-4 space-y-2">
           {isCompact ? (
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+            <div className="flex flex-wrap justify-center gap-2">
               {projects.map((project) => (
                 <ProjectItem key={project.name} project={project} compact />
               ))}
