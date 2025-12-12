@@ -25,6 +25,36 @@ interface BackendStats {
   timestamp: number
 }
 
+interface WebSocketData {
+  stats: BackendStats
+  repoStats: Record<string, any>
+}
+
+// Shared socket instance
+let sharedSocket: Socket | null = null
+let socketListeners: Set<(data: WebSocketData) => void> = new Set()
+
+export function getSharedSocket(): Socket {
+  if (!sharedSocket) {
+    sharedSocket = io(API_URL, {
+      transports: ['websocket', 'polling'],
+      reconnection: true,
+      reconnectionDelay: 1000,
+      reconnectionAttempts: 10
+    })
+    
+    sharedSocket.on('stats-update', (data: WebSocketData) => {
+      socketListeners.forEach(listener => listener(data))
+    })
+  }
+  return sharedSocket
+}
+
+export function subscribeToStats(callback: (data: WebSocketData) => void) {
+  socketListeners.add(callback)
+  return () => socketListeners.delete(callback)
+}
+
 export function GitHubStatsBar() {
   const [stats, setStats] = useState<GitHubStats>({
     lastCommitDate: '-',
@@ -35,23 +65,8 @@ export function GitHubStatsBar() {
     totalCommits: 0,
     loading: true,
   })
-  const socketRef = useRef<Socket | null>(null)
 
   useEffect(() => {
-    // Fetch initial stats via REST API
-    const fetchStats = async () => {
-      try {
-        const response = await fetch(`${API_URL}/api/stats`)
-        if (response.ok) {
-          const data: BackendStats = await response.json()
-          updateStats(data)
-        }
-      } catch (error) {
-        console.error('Error fetching stats:', error)
-        setStats(prev => ({ ...prev, loading: false }))
-      }
-    }
-
     // Update stats from backend format
     const updateStats = (data: BackendStats) => {
       setStats({
@@ -65,26 +80,37 @@ export function GitHubStatsBar() {
       })
     }
 
-    // Connect to WebSocket for real-time updates
-    socketRef.current = io(API_URL, {
-      transports: ['websocket', 'polling'],
-      reconnection: true,
-      reconnectionDelay: 1000,
-      reconnectionAttempts: 5
-    })
+    // Fetch initial stats via REST API
+    const fetchStats = async () => {
+      try {
+        const response = await fetch(`${API_URL}/api/stats`)
+        if (response.ok) {
+          const data = await response.json()
+          updateStats(data)
+        }
+      } catch (error) {
+        console.error('Error fetching stats:', error)
+        setStats(prev => ({ ...prev, loading: false }))
+      }
+    }
 
-    socketRef.current.on('connect', () => {
+    // Connect to shared WebSocket
+    const socket = getSharedSocket()
+    
+    socket.on('connect', () => {
       console.log('Connected to stats server')
     })
 
-    socketRef.current.on('stats-update', (data: BackendStats) => {
+    // Subscribe to updates
+    const unsubscribe = subscribeToStats((data: WebSocketData) => {
       console.log('Received stats update:', data)
-      updateStats(data)
+      if (data.stats) {
+        updateStats(data.stats)
+      }
     })
 
-    socketRef.current.on('connect_error', (error) => {
+    socket.on('connect_error', (error) => {
       console.error('WebSocket connection error:', error)
-      // Fall back to REST API
       fetchStats()
     })
 
@@ -92,9 +118,7 @@ export function GitHubStatsBar() {
     fetchStats()
 
     return () => {
-      if (socketRef.current) {
-        socketRef.current.disconnect()
-      }
+      unsubscribe()
     }
   }, [])
 

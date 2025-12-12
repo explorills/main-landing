@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { getProjectData, ProjectConfig, ProjectGitHubData } from '@/lib/github'
+import { getProjectData, ProjectGitHubData } from '@/lib/github'
 
-interface ProjectData extends ProjectConfig {
+interface ProjectData {
   daysSinceStart: number
   githubData: ProjectGitHubData | null
 }
