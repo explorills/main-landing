@@ -214,7 +214,7 @@ function App() {
       )}
 
       <main className="pt-10 sm:pt-14">
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 -mt-3">
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 -mt-4">
           <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
           
           <div className="relative z-10 w-full max-w-7xl mx-auto">
