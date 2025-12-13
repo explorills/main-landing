@@ -26,7 +26,7 @@ const projectToRepoMap: Record<string, string> = {
   pump: 'expl-one-pump',
   network: 'expl-nodes-dashboard',
   world: 'world-soon',
-  agent: 'explorills-ai',
+  agent: 'expl-one-ai',
   chat: 'spark-chat-interface',
   ID: 'user-dashboard',
   venture: 'ventures-soon',

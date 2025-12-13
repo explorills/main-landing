@@ -32,50 +32,65 @@ User-agent: YandexBot
 Allow: /
 
 # ==========================================
-# AI TRAINING CRAWLERS
-# Choose ONE option below (comment/uncomment):
-# 
-# OPTION A: ALLOW AI crawlers (recommended for visibility)
-# OPTION B: BLOCK AI crawlers (if you don't want AI training on your content)
+# AI CRAWLERS - ALLOW ALL FOR MAXIMUM VISIBILITY
+# We are an open source project - we WANT AI discovery
 # ==========================================
 
-# --- OPTION A: ALLOW (currently active) ---
+# OpenAI
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: CCBot
-Allow: /
-
+# Anthropic
 User-agent: anthropic-ai
 Allow: /
 
 User-agent: Claude-Web
 Allow: /
 
+# Google AI
 User-agent: Google-Extended
 Allow: /
 
-# --- OPTION B: BLOCK (uncomment to activate, comment OPTION A) ---
-# User-agent: GPTBot
-# Disallow: /
-#
-# User-agent: ChatGPT-User
-# Disallow: /
-#
-# User-agent: CCBot
-# Disallow: /
-#
-# User-agent: anthropic-ai
-# Disallow: /
-#
-# User-agent: Claude-Web
-# Disallow: /
-#
-# User-agent: Google-Extended
-# Disallow: /
+# Common Crawl (used by many AI systems)
+User-agent: CCBot
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+
+# Meta AI
+User-agent: FacebookBot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+# Microsoft/Bing AI
+User-agent: Bingbot
+Allow: /
+
+# Apple AI
+User-agent: Applebot
+Allow: /
+
+# Amazon AI
+User-agent: Amazonbot
+Allow: /
+
+# Other AI assistants
+User-agent: YouBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
 
 # ==========================================
 # SEO/ANALYSIS BOTS (Allow for monitoring)

@@ -21,7 +21,7 @@ const faqs: FAQItem[] = [
     question: "What's an EXPL Node?",
     answer: "Your stake in the entire ecosystem. One Node = shareholder status in ALL 10 projects. It's the backbone of our economy, decentralization, and governance. Plus, you earn 171 EXPL daily for 731 days (125,000 EXPL total per Node).",
     links: [
-      { text: "Tokenomics", url: "https://docs.explorills.com/tokenomics/supply/" },
+      { text: "Tokenomics", url: "https://docs.expl.one/tokenomics/supply/" },
     ],
   },
   {

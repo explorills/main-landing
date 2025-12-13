@@ -11,7 +11,7 @@
  * CUSTOMIZATION:
  * - size: 'sm' | 'md' | 'lg' (default: 'md')
  * - className: Additional CSS classes to apply
- * - href: Link URL (default: https://mint.explorills.com)
+ * - href: Link URL (default: https://node.expl.one)
  * 
  * EXAMPLES:
  * <PoweredByExplNodes />
@@ -33,7 +33,7 @@ interface PoweredByExplNodesProps {
   size?: 'sm' | 'md' | 'lg'
   /** Additional CSS classes */
   className?: string
-  /** Link URL (default: https://mint.explorills.com) */
+  /** Link URL (default: https://node.expl.one) */
   href?: string
   /** Open in new tab (default: true) */
   newTab?: boolean
@@ -85,7 +85,7 @@ const STYLES = {
 export function PoweredByExplNodes({
   size = 'md',
   className = '',
-  href = 'https://mint.explorills.com',
+  href = 'https://node.expl.one',
   newTab = true,
 }: PoweredByExplNodesProps) {
   const [isHovered, setIsHovered] = React.useState(false)
