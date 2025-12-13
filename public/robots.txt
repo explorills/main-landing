@@ -1,19 +1,24 @@
 # robots.txt for EXPL.ONE - ONE Ecosystem
 # https://expl.one
+# Last Updated: 2025-12-13
 
-# Allow all search engine crawlers
+# ==========================================
+# ALLOW ALL SEARCH ENGINE CRAWLERS
+# ==========================================
 User-agent: *
 Allow: /
 
-# Specific instructions for major search engines
+# Google
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 1
 
+# Bing
 User-agent: Bingbot
 Allow: /
 Crawl-delay: 2
 
+# Other major search engines
 User-agent: Slurp
 Allow: /
 
@@ -26,7 +31,15 @@ Allow: /
 User-agent: YandexBot
 Allow: /
 
-# Allow AI training crawlers
+# ==========================================
+# AI TRAINING CRAWLERS
+# Choose ONE option below (comment/uncomment):
+# 
+# OPTION A: ALLOW AI crawlers (recommended for visibility)
+# OPTION B: BLOCK AI crawlers (if you don't want AI training on your content)
+# ==========================================
+
+# --- OPTION A: ALLOW (currently active) ---
 User-agent: GPTBot
 Allow: /
 
@@ -42,7 +55,31 @@ Allow: /
 User-agent: Claude-Web
 Allow: /
 
-# Block common bad bots
+User-agent: Google-Extended
+Allow: /
+
+# --- OPTION B: BLOCK (uncomment to activate, comment OPTION A) ---
+# User-agent: GPTBot
+# Disallow: /
+#
+# User-agent: ChatGPT-User
+# Disallow: /
+#
+# User-agent: CCBot
+# Disallow: /
+#
+# User-agent: anthropic-ai
+# Disallow: /
+#
+# User-agent: Claude-Web
+# Disallow: /
+#
+# User-agent: Google-Extended
+# Disallow: /
+
+# ==========================================
+# SEO/ANALYSIS BOTS (Allow for monitoring)
+# ==========================================
 User-agent: AhrefsBot
 Allow: /
 
@@ -52,8 +89,9 @@ Allow: /
 User-agent: MJ12bot
 Allow: /
 
-# Sitemap location
+# ==========================================
+# SITEMAP & HOST
+# ==========================================
 Sitemap: https://expl.one/sitemap.xml
-
-# Host
+Sitemap: https://expl.one/sitemap-index.xml
 Host: https://expl.one
