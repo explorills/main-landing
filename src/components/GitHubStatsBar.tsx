@@ -113,20 +113,21 @@ function AnimatedNumber({ value, color, prevValue }: { value: number | string; c
   )
 }
 
-// Live status indicator
+// Live status indicator - simple professional pulse
 function LiveIndicator({ status }: { status: 'connecting' | 'connected' | 'disconnected' }) {
   const getStatusConfig = () => {
     switch (status) {
       case 'connected':
-        return { color: '#16a34a', text: 'LIVE', Icon: WifiHigh, pulse: true }
+        return { color: '#16a34a', text: 'LIVE', Icon: WifiHigh }
       case 'connecting':
-        return { color: '#f59e0b', text: 'Connecting...', Icon: WifiHigh, pulse: true }
+        return { color: '#f59e0b', text: 'Connecting...', Icon: WifiHigh }
       case 'disconnected':
-        return { color: '#ef4444', text: 'Offline', Icon: WifiSlash, pulse: false }
+        return { color: '#ef4444', text: 'Offline', Icon: WifiSlash }
     }
   }
   
-  const { color, text, Icon, pulse } = getStatusConfig()
+  const { color, text, Icon } = getStatusConfig()
+  const isActive = status === 'connected' || status === 'connecting'
   
   return (
     <motion.div
@@ -134,43 +135,14 @@ function LiveIndicator({ status }: { status: 'connecting' | 'connected' | 'disco
       animate={{ opacity: 1, y: 0 }}
       className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/60 border border-border/30"
     >
-      <div className="relative flex items-center justify-center w-4 h-4">
-        {pulse && (
-          <>
-            {/* First pulse - starts immediately */}
-            <motion.div
-              className="absolute w-2 h-2 rounded-full"
-              style={{ backgroundColor: color }}
-              animate={{ 
-                scale: [1, 2.5],
-                opacity: [0.6, 0]
-              }}
-              transition={{ 
-                duration: 2, 
-                repeat: Infinity, 
-                ease: 'easeOut'
-              }}
-            />
-            {/* Second pulse - delayed by 1 second */}
-            <motion.div
-              className="absolute w-2 h-2 rounded-full"
-              style={{ backgroundColor: color }}
-              animate={{ 
-                scale: [1, 2.5],
-                opacity: [0.6, 0]
-              }}
-              transition={{ 
-                duration: 2, 
-                repeat: Infinity, 
-                ease: 'easeOut',
-                delay: 1
-              }}
-            />
-          </>
-        )}
+      <div className="relative flex items-center justify-center w-3 h-3">
         <div
           className="w-2 h-2 rounded-full"
-          style={{ backgroundColor: color }}
+          style={{ 
+            backgroundColor: color,
+            boxShadow: isActive ? `0 0 8px ${color}` : 'none',
+            animation: isActive ? 'pulse-glow 2s ease-in-out infinite' : 'none'
+          }}
         />
       </div>
       <span className="text-xs font-medium" style={{ color }}>{text}</span>

@@ -150,7 +150,7 @@ export function FAQSection() {
               <span className="text-primary glow-accent">Answered.</span>
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Everything you need to know about the ONE ecosystem and EXPL Nodes
+              Everything you need to know about the EXPL Nodes and ONE ecosystem.
             </p>
           </motion.div>
         </motion.div>

@@ -9,6 +9,7 @@ import { ParticleBackground, FloatingOrbs, RisingParticles, BottomParticleBackgr
 import { PoweredByExplNodes } from '@/components/PoweredByExplNodes'
 
 const ecosystemProjects = [
+  { name: 'ecosystem', color: '#a147e1' },
   { name: 'pump', color: '#16a34a' },
   { name: 'network', color: '#2563eb' },
   { name: 'world', color: '#ec4899' },
@@ -80,6 +81,11 @@ function App() {
     return () => clearInterval(interval)
   }, [])
 
+  // Scroll to top on page load/refresh
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20)
@@ -113,17 +119,26 @@ function App() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="flex items-center gap-3 sm:gap-4 flex-shrink-0"
             >
-              <div className="bg-[#1c1c1d] rounded-lg p-2">
+              <motion.div
+                key={currentIndex}
+                animate={{ scale: [1, 1.08, 1] }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              >
                 <img 
                   src="/logo.png" 
                   alt="EXPL.ONE - ONE Ecosystem Logo - Open Source Web3 Platform" 
-                  className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
+                  className="w-14 h-14 sm:w-16 sm:h-16 object-contain"
                   loading="eager"
-                  width="48"
-                  height="48"
+                  width="64"
+                  height="64"
                 />
-              </div>
-              <div className="flex flex-col gap-1">
+              </motion.div>
+              <motion.div 
+                className="flex flex-col gap-1"
+                key={currentIndex}
+                animate={{ scale: [1, 1.03, 1] }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              >
                 <div className="flex items-center gap-2">
                   <span className="text-[24px] sm:text-[26px] font-bold text-white">ONE</span>
                   <span className="relative inline-block min-w-[80px] sm:min-w-[120px]">
@@ -153,7 +168,7 @@ function App() {
                   </span>
                 </div>
                 <PoweredByExplNodes size="sm" />
-              </div>
+              </motion.div>
             </motion.div>
             <motion.nav
               initial={{ opacity: 0, x: 20 }}
@@ -337,7 +352,7 @@ function App() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-6"
-              >
+              > 
                 <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight px-4">
                   <span className="text-foreground">A single </span>
                   <span className="relative inline-block">
@@ -357,10 +372,11 @@ function App() {
                   </span>
                   <span className="text-foreground"> is all you need</span>
                   <br />
-                  <span className="text-foreground/80">to become a shareholder</span>
+                  <span className="text-foreground/80">to become a stakeholder</span>
                   <br />
                   <span className="text-foreground/80">in the </span>
-                  <span className="text-primary">ONE ecosystem</span>
+                  <span className="text-primary">ONE </span>
+                  <span className="text-foreground/80">ecosystem</span>
                 </h2>
               </motion.div>
 
@@ -372,9 +388,7 @@ function App() {
                 className="max-w-3xl mx-auto space-y-6 px-4"
               >
                 <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                  Join a revolutionary ecosystem where ownership is democratized. 
-                  Each EXPL Node grants you a stake in the entire ONE ecosystem, 
-                  connecting you to every project, every innovation, and every success.
+                  Each EXPL Node grants a 45% lifetime proportional share of revenue from the entire ecosystem, minting up to 125,000 EXPL over 731 days, and voting power across all projects.
                 </p>
                 <p className="text-base sm:text-lg md:text-xl text-muted-foreground/80 leading-relaxed">
                   Become more than a user. Become a co-owner.
@@ -389,7 +403,7 @@ function App() {
                 className="pt-4"
               >
                 <motion.a
-                  href="https://mint.expl.one"
+                  href="https://node.expl.one"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block relative group cursor-pointer"

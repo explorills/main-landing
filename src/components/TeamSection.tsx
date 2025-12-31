@@ -17,7 +17,7 @@ const teamMembers: TeamMember[] = [
   {
     name: 'Giorgi (orb) Orbeliani',
     title: 'Creator-Engineer / Founder',
-    role: 'Handles all technical development, full-stack, building everything',
+    role: 'Leads platform architecture and full-stack development, building and integrating all core systems end-to-end.',
     color: '#a147e1',
     image: giorgioImage,
     linkedin: 'https://www.linkedin.com/in/g-orbeliani/',
@@ -25,7 +25,7 @@ const teamMembers: TeamMember[] = [
   {
     name: 'Lia Biniashvili',
     title: 'Marketing & Communications Lead',
-    role: 'Handles collaborations, communications, investor relations, branding, messaging',
+    role: 'Directs marketing strategy, communications, partnerships, investor relations, and brand messaging across all channels.',
     color: '#2563eb',
     image: likaImage,
     linkedin: 'https://www.linkedin.com/in/lika-biniashvili-liabin/',
@@ -181,7 +181,7 @@ export function TeamSection() {
             <span className="text-primary glow-accent">Team</span>
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
-            The minds behind the ONE ecosystem, building the future one project at a time
+            The minds behind the ONE ecosystem, building the foundation of next-gen decentralized internet for everyone
           </p>
         </motion.div>
 
@@ -218,11 +218,11 @@ export function TeamSection() {
               </motion.div>
 
               <h3 className="text-2xl sm:text-3xl font-bold text-foreground">
-                Want to Contribute?
+                Interested in being part of what we're building?
               </h3>
 
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                We're not currently hiring, <span className="text-foreground font-semibold">BUT</span> if you believe in our vision and want to volunteer/contribute (technical or non-technical), reach us at:
+                We're not hiring at the moment <span className="text-foreground font-semibold">BUT</span> if you share our vision and would like to volunteer/contribute (technical or non-technical)  contact us at:
               </p>
 
               <motion.a
