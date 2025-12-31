@@ -2,8 +2,6 @@
 
 **[ONE ecosystem](https://expl.one) // powered by [EXPL Nodes](https://node.expl.one)**
 
-Main landing page for the ONE ecosystem.
-
 ## Overview
 
 This is an informational landing page that showcases the ONE ecosystem's open-source projects and development activity. The page connects to the ONE ecosystem GitHub organization to display real-time progress through commit activity and repository statistics.

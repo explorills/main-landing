@@ -49,7 +49,7 @@ const projectsDetails: ProjectDetails[] = [
     name: 'ecosystem',
     color: '#a147e1',
     status: 'Deployed',
-    description: 'Main landing page for the ONE ecosystem',
+    description: '',
     url: 'https://expl.one',
   },
   {

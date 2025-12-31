@@ -43,7 +43,7 @@ export function Footer() {
             <div className="flex items-center justify-between gap-4">
               <div className="text-xs whitespace-nowrap">
                 <span className="text-primary font-semibold">EXPL.ONE</span>
-                <span className="text-muted-foreground"> © 2025 All rights reserved</span>
+                <span className="text-muted-foreground"> © 2026 All rights reserved</span>
               </div>
               
               <div className="flex items-center gap-4 max-[550px]:ml-auto">

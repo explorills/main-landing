@@ -88,14 +88,7 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  useEffect(() => {
-    if (import.meta.env.DEV) {
-      import('@/lib/validateGitHubConfig').then(({ validateGitHubConfiguration, logValidationResults }) => {
-        const result = validateGitHubConfiguration()
-        logValidationResults(result)
-      })
-    }
-  }, [])
+
 
   return (
     <div className="min-h-screen bg-background text-foreground pb-16">

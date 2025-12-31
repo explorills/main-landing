@@ -1,25 +1,10 @@
 import { useState, useEffect, useCallback } from 'react'
-import { getProjectData, ProjectGitHubData, RepoStats } from '@/lib/github'
+import { getProjectData, ProjectGitHubData, RepoStats, projectToRepoMap } from '@/lib/github'
 import { subscribeToStats, getSharedSocket } from '@/components/GitHubStatsBar'
 
 interface ProjectData {
   daysSinceStart: number
   githubData: ProjectGitHubData | null
-}
-
-// Map project names to their actual repo names
-const projectToRepoMap: Record<string, string> = {
-  ecosystem: 'main-landing',
-  pump: 'expl-one-pump',
-  network: 'expl-nodes-dashboard',
-  world: 'world-soon',
-  agent: 'expl-one-ai',
-  chat: 'spark-chat-interface',
-  ID: 'user-dashboard',
-  venture: 'ventures-soon',
-  care: 'care-soon',
-  merch: 'shop-soon',
-  space: 'world-soon',
 }
 
 export function useGitHubData(projectName: string) {
