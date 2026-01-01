@@ -8,6 +8,7 @@ import { Footer } from '@/components/Footer'
 import { ParticleBackground, FloatingOrbs, RisingParticles, BottomParticleBackground } from '@/components/ParticleBackground'
 import { PoweredByExplNodes } from '@/components/PoweredByExplNodes'
 
+// Projects for navbar title rotation (includes ecosystem)
 const ecosystemProjects = [
   { name: 'ecosystem', color: '#a147e1' },
   { name: 'pump', color: '#16a34a' },
@@ -21,6 +22,9 @@ const ecosystemProjects = [
   { name: 'merch', color: '#ef5609' },
   { name: 'space', color: '#84cc16' },
 ]
+
+// Projects for hero ring (excludes ecosystem - it's in the center)
+const heroRingProjects = ecosystemProjects.filter(p => p.name !== 'ecosystem')
 
 function AnimatedWord() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -104,12 +108,13 @@ function App() {
       <RisingParticles />
       
       <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 gpu-accelerate ${
           scrolled ? 'backdrop-blur-lg bg-[#1c1c1d]/40' : 'bg-[#1c1c1d]/50'
         }`}
+        style={{ willChange: 'transform' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-3 sm:py-4 gap-4">
@@ -119,25 +124,22 @@ function App() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="flex items-center gap-3 sm:gap-4 flex-shrink-0"
             >
-              <motion.div
-                key={currentIndex}
+              <motion.img 
+                src="/logo.png" 
+                alt="EXPL.ONE - ONE Ecosystem Logo - Open Source Web3 Platform" 
+                className="w-14 h-14 sm:w-16 sm:h-16 object-contain"
+                loading="eager"
+                width="64"
+                height="64"
                 animate={{ scale: [1, 1.08, 1] }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <img 
-                  src="/logo.png" 
-                  alt="EXPL.ONE - ONE Ecosystem Logo - Open Source Web3 Platform" 
-                  className="w-14 h-14 sm:w-16 sm:h-16 object-contain"
-                  loading="eager"
-                  width="64"
-                  height="64"
-                />
-              </motion.div>
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 1.5 }}
+                style={{ willChange: 'transform' }}
+              />
               <motion.div 
                 className="flex flex-col gap-1"
-                key={currentIndex}
                 animate={{ scale: [1, 1.03, 1] }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 1.5 }}
+                style={{ willChange: 'transform' }}
               >
                 <div className="flex items-center gap-2">
                   <span className="text-[24px] sm:text-[26px] font-bold text-white">ONE</span>
@@ -211,10 +213,12 @@ function App() {
       
       {mobileMenuOpen && (
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.15 }}
           className="fixed top-[72px] left-0 right-0 z-40 bg-[#1c1c1d]/95 backdrop-blur-md border-t border-border/30 md:hidden"
+          style={{ willChange: 'opacity' }}
         >
           <div className="flex flex-col py-4 px-4 gap-4">
             <a href="#why-node" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Why Node</a>
@@ -236,8 +240,8 @@ function App() {
           
           <div className="relative z-10 w-full max-w-7xl mx-auto">
             <div className="relative w-full aspect-square max-w-3xl mx-auto">
-              {ecosystemProjects.map((project, index) => {
-                const angle = (index / ecosystemProjects.length) * 2 * Math.PI - Math.PI / 2
+              {heroRingProjects.map((project, index) => {
+                const angle = (index / heroRingProjects.length) * 2 * Math.PI - Math.PI / 2
                 const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 35 : 42
                 const x = 50 + radius * Math.cos(angle)
                 const y = 50 + radius * Math.sin(angle)
@@ -252,7 +256,7 @@ function App() {
                       delay: 0.6 + index * 0.1,
                       ease: [0.16, 1, 0.3, 1],
                     }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2"
+                    className="absolute -translate-x-1/2 -translate-y-1/2 gpu-accelerate"
                     style={{
                       left: `${x}%`,
                       top: `${y}%`,
@@ -260,17 +264,15 @@ function App() {
                   >
                     <motion.div
                       animate={{
-                        y: [0, -12, 0],
+                        y: [0, -10, 0],
                       }}
                       transition={{
-                        duration: 2.5 + index * 0.15,
+                        duration: 3 + index * 0.2,
                         repeat: Infinity,
-                        ease: [0.45, 0.05, 0.55, 0.95],
-                        delay: index * 0.15,
+                        ease: 'easeInOut',
                       }}
                       style={{
                         willChange: 'transform',
-                        transform: 'translateZ(0)',
                       }}
                       className="relative group cursor-pointer"
                     >

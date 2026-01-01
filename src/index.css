@@ -9,15 +9,24 @@
   body {
     font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
     scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   html {
     scroll-behavior: smooth;
   }
 
-  /* Fix scroll offset for fixed navbar */
+  /* Fix scroll offset for fixed navbar - responsive across all devices */
   [id] {
-    scroll-margin-top: 100px;
+    scroll-margin-top: clamp(1rem, 4vh, 5rem);
+  }
+
+  /* GPU acceleration for animated elements */
+  .gpu-accelerate {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
   }
 }
 
