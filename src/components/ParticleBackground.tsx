@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useMemo } from 'react'
+import { usePerformanceMode } from '@/hooks/use-performance-mode'
 
 interface Particle {
   x: number
@@ -8,445 +8,285 @@ interface Particle {
   vy: number
   size: number
   opacity: number
-  color: string
   baseX: number
   baseY: number
-  colorIndex: number
 }
 
-const colors = [
-  'oklch(0.62 0.24 295)',
-  'oklch(0.55 0.20 280)',
-  'oklch(0.68 0.18 310)',
+// Pre-computed colors for performance (avoid runtime color calculations)
+const PARTICLE_COLORS = [
+  'rgba(161, 71, 225, 0.8)',   // Primary purple
+  'rgba(140, 60, 200, 0.7)',   // Darker purple
+  'rgba(180, 90, 240, 0.6)',   // Lighter purple
 ]
 
-const getColorForScrollPosition = (scrollProgress: number, colorIndex: number): string => {
-  const hue = 295 + (scrollProgress * 60 - 30)
-  const saturation = 0.20 + (Math.sin(scrollProgress * Math.PI * 2) * 0.08)
-  const lightness = 0.58 + (colorIndex * 0.05)
-  return `oklch(${lightness} ${saturation} ${hue})`
-}
+const LINE_COLOR = 'rgba(161, 71, 225, 0.15)'
 
 export function ParticleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Particle[]>([])
   const animationRef = useRef<number | undefined>(undefined)
-  const scrollY = useRef(0)
-  const mouseX = useRef(0)
-  const mouseY = useRef(0)
-  const isVisible = useRef(true)
+  const lastFrameTimeRef = useRef<number>(0)
+  const isVisibleRef = useRef(true)
+  const config = usePerformanceMode()
+
+  // Don't render anything if particles are disabled
+  if (!config.enableParticles) {
+    return null
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
 
-    const ctx = canvas.getContext('2d')
+    const ctx = canvas.getContext('2d', {
+      alpha: true,
+      desynchronized: true, // Allow async rendering for better performance
+    })
     if (!ctx) return
 
+    // Use integer dimensions for better performance
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      const dpr = Math.min(window.devicePixelRatio, 2) // Cap at 2x for performance
+      canvas.width = Math.floor(window.innerWidth * dpr)
+      canvas.height = Math.floor(window.innerHeight * dpr)
+      canvas.style.width = `${window.innerWidth}px`
+      canvas.style.height = `${window.innerHeight}px`
+      ctx.scale(dpr, dpr)
     }
 
     resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
 
-    // Detect mobile and adjust particle count
-    const isMobile = window.innerWidth < 768
-    const particleCount = Math.min(
-      Math.floor((canvas.width * canvas.height) / (isMobile ? 25000 : 15000)), 
-      isMobile ? 50 : 100
-    )
+    // Debounced resize handler
+    let resizeTimeout: ReturnType<typeof setTimeout>
+    const handleResize = () => {
+      clearTimeout(resizeTimeout)
+      resizeTimeout = setTimeout(resizeCanvas, 150)
+    }
+    window.addEventListener('resize', handleResize, { passive: true })
+
+    // Initialize particles with fewer, simpler calculations
+    const particleCount = config.particleCount
+    const width = window.innerWidth
+    const height = window.innerHeight
 
     particlesRef.current = Array.from({ length: particleCount }, (_, i) => {
-      const x = Math.random() * canvas.width
-      const y = Math.random() * canvas.height
+      const x = Math.random() * width
+      const y = Math.random() * height
       return {
         x,
         y,
         baseX: x,
         baseY: y,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2.5 + 1,
-        opacity: Math.random() * 0.6 + 0.3,
-        color: colors[i % colors.length],
-        colorIndex: i % colors.length,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: Math.random() * 2 + 1,
+        opacity: Math.random() * 0.4 + 0.3,
       }
     })
 
-    const handleScroll = () => {
-      scrollY.current = window.scrollY
-    }
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX.current = e.clientX
-      mouseY.current = e.clientY
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('mousemove', handleMouseMove, { passive: true })
-
-    // Pause animation when page is hidden
+    // Visibility change handling
     const handleVisibilityChange = () => {
-      isVisible.current = !document.hidden
-      if (isVisible.current && !animationRef.current) {
-        animate()
+      isVisibleRef.current = !document.hidden
+      if (isVisibleRef.current && !animationRef.current) {
+        lastFrameTimeRef.current = performance.now()
+        animate(performance.now())
       }
     }
     document.addEventListener('visibilitychange', handleVisibilityChange)
 
-    const animate = () => {
-      if (!ctx || !canvas || !isVisible.current) return
+    // Frame interval based on target FPS
+    const frameInterval = 1000 / config.targetFPS
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-
-      const scrollOffset = scrollY.current * 0.3
-      const scrollProgress = Math.min(scrollY.current / (document.documentElement.scrollHeight - window.innerHeight), 1)
-
-      particlesRef.current.forEach((particle) => {
-        const dx = mouseX.current - particle.x
-        const dy = mouseY.current - (particle.y - scrollOffset)
-        const distance = Math.sqrt(dx * dx + dy * dy)
-        const maxDistance = 150
-
-        if (distance < maxDistance) {
-          const force = (1 - distance / maxDistance) * 0.5
-          particle.x -= (dx / distance) * force * 3
-          particle.y -= (dy / distance) * force * 3
-        }
-
-        particle.x += particle.vx
-        particle.y += particle.vy
-
-        const returnForce = 0.02
-        particle.x += (particle.baseX - particle.x) * returnForce
-        particle.y += (particle.baseY - particle.y) * returnForce
-
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1
-
-        particle.x = Math.max(0, Math.min(canvas.width, particle.x))
-        particle.y = Math.max(0, Math.min(canvas.height, particle.y))
-
-        const displayY = particle.y - scrollOffset
-
-        if (displayY > -50 && displayY < canvas.height + 50) {
-          const particleColor = getColorForScrollPosition(scrollProgress, particle.colorIndex)
-          
-          ctx.beginPath()
-          ctx.arc(particle.x, displayY, particle.size, 0, Math.PI * 2)
-          ctx.fillStyle = particleColor
-          ctx.globalAlpha = particle.opacity
-          ctx.fill()
-        }
-      })
-
-      particlesRef.current.forEach((particle, i) => {
-        particlesRef.current.slice(i + 1).forEach((otherParticle) => {
-          const dx = particle.x - otherParticle.x
-          const dy = particle.y - otherParticle.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
-
-          if (distance < 150) {
-            const displayY1 = particle.y - scrollOffset
-            const displayY2 = otherParticle.y - scrollOffset
-
-            if (displayY1 > -50 && displayY1 < canvas.height + 50 && 
-                displayY2 > -50 && displayY2 < canvas.height + 50) {
-              const lineColor = getColorForScrollPosition(scrollProgress, 0)
-              
-              ctx.beginPath()
-              ctx.moveTo(particle.x, displayY1)
-              ctx.lineTo(otherParticle.x, displayY2)
-              ctx.strokeStyle = `${lineColor.replace(')', ` / ${0.15 * (1 - distance / 150)})`).replace('oklch(', 'oklch(')}`
-              ctx.globalAlpha = 0.3 * (1 - distance / 150)
-              ctx.lineWidth = 0.8
-              ctx.stroke()
-            }
-          }
-        })
-      })
-
-      ctx.globalAlpha = 1
-      animationRef.current = requestAnimationFrame(animate)
-    }
-
-    animate()
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvas)
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('visibilitychange', handleVisibilityChange)
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
-    }
-  }, [])
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="fixed top-0 left-0 pointer-events-none z-0"
-      style={{ 
-        opacity: 0.7, 
-        width: '100vw', 
-        height: '100vh',
-        mixBlendMode: 'screen'
-      }}
-    />
-  )
-}
-
-export function FloatingOrbs() {
-  const orbs = [
-    { size: 300, x: '10%', y: '20%', delay: 0, duration: 20 },
-    { size: 400, x: '80%', y: '60%', delay: 5, duration: 25 },
-    { size: 250, x: '60%', y: '10%', delay: 10, duration: 22 },
-    { size: 350, x: '20%', y: '80%', delay: 15, duration: 28 },
-  ]
-
-  return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-      {orbs.map((orb, index) => (
-        <motion.div
-          key={index}
-          className="absolute rounded-full blur-3xl opacity-20"
-          style={{
-            width: orb.size,
-            height: orb.size,
-            left: orb.x,
-            top: orb.y,
-            background: 'radial-gradient(circle, oklch(0.62 0.24 295 / 0.4) 0%, transparent 70%)',
-          }}
-          animate={{
-            x: [0, 50, -30, 0],
-            y: [0, -30, 50, 0],
-            scale: [1, 1.1, 0.9, 1],
-          }}
-          transition={{
-            duration: orb.duration,
-            delay: orb.delay,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      ))}
-    </div>
-  )
-}
-
-export function RisingParticles() {
-  const particles = Array.from({ length: 15 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    delay: Math.random() * 10,
-    duration: 15 + Math.random() * 10,
-    size: 2 + Math.random() * 3,
-  }))
-
-  return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10">
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute rounded-full"
-          style={{
-            left: `${particle.x}%`,
-            bottom: '-20px',
-            width: particle.size,
-            height: particle.size,
-            background: 'oklch(0.62 0.24 295 / 0.6)',
-            boxShadow: '0 0 10px oklch(0.62 0.24 295 / 0.4)',
-          }}
-          animate={{
-            y: ['0vh', '-110vh'],
-            opacity: [0, 0.8, 0.8, 0],
-            x: [0, Math.random() * 40 - 20],
-          }}
-          transition={{
-            duration: particle.duration,
-            delay: particle.delay,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-        />
-      ))}
-    </div>
-  )
-}
-
-export function BottomParticleBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const particlesRef = useRef<Particle[]>([])
-  const animationRef = useRef<number | undefined>(undefined)
-  const scrollY = useRef(0)
-  const mouseX = useRef(0)
-  const mouseY = useRef(0)
-  const isVisible = useRef(true)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth
-      canvas.height = document.documentElement.scrollHeight
-    }
-
-    resizeCanvas()
-    window.addEventListener('resize', resizeCanvas)
-
-    const isMobile = window.innerWidth < 768
-    const particleCount = Math.min(
-      Math.floor((canvas.width * canvas.height) / (isMobile ? 25000 : 15000)), 
-      isMobile ? 50 : 100
-    )
-
-    const viewportHeight = window.innerHeight
-    const totalHeight = document.documentElement.scrollHeight
-    const startY = totalHeight * 0.4
-
-    particlesRef.current = Array.from({ length: particleCount }, (_, i) => {
-      const x = Math.random() * canvas.width
-      const y = startY + Math.random() * (totalHeight - startY)
-      return {
-        x,
-        y,
-        baseX: x,
-        baseY: y,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2.5 + 1,
-        opacity: Math.random() * 0.6 + 0.3,
-        color: colors[i % colors.length],
-        colorIndex: i % colors.length,
-      }
-    })
-
-    const handleScroll = () => {
-      scrollY.current = window.scrollY
-    }
-
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX.current = e.clientX
-      mouseY.current = e.clientY + scrollY.current
-    }
-
-    const handleVisibilityChange = () => {
-      isVisible.current = !document.hidden
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    window.addEventListener('mousemove', handleMouseMove)
-    document.addEventListener('visibilitychange', handleVisibilityChange)
-
-    const animate = () => {
-      if (!isVisible.current) {
+    const animate = (currentTime: number) => {
+      if (!ctx || !canvas || !isVisibleRef.current) {
         animationRef.current = requestAnimationFrame(animate)
         return
       }
 
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      // FPS throttling
+      const elapsed = currentTime - lastFrameTimeRef.current
+      if (elapsed < frameInterval) {
+        animationRef.current = requestAnimationFrame(animate)
+        return
+      }
+      lastFrameTimeRef.current = currentTime - (elapsed % frameInterval)
 
-      const scrollOffset = scrollY.current
-      const scrollProgress = Math.min(scrollOffset / (document.documentElement.scrollHeight - window.innerHeight), 1)
+      const displayWidth = window.innerWidth
+      const displayHeight = window.innerHeight
 
-      particlesRef.current.forEach((particle) => {
-        const dx = mouseX.current - particle.x
-        const dy = mouseY.current - particle.y
-        const distance = Math.sqrt(dx * dx + dy * dy)
-        const maxDistance = 150
+      // Clear canvas
+      ctx.clearRect(0, 0, displayWidth, displayHeight)
 
-        if (distance < maxDistance) {
-          const force = (maxDistance - distance) / maxDistance
-          particle.vx -= (dx / distance) * force * 0.3
-          particle.vy -= (dy / distance) * force * 0.3
-        }
+      const particles = particlesRef.current
+      const connectionDistance = config.connectionDistance
+      const connectionDistanceSq = connectionDistance * connectionDistance
 
+      // Update and draw particles
+      for (let i = 0; i < particles.length; i++) {
+        const particle = particles[i]
+
+        // Simple physics update
         particle.x += particle.vx
         particle.y += particle.vy
 
-        const returnForce = 0.02
-        particle.x += (particle.baseX - particle.x) * returnForce
-        particle.y += (particle.baseY - particle.y) * returnForce
+        // Return to base position (gentle spring)
+        particle.x += (particle.baseX - particle.x) * 0.01
+        particle.y += (particle.baseY - particle.y) * 0.01
 
-        if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1
-        if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1
-
-        particle.x = Math.max(0, Math.min(canvas.width, particle.x))
-        particle.y = Math.max(0, Math.min(canvas.height, particle.y))
-
-        const displayY = particle.y - scrollOffset
-
-        if (displayY > -50 && displayY < window.innerHeight + 50) {
-          const particleColor = getColorForScrollPosition(scrollProgress, particle.colorIndex)
-          
-          ctx.beginPath()
-          ctx.arc(particle.x, displayY, particle.size, 0, Math.PI * 2)
-          ctx.fillStyle = particleColor
-          ctx.globalAlpha = particle.opacity
-          ctx.fill()
+        // Boundary bouncing
+        if (particle.x < 0 || particle.x > displayWidth) {
+          particle.vx *= -1
+          particle.x = Math.max(0, Math.min(displayWidth, particle.x))
         }
-      })
+        if (particle.y < 0 || particle.y > displayHeight) {
+          particle.vy *= -1
+          particle.y = Math.max(0, Math.min(displayHeight, particle.y))
+        }
 
-      particlesRef.current.forEach((particle, i) => {
-        particlesRef.current.slice(i + 1).forEach((otherParticle) => {
-          const dx = particle.x - otherParticle.x
-          const dy = particle.y - otherParticle.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
+        // Draw particle (use integer coordinates for faster rendering)
+        ctx.beginPath()
+        ctx.arc(particle.x | 0, particle.y | 0, particle.size, 0, Math.PI * 2)
+        ctx.fillStyle = PARTICLE_COLORS[i % PARTICLE_COLORS.length]
+        ctx.globalAlpha = particle.opacity
+        ctx.fill()
+      }
 
-          if (distance < 150) {
-            const displayY1 = particle.y - scrollOffset
-            const displayY2 = otherParticle.y - scrollOffset
+      // Draw connections (optimized: use spatial hashing or limit checks)
+      if (connectionDistance > 0) {
+        ctx.strokeStyle = LINE_COLOR
+        ctx.lineWidth = 0.5
+        ctx.globalAlpha = 0.3
 
-            if (displayY1 > -50 && displayY1 < window.innerHeight + 50 && 
-                displayY2 > -50 && displayY2 < window.innerHeight + 50) {
-              const lineColor = getColorForScrollPosition(scrollProgress, 0)
-              
+        // Only check nearby particles (simple optimization)
+        for (let i = 0; i < particles.length; i++) {
+          const p1 = particles[i]
+          // Limit connections per particle for performance
+          let connections = 0
+          const maxConnections = 3
+
+          for (let j = i + 1; j < particles.length && connections < maxConnections; j++) {
+            const p2 = particles[j]
+            const dx = p1.x - p2.x
+            const dy = p1.y - p2.y
+            const distSq = dx * dx + dy * dy
+
+            if (distSq < connectionDistanceSq) {
+              const opacity = 1 - distSq / connectionDistanceSq
+              ctx.globalAlpha = opacity * 0.2
               ctx.beginPath()
-              ctx.moveTo(particle.x, displayY1)
-              ctx.lineTo(otherParticle.x, displayY2)
-              ctx.strokeStyle = `${lineColor.replace(')', ` / ${0.15 * (1 - distance / 150)})`).replace('oklch(', 'oklch(')}`
-              ctx.globalAlpha = 0.3 * (1 - distance / 150)
-              ctx.lineWidth = 0.8
+              ctx.moveTo(p1.x | 0, p1.y | 0)
+              ctx.lineTo(p2.x | 0, p2.y | 0)
               ctx.stroke()
+              connections++
             }
           }
-        })
-      })
+        }
+      }
 
       ctx.globalAlpha = 1
       animationRef.current = requestAnimationFrame(animate)
     }
 
-    animate()
+    // Start animation
+    lastFrameTimeRef.current = performance.now()
+    animate(performance.now())
 
     return () => {
-      window.removeEventListener('resize', resizeCanvas)
-      window.removeEventListener('scroll', handleScroll)
-      window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('resize', handleResize)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
+      clearTimeout(resizeTimeout)
       if (animationRef.current) {
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [])
+  }, [config.particleCount, config.connectionDistance, config.targetFPS])
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed top-0 left-0 pointer-events-none z-0"
-      style={{ 
-        opacity: 0.7, 
-        width: '100vw', 
-        height: '100vh',
-        mixBlendMode: 'screen'
+      className="fixed inset-0 pointer-events-none"
+      style={{
+        opacity: 0.6,
+        zIndex: 0,
+        willChange: 'auto', // Don't hint GPU when not needed
       }}
+      aria-hidden="true"
     />
   )
+}
+
+// Simplified floating orbs - CSS only, no JS animation loops
+export function FloatingOrbs() {
+  const config = usePerformanceMode()
+
+  if (!config.enableFloatingOrbs) {
+    return null
+  }
+
+  return (
+    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
+      <div
+        className="floating-orb floating-orb-1"
+        style={{
+          width: 250,
+          height: 250,
+          left: '10%',
+          top: '20%',
+        }}
+      />
+      <div
+        className="floating-orb floating-orb-2"
+        style={{
+          width: 300,
+          height: 300,
+          left: '75%',
+          top: '55%',
+        }}
+      />
+    </div>
+  )
+}
+
+// Simplified rising particles - CSS only
+export function RisingParticles() {
+  const config = usePerformanceMode()
+
+  if (!config.enableRisingParticles) {
+    return null
+  }
+
+  // Pre-generate particle positions
+  const particles = useMemo(() =>
+    Array.from({ length: 8 }, (_, i) => ({
+      id: i,
+      x: 10 + (i * 12),
+      delay: i * 1.5,
+      duration: 12 + (i % 3) * 4,
+      size: 2 + (i % 2),
+    })),
+  [])
+
+  return (
+    <div className="fixed inset-0 overflow-hidden pointer-events-none -z-10" aria-hidden="true">
+      {particles.map((particle) => (
+        <div
+          key={particle.id}
+          className="rising-particle"
+          style={{
+            left: `${particle.x}%`,
+            width: particle.size,
+            height: particle.size,
+            animationDelay: `${particle.delay}s`,
+            animationDuration: `${particle.duration}s`,
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
+// Second canvas removed - one is enough and less impactful
+export function BottomParticleBackground() {
+  // Completely disabled - the main ParticleBackground is sufficient
+  return null
 }

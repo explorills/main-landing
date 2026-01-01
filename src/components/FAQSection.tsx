@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { CaretDown } from '@phosphor-icons/react'
+import { usePerformanceMode } from '@/hooks/use-performance-mode'
 
 interface FAQItem {
   question: string
@@ -45,42 +46,44 @@ const faqs: FAQItem[] = [
   },
 ]
 
-function FAQItem({ item, index, isOpen, onToggle }: { item: FAQItem; index: number; isOpen: boolean; onToggle: () => void }) {
-
+function FAQItemComponent({ item, index, isOpen, onToggle, enableAnimation }: {
+  item: FAQItem
+  index: number
+  isOpen: boolean
+  onToggle: () => void
+  enableAnimation: boolean
+}) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={enableAnimation ? { opacity: 0, y: 15 } : false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.4, delay: index * 0.05, ease: 'easeOut' }}
       className="border-b border-border/30 last:border-0"
     >
       <button
         onClick={onToggle}
         className="w-full flex items-start justify-between gap-4 py-6 text-left group cursor-pointer"
       >
-        <h3 className="text-lg sm:text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-200">
+        <h3 className="text-lg sm:text-xl font-semibold text-foreground group-hover:text-primary transition-colors duration-150">
           {item.question}
         </h3>
         <div className="flex-shrink-0 mt-1">
-          <motion.div
-            animate={{ rotate: isOpen ? 180 : 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="text-primary"
+          <div
+            className="text-primary transition-transform duration-200"
+            style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
           >
             <CaretDown size={20} weight="bold" />
-          </motion.div>
+          </div>
         </div>
       </button>
 
-      <motion.div
-        initial={false}
-        animate={{
-          height: isOpen ? 'auto' : 0,
+      <div
+        className="overflow-hidden transition-all duration-200"
+        style={{
+          maxHeight: isOpen ? '500px' : '0',
           opacity: isOpen ? 1 : 0,
         }}
-        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        className="overflow-hidden"
       >
         <div className="pb-6 pr-12">
           <p className="text-base text-muted-foreground leading-relaxed mb-4 cursor-text select-text">
@@ -94,7 +97,7 @@ function FAQItem({ item, index, isOpen, onToggle }: { item: FAQItem; index: numb
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary text-sm font-medium transition-colors duration-200 border border-primary/20 hover:border-primary/40"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary text-sm font-medium transition-colors duration-150 border border-primary/20 hover:border-primary/40"
                 >
                   {link.text}
                   <span className="text-xs">→</span>
@@ -103,13 +106,14 @@ function FAQItem({ item, index, isOpen, onToggle }: { item: FAQItem; index: numb
             </div>
           )}
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   )
 }
 
 export function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const config = usePerformanceMode()
 
   const handleToggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
@@ -119,67 +123,51 @@ export function FAQSection() {
     <section className="relative min-h-screen py-20 px-4">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.02 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.5 }}
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `repeating-radial-gradient(circle at center, transparent 0, transparent 2px, oklch(0.62 0.24 295 / 0.05) 2px, transparent 3px)`,
-          }}
-        />
       </div>
 
       <div className="relative z-10 w-full max-w-4xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={config.enableScrollAnimations ? { opacity: 0, y: 20 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
           className="text-center mb-16"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-              <span className="text-foreground">Questions? </span>
-              <span className="text-primary glow-accent">Answered.</span>
-            </h2>
-            <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Everything you need to know about the EXPL Nodes and ONE ecosystem.
-            </p>
-          </motion.div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+            <span className="text-foreground">Questions? </span>
+            <span className="text-primary">Answered.</span>
+          </h2>
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+            Everything you need to know about the EXPL Nodes and ONE ecosystem.
+          </p>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={config.enableScrollAnimations ? { opacity: 0 } : false}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="bg-card/30 backdrop-blur-sm rounded-2xl border border-border/30 p-6 sm:p-8 md:p-10"
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-card/30 rounded-2xl border border-border/30 p-6 sm:p-8 md:p-10"
         >
           <div className="space-y-0">
             {faqs.map((faq, index) => (
-              <FAQItem 
-                key={index} 
-                item={faq} 
-                index={index} 
+              <FAQItemComponent
+                key={index}
+                item={faq}
+                index={index}
                 isOpen={openIndex === index}
                 onToggle={() => handleToggle(index)}
+                enableAnimation={config.enableScrollAnimations}
               />
             ))}
           </div>
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={config.enableScrollAnimations ? { opacity: 0, y: 15 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
           className="mt-12 text-center"
         >
           <p className="text-muted-foreground mb-6">
@@ -190,7 +178,7 @@ export function FAQSection() {
               href="https://discord.com/invite/RetTCVq7tJ"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold transition-all duration-200 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold transition-all duration-150 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40"
             >
               Join Discord
               <span>→</span>
@@ -199,7 +187,7 @@ export function FAQSection() {
               href="https://docs.expl.one"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card/50 hover:bg-card border border-border/50 hover:border-primary/50 text-foreground font-semibold transition-all duration-200"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card/50 hover:bg-card border border-border/50 hover:border-primary/50 text-foreground font-semibold transition-all duration-150"
             >
               Read Docs
               <span>→</span>

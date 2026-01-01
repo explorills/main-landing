@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from 'react'
 import { GitCommit, TrendUp, Calendar, Clock, WifiHigh, WifiSlash } from '@phosphor-icons/react'
 import { io, Socket } from 'socket.io-client'
 import { updateRepoStatsCache, RepoStats } from '@/lib/github'
+import { usePerformanceMode } from '@/hooks/use-performance-mode'
 
 const API_URL = 'https://api-landing.expl.one'
 
@@ -45,24 +46,23 @@ export function getSharedSocket(): Socket {
       reconnectionDelay: 1000,
       reconnectionAttempts: 10
     })
-    
+
     sharedSocket.on('connect', () => {
       connectionStatus = 'connected'
       statusListeners.forEach(listener => listener('connected'))
     })
-    
+
     sharedSocket.on('disconnect', () => {
       connectionStatus = 'disconnected'
       statusListeners.forEach(listener => listener('disconnected'))
     })
-    
+
     sharedSocket.on('connect_error', () => {
       connectionStatus = 'disconnected'
       statusListeners.forEach(listener => listener('disconnected'))
     })
-    
+
     sharedSocket.on('stats-update', (data: WebSocketData) => {
-      // Update the global cache for repo stats - this makes repo commits update live
       if (data.repoStats) {
         updateRepoStatsCache(data.repoStats)
       }
@@ -83,37 +83,39 @@ export function subscribeToConnectionStatus(callback: (status: typeof connection
   return () => statusListeners.delete(callback)
 }
 
-// Animated number component with flash effect
-function AnimatedNumber({ value, color, prevValue }: { value: number | string; color: string; prevValue?: number | string }) {
+// Animated number component - CSS-only animation
+function AnimatedNumber({ value, color, prevValue, enableAnimation }: {
+  value: number | string
+  color: string
+  prevValue?: number | string
+  enableAnimation: boolean
+}) {
   const [isFlashing, setIsFlashing] = useState(false)
-  
+
   useEffect(() => {
+    if (!enableAnimation) return
     if (prevValue !== undefined && value !== prevValue) {
       setIsFlashing(true)
-      const timer = setTimeout(() => setIsFlashing(false), 1200)
+      const timer = setTimeout(() => setIsFlashing(false), 800)
       return () => clearTimeout(timer)
     }
-  }, [value, prevValue])
-  
+  }, [value, prevValue, enableAnimation])
+
   return (
-    <motion.span
-      animate={{
-        scale: isFlashing ? [1, 1.15, 1] : 1,
-      }}
-      transition={{ duration: 0.4, ease: 'easeOut' }}
-      style={{ 
+    <span
+      style={{
         color,
         display: 'inline-block',
-        textShadow: isFlashing ? `0 0 20px ${color}, 0 0 40px ${color}` : 'none',
+        transform: isFlashing ? 'scale(1.1)' : 'scale(1)',
+        transition: 'transform 0.3s ease-out',
       }}
-      className={isFlashing ? 'transition-all duration-300' : ''}
     >
       {value}
-    </motion.span>
+    </span>
   )
 }
 
-// Live status indicator - simple professional pulse
+// Live status indicator
 function LiveIndicator({ status }: { status: 'connecting' | 'connected' | 'disconnected' }) {
   const getStatusConfig = () => {
     switch (status) {
@@ -125,33 +127,25 @@ function LiveIndicator({ status }: { status: 'connecting' | 'connected' | 'disco
         return { color: '#ef4444', text: 'Offline', Icon: WifiSlash }
     }
   }
-  
+
   const { color, text, Icon } = getStatusConfig()
-  const isActive = status === 'connected' || status === 'connecting'
-  
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/60 border border-border/30"
-    >
+    <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/60 border border-border/30">
       <div className="relative flex items-center justify-center w-3 h-3">
         <div
           className="w-2 h-2 rounded-full"
-          style={{ 
-            backgroundColor: color,
-            boxShadow: isActive ? `0 0 8px ${color}` : 'none',
-            animation: isActive ? 'pulse-glow 2s ease-in-out infinite' : 'none'
-          }}
+          style={{ backgroundColor: color }}
         />
       </div>
       <span className="text-xs font-medium" style={{ color }}>{text}</span>
       <Icon size={14} weight="bold" style={{ color }} />
-    </motion.div>
+    </div>
   )
 }
 
 export function GitHubStatsBar() {
+  const config = usePerformanceMode()
   const [stats, setStats] = useState<GitHubStats>({
     lastCommitDate: '-',
     commitsToday: 0,
@@ -202,7 +196,6 @@ export function GitHubStatsBar() {
     const unsubscribeStatus = subscribeToConnectionStatus(setWsStatus)
 
     const unsubscribe = subscribeToStats((data: WebSocketData) => {
-      console.log('📡 Live stats update received:', data.stats?.today, 'commits today')
       if (data.stats) {
         updateStats(data.stats)
       }
@@ -227,13 +220,13 @@ export function GitHubStatsBar() {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={config.enableScrollAnimations ? { opacity: 0, y: 15 } : false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.4 }}
       className="mb-12"
     >
-      <div className="bg-card/30 backdrop-blur-sm rounded-xl border border-border/30 p-4 sm:p-6">
+      <div className="bg-card/30 rounded-xl border border-border/30 p-4 sm:p-6">
         <div className="flex items-center justify-between mb-4">
           <LiveIndicator status={wsStatus} />
           {lastUpdateTime && (
@@ -242,43 +235,34 @@ export function GitHubStatsBar() {
             </span>
           )}
         </div>
-        
+
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {statItems.map((stat, index) => {
             const Icon = stat.icon
             return (
-              <motion.div
+              <div
                 key={stat.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
                 className="relative group"
               >
-                <div className="flex flex-col items-center gap-2 p-3 rounded-lg bg-background/40 border border-border/20 hover:border-primary/30 transition-all duration-300">
-                  <div className="relative">
-                    <motion.div
-                      className="absolute inset-0 rounded-full blur-lg opacity-0 group-hover:opacity-40 transition-opacity duration-300"
-                      style={{ backgroundColor: stat.color }}
-                    />
-                    <Icon size={20} weight="bold" style={{ color: stat.color }} className="relative" />
-                  </div>
+                <div className="flex flex-col items-center gap-2 p-3 rounded-lg bg-background/40 border border-border/20 hover:border-primary/30 transition-all duration-150">
+                  <Icon size={20} weight="bold" style={{ color: stat.color }} />
                   <div className="text-center">
                     <div className="text-lg sm:text-xl font-bold text-foreground">
                       {stats.loading ? (
-                        <motion.div
-                          animate={{ opacity: [0.3, 1, 0.3] }}
-                          transition={{ duration: 1.5, repeat: Infinity }}
-                          className="h-6 w-12 bg-muted-foreground/20 rounded mx-auto"
-                        />
+                        <div className="h-6 w-12 bg-muted-foreground/20 rounded mx-auto animate-pulse" />
                       ) : (
-                        <AnimatedNumber value={stat.value} color={stat.color} prevValue={stat.prevValue} />
+                        <AnimatedNumber
+                          value={stat.value}
+                          color={stat.color}
+                          prevValue={stat.prevValue}
+                          enableAnimation={config.enableInfiniteAnimations}
+                        />
                       )}
                     </div>
                     <div className="text-xs text-muted-foreground mt-1">{stat.label}</div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             )
           })}
         </div>

@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useState, useEffect, useRef } from 'react'
 import { CaretDown, ArrowUpRight, GitCommit, Calendar } from '@phosphor-icons/react'
 import { useGitHubData } from '@/hooks/use-github-data'
+import { usePerformanceMode } from '@/hooks/use-performance-mode'
 import { GitHubStatsBar } from './GitHubStatsBar'
 
 type ProjectStatus = 'Deployed' | 'In Progress' | 'Coming Soon'
@@ -14,33 +15,32 @@ interface ProjectDetails {
   url?: string
 }
 
-// Animated commit count that flashes on update
-function AnimatedCommitCount({ count }: { count: number }) {
+// Animated commit count that flashes on update (only on high performance)
+function AnimatedCommitCount({ count, enableAnimation }: { count: number; enableAnimation: boolean }) {
   const [isFlashing, setIsFlashing] = useState(false)
   const prevCountRef = useRef(count)
-  
+
   useEffect(() => {
+    if (!enableAnimation) return
     if (count !== prevCountRef.current) {
       setIsFlashing(true)
       prevCountRef.current = count
-      const timer = setTimeout(() => setIsFlashing(false), 1000)
+      const timer = setTimeout(() => setIsFlashing(false), 800)
       return () => clearTimeout(timer)
     }
-  }, [count])
-  
+  }, [count, enableAnimation])
+
   return (
-    <motion.span
-      animate={{
-        scale: isFlashing ? [1, 1.3, 1] : 1,
-        color: isFlashing ? '#16a34a' : '#a1a1aa',
-      }}
-      transition={{ duration: 0.4 }}
+    <span
       style={{
-        textShadow: isFlashing ? '0 0 10px #16a34a' : 'none',
+        color: isFlashing ? '#16a34a' : '#a1a1aa',
+        transform: isFlashing ? 'scale(1.2)' : 'scale(1)',
+        display: 'inline-block',
+        transition: 'all 0.3s ease-out',
       }}
     >
       {count}
-    </motion.span>
+    </span>
   )
 }
 
@@ -112,13 +112,13 @@ const projectsDetails: ProjectDetails[] = [
 
 const statusCategories: ProjectStatus[] = ['Deployed', 'In Progress', 'Coming Soon']
 
-function ProjectItem({ project, compact }: { project: ProjectDetails; compact?: boolean }) {
+function ProjectItem({ project, compact, enableAnimation }: { project: ProjectDetails; compact?: boolean; enableAnimation: boolean }) {
   const { data: githubData } = useGitHubData(project.name)
   const hasLink = project.status === 'Deployed' || project.status === 'In Progress'
 
   if (compact) {
     return (
-      <div className="flex items-center justify-between py-2 px-3 rounded-lg bg-background/20 hover:bg-background/40 transition-all duration-200">
+      <div className="flex items-center justify-between py-2 px-3 rounded-lg bg-background/20 hover:bg-background/40 transition-all duration-150">
         <div className="flex items-center gap-2">
           <div
             className="w-2 h-2 rounded-full flex-shrink-0"
@@ -133,7 +133,7 @@ function ProjectItem({ project, compact }: { project: ProjectDetails; compact?: 
   }
 
   const CardContent = (
-    <div className="flex items-center justify-between gap-3 py-3 px-4 rounded-lg bg-background/20 hover:bg-background/40 transition-all duration-200 group">
+    <div className="flex items-center justify-between gap-3 py-3 px-4 rounded-lg bg-background/20 hover:bg-background/40 transition-all duration-150 group">
       <div className="flex items-center gap-3 flex-1 min-w-0">
         <div
           className="w-2.5 h-2.5 rounded-full flex-shrink-0"
@@ -160,7 +160,7 @@ function ProjectItem({ project, compact }: { project: ProjectDetails; compact?: 
         <div className="flex items-center gap-3 flex-shrink-0">
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <GitCommit size={12} weight="bold" />
-            <AnimatedCommitCount count={githubData.githubData?.commitCount || 0} />
+            <AnimatedCommitCount count={githubData.githubData?.commitCount || 0} enableAnimation={enableAnimation} />
           </div>
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <Calendar size={12} weight="bold" />
@@ -182,7 +182,7 @@ function ProjectItem({ project, compact }: { project: ProjectDetails; compact?: 
   return CardContent
 }
 
-function StatusCategory({ status, projects }: { status: ProjectStatus; projects: ProjectDetails[] }) {
+function StatusCategory({ status, projects, enableAnimation }: { status: ProjectStatus; projects: ProjectDetails[]; enableAnimation: boolean }) {
   const [isOpen, setIsOpen] = useState(status === 'In Progress' || status === 'Deployed')
 
   const getStatusColor = () => {
@@ -200,15 +200,15 @@ function StatusCategory({ status, projects }: { status: ProjectStatus; projects:
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={enableAnimation ? { opacity: 0, y: 15 } : false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="bg-card/30 backdrop-blur-sm rounded-xl border border-border/30 overflow-hidden"
+      transition={{ duration: 0.4 }}
+      className="bg-card/30 rounded-xl border border-border/30 overflow-hidden"
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between gap-4 p-4 sm:p-5 cursor-pointer hover:bg-background/20 transition-colors duration-200"
+        className="w-full flex items-center justify-between gap-4 p-4 sm:p-5 cursor-pointer hover:bg-background/20 transition-colors duration-150"
       >
         <div className="flex items-center gap-3">
           <div
@@ -219,42 +219,42 @@ function StatusCategory({ status, projects }: { status: ProjectStatus; projects:
             {status} <span className="text-muted-foreground text-sm">({projects.length})</span>
           </h3>
         </div>
-        <motion.div
-          animate={{ rotate: isOpen ? 180 : 0 }}
-          transition={{ duration: 0.3 }}
+        <div
+          className="transition-transform duration-200"
+          style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
         >
           <CaretDown size={20} weight="bold" style={{ color: getStatusColor() }} />
-        </motion.div>
+        </div>
       </button>
 
-      <motion.div
-        initial={false}
-        animate={{
-          height: isOpen ? 'auto' : 0,
+      <div
+        className="overflow-hidden transition-all duration-200"
+        style={{
+          maxHeight: isOpen ? '1000px' : '0',
           opacity: isOpen ? 1 : 0,
         }}
-        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-        className="overflow-hidden"
       >
         <div className="px-4 sm:px-5 pb-4 space-y-2">
           {isCompact ? (
             <div className="flex flex-wrap justify-center gap-2">
               {projects.map((project) => (
-                <ProjectItem key={project.name} project={project} compact />
+                <ProjectItem key={project.name} project={project} compact enableAnimation={enableAnimation} />
               ))}
             </div>
           ) : (
             projects.map((project) => (
-              <ProjectItem key={project.name} project={project} />
+              <ProjectItem key={project.name} project={project} enableAnimation={enableAnimation} />
             ))
           )}
         </div>
-      </motion.div>
+      </div>
     </motion.div>
   )
 }
 
 export function ProjectsSection() {
+  const config = usePerformanceMode()
+
   return (
     <section id="projects" className="relative min-h-screen py-20 px-4">
       <div className="absolute inset-0">
@@ -263,15 +263,15 @@ export function ProjectsSection() {
 
       <div className="relative z-10 w-full max-w-5xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={config.enableScrollAnimations ? { opacity: 0, y: 20 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
             <span className="text-foreground">Ecosystem </span>
-            <span className="text-primary glow-accent">Projects</span>
+            <span className="text-primary">Projects</span>
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto cursor-text select-text">
             Explore the growing landscape of interconnected applications
@@ -284,7 +284,14 @@ export function ProjectsSection() {
           {statusCategories.map((status) => {
             const projects = projectsDetails.filter((p) => p.status === status)
             if (projects.length === 0) return null
-            return <StatusCategory key={status} status={status} projects={projects} />
+            return (
+              <StatusCategory
+                key={status}
+                status={status}
+                projects={projects}
+                enableAnimation={config.enableScrollAnimations}
+              />
+            )
           })}
         </div>
       </div>
