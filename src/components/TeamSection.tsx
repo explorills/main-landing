@@ -174,7 +174,7 @@ export function TeamSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-8 space-y-4"
+          className="text-center mb-6 space-y-4"
         >
           <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold">
             <span className="text-foreground">Meet the </span>
