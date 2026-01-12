@@ -5,7 +5,6 @@ import { TeamSection } from '@/components/TeamSection'
 import { AboutSection } from '@/components/AboutSection'
 import { ProjectsSection } from '@/components/ProjectsSection'
 import { Footer } from '@/components/Footer'
-import { ParticleBackground, FloatingOrbs, RisingParticles, BottomParticleBackground } from '@/components/ParticleBackground'
 import { PoweredByExplNodes } from '@/components/PoweredByExplNodes'
 
 // Projects for navbar title rotation (includes ecosystem)
@@ -101,11 +100,9 @@ function App() {
 
 
   return (
-    <div className="min-h-screen bg-background text-foreground pb-16">
-      <ParticleBackground />
-      <BottomParticleBackground />
-      <FloatingOrbs />
-      <RisingParticles />
+    <div className="min-h-screen text-foreground pb-16" style={{ backgroundColor: '#0a1628' }}>
+      {/* Solid dark blue background - removed particle animations for performance testing */}
+      <div className="fixed inset-0 -z-10" style={{ backgroundColor: '#0a1628' }} />
       
       <motion.header
         initial={{ y: -100, opacity: 0 }}
