@@ -248,8 +248,9 @@ function App() {
         >
           <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
           
-          <div className="relative z-10 w-full max-w-7xl mx-auto">
-            <div className="relative w-full aspect-square max-w-3xl mx-auto">
+          <div className="relative z-10 w-full max-w-7xl mx-auto flex items-center justify-center" style={{ height: '100%' }}>
+            {/* Ring container: uses min of available width/height to never cut */}
+            <div className="relative" style={{ width: 'min(100%, 100vh - 200px, 768px)', aspectRatio: '1/1' }}>
               {heroRingProjects.map((project, index) => {
                 const angle = (index / heroRingProjects.length) * 2 * Math.PI - Math.PI / 2
                 const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 35 : 42
@@ -335,7 +336,7 @@ function App() {
 
 
 
-        <section id="why-node" className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 py-20">
+        <section id="why-node" className="relative flex items-center justify-center overflow-hidden px-4 py-12">
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
             <motion.div

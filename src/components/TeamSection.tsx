@@ -153,7 +153,7 @@ function TeamMemberCard({ member, index }: { member: TeamMember; index: number }
 
 export function TeamSection() {
   return (
-    <section className="relative min-h-screen py-20 px-4">
+    <section className="relative py-12 px-4">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
         <motion.div

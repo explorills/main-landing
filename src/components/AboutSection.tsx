@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 
 export function AboutSection() {
   return (
-    <section id="about" className="relative min-h-screen py-20 px-4">
+    <section id="about" className="relative py-12 px-4">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
         <motion.div
