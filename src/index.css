@@ -19,7 +19,7 @@
 
   /* Fix scroll offset for fixed navbar - responsive across all devices */
   [id] {
-    scroll-margin-top: clamp(1rem, 4vh, 5rem);
+    scroll-margin-top: clamp(1rem, 8vh, 5rem);
   }
 
   /* GPU acceleration for animated elements */
