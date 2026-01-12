@@ -101,7 +101,7 @@ function App() {
 
 
   return (
-    <div className="min-h-screen bg-background text-foreground pb-16">
+    <div className="min-h-screen text-foreground pb-16">
       {/* Static starfield background - no animations */}
       <ParticleBackground />
       
