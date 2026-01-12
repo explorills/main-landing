@@ -233,7 +233,7 @@ function App() {
         {/* Visually hidden H1 for SEO - critical for page structure */}
         <h1 className="sr-only">EXPL.ONE - Open Source Web3 Ecosystem: ONE Perfect Tool Per Category</h1>
         
-        <section aria-label="ONE Ecosystem Overview" className="relative min-h-screen flex items-center justify-center overflow-hidden px-4 -mt-4">
+        <section aria-label="ONE Ecosystem Overview" className="relative flex items-center justify-center overflow-hidden px-4 pt-20 pb-8 sm:pt-24 sm:pb-12 md:min-h-screen md:pt-0 md:pb-0">
           <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
           
           <div className="relative z-10 w-full max-w-7xl mx-auto">
