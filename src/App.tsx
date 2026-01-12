@@ -229,11 +229,23 @@ function App() {
         </motion.div>
       )}
 
-      <main className="pt-10 sm:pt-14" role="main">
+      <main className="pb-14" role="main">
         {/* Visually hidden H1 for SEO - critical for page structure */}
         <h1 className="sr-only">EXPL.ONE - Open Source Web3 Ecosystem: ONE Perfect Tool Per Category</h1>
         
-        <section aria-label="ONE Ecosystem Overview" className="relative flex items-center justify-center overflow-hidden px-4 pt-20 pb-8 sm:pt-24 sm:pb-12 md:min-h-screen md:pt-0 md:pb-0">
+        {/* Hero section: perfectly centered between navbar (top) and footer (bottom) 
+            Navbar height: ~104px (logo 56-64px + title + powered by button + py-3/py-4)
+            Footer height: ~48px (py-3 + content)
+            Using 100svh for better mobile viewport handling */}
+        <section 
+          aria-label="ONE Ecosystem Overview" 
+          className="relative flex items-center justify-center overflow-hidden px-4"
+          style={{
+            height: 'calc(100svh - 104px - 48px)',
+            minHeight: '400px',
+            marginTop: '104px',
+          }}
+        >
           <div className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent" />
           
           <div className="relative z-10 w-full max-w-7xl mx-auto">
