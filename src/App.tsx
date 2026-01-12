@@ -122,17 +122,19 @@ function App() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="flex items-center gap-3 sm:gap-4 flex-shrink-0"
             >
-              <motion.img 
-                src="/logo.png" 
-                alt="EXPL.ONE - ONE Ecosystem Logo - Open Source Web3 Platform" 
-                className="w-14 h-14 sm:w-16 sm:h-16 object-contain"
-                loading="eager"
-                width="64"
-                height="64"
-                animate={{ scale: [1, 1.08, 1] }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 1.5 }}
-                style={{ willChange: 'transform' }}
-              />
+              <a href="https://expl.one/" className="cursor-pointer">
+                <motion.img 
+                  src="/logo.png" 
+                  alt="EXPL.ONE - ONE Ecosystem Logo - Open Source Web3 Platform" 
+                  className="w-14 h-14 sm:w-16 sm:h-16 object-contain"
+                  loading="eager"
+                  width="64"
+                  height="64"
+                  animate={{ scale: [1, 1.08, 1] }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 1.5 }}
+                  style={{ willChange: 'transform' }}
+                />
+              </a>
               <motion.div 
                 className="flex flex-col gap-1"
                 animate={{ scale: [1, 1.03, 1] }}
