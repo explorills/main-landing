@@ -6,14 +6,14 @@ import {
   DialogHeader, 
   DialogTitle, 
   DialogDescription,
-  DialogFooter 
+  DialogFooter,
+  DialogClose
 } from '@/components/ui/dialog'
 import { 
   Select, 
   SelectContent, 
   SelectItem, 
-  SelectTrigger, 
-  SelectValue 
+  SelectTrigger
 } from '@/components/ui/select'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -25,7 +25,8 @@ import {
   SpinnerGap, 
   CheckCircle,
   Warning,
-  Briefcase
+  Briefcase,
+  X
 } from '@phosphor-icons/react'
 import { toast } from 'sonner'
 
@@ -156,17 +157,23 @@ export function ProfileSubmissionModal({ open, onOpenChange }: ProfileSubmission
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-[540px] max-h-[90vh] overflow-y-auto overflow-x-hidden bg-card/95 backdrop-blur-xl border-border/50">
-        <DialogHeader className="space-y-3">
-          <DialogTitle className="text-2xl font-bold text-foreground flex items-center gap-2">
-            <Briefcase size={28} weight="duotone" className="text-primary" />
-            Submit Your Profile
-          </DialogTitle>
-          <DialogDescription className="text-muted-foreground text-base">
-            Register your interest in being part of EXPL ONE. We'll review your profile and reach out when opportunities arise.
-          </DialogDescription>
+        <DialogHeader className="space-y-3 flex-row items-start justify-between gap-4">
+          <div className="flex-1 space-y-2">
+            <DialogTitle className="text-2xl font-bold text-foreground flex items-center gap-2">
+              <Briefcase size={28} weight="duotone" className="text-primary" />
+              Submit Your Profile
+            </DialogTitle>
+            <DialogDescription className="text-muted-foreground text-base">
+              Register your interest in being part of EXPL ONE. We'll review your profile and reach out when opportunities arise.
+            </DialogDescription>
+          </div>
+          <DialogClose className="flex-shrink-0 w-10 h-10 rounded-full bg-muted/50 hover:bg-muted flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+            <X size={22} weight="bold" className="text-foreground" />
+            <span className="sr-only">Close</span>
+          </DialogClose>
         </DialogHeader>
 
-        <div className="space-y-6 py-4">
+        <div className="space-y-6 px-6 py-4 overflow-y-auto">
           {/* 1. Work Fields */}
           <div className="space-y-2">
             <Label htmlFor="workFields" className="text-base font-medium text-foreground">
@@ -198,15 +205,22 @@ export function ProfileSubmissionModal({ open, onOpenChange }: ProfileSubmission
               My intention: <span className="text-primary">*</span>
             </Label>
             <Select value={contributionType} onValueChange={(value) => setContributionType(value as ContributionType)}>
-              <SelectTrigger className={`w-full bg-background/50 border-border/50 focus:border-primary h-auto min-h-[44px] ${
+              <SelectTrigger className={`w-full bg-background/50 border-border/50 focus:border-primary h-auto min-h-[44px] rounded-lg ${
                 errors.contributionType ? 'border-destructive' : ''
               }`}>
-                <SelectValue placeholder="Select your intention..." />
+                <span className="truncate text-left">
+                  {contributionType === 'contribute_now' 
+                    ? 'I have a clear vision, valuable connections...'
+                    : contributionType === 'register_for_future'
+                    ? "I'd like to register my profile..."
+                    : <span className="text-muted-foreground">Select your intention...</span>
+                  }
+                </span>
               </SelectTrigger>
-              <SelectContent className="bg-card border-border/50 max-w-[calc(100vw-3rem)] sm:max-w-[508px]">
+              <SelectContent className="bg-card border-primary/20 max-w-[calc(100vw-3rem)] sm:max-w-[508px] p-1">
                 <SelectItem 
                   value="contribute_now" 
-                  className="py-3 cursor-pointer focus:bg-primary/10"
+                  className="py-3"
                 >
                   <span className="block text-sm leading-relaxed whitespace-normal">
                     I have a clear vision, valuable connections, potential investor opportunities, or skills that can improve certain aspects, and I'd like to contribute now, even if there are no open positions.
@@ -214,7 +228,7 @@ export function ProfileSubmissionModal({ open, onOpenChange }: ProfileSubmission
                 </SelectItem>
                 <SelectItem 
                   value="register_for_future" 
-                  className="py-3 cursor-pointer focus:bg-primary/10"
+                  className="py-3"
                 >
                   <span className="block text-sm leading-relaxed whitespace-normal">
                     I'd like to register my profile in the EXPL ONE database to be considered in the future when opportunities become available.
@@ -308,7 +322,7 @@ export function ProfileSubmissionModal({ open, onOpenChange }: ProfileSubmission
           </div>
         </div>
 
-        <DialogFooter className="flex flex-col sm:flex-row gap-3 pt-4 border-t border-border/30">
+        <DialogFooter className="flex flex-col sm:flex-row gap-3">
           <Button
             variant="outline"
             onClick={() => handleOpenChange(false)}
