@@ -453,36 +453,6 @@ function App() {
                   </div>
                 </motion.a>
               </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, delay: 0.8 }}
-                className="pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 max-w-4xl mx-auto px-4"
-              >
-                {[
-                  { label: 'Ecosystem Access', value: '10 Projects' },
-                  { label: 'Ownership Model', value: 'Co-Shareholder' },
-                  { label: 'Node Type', value: 'Single NFT' },
-                  { label: 'Future Growth', value: 'Unlimited' },
-                ].map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.9 + index * 0.1 }}
-                    className="relative group"
-                  >
-                    <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    <div className="relative p-4 rounded-lg border border-border/30 backdrop-blur-sm bg-card/20">
-                      <div className="text-2xl sm:text-3xl font-bold text-primary mb-1">{stat.value}</div>
-                      <div className="text-xs sm:text-sm text-muted-foreground">{stat.label}</div>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
             </motion.div>
           </div>
         </section>
