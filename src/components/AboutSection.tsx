@@ -59,8 +59,8 @@ export function AboutSection() {
                   mediocre apps drowning in AI slop, bots, spam, and endless 
                   options, we build HUMAN-VERIFIABLE, HUMAN-TRANSPARENT, 
                   HUMAN-SHAPED{' '}
-                  <span className="whitespace-nowrap">
-                    <ArrowRight size={18} weight="bold" className="inline-block -translate-y-[0.5px] text-primary" />{' '}
+                  <span className="whitespace-nowrap inline-flex items-center">
+                    <ArrowRight size={24} weight="bold" className="text-primary" />{' '}
                     ONE perfect
                   </span>{' '}
                   ecosystem, with its singular 
@@ -76,9 +76,9 @@ export function AboutSection() {
                   Our Philosophy
                 </h3>
                 <p className="text-base sm:text-lg text-muted-foreground leading-relaxed cursor-text select-text">
-                  We're open source, community-driven, and non-capitalistic. No profit-hungry tech giants here - 
-                  we create what we love because the purpose IS the creation. The community decides what's worth building, 
-                  not investors or user metrics.
+                  Every product in the ONE ecosystem exists for a clear reason, serves a defined role, and is built to be stable before it is expanded. We value coherence over scale and depth over speed.
+
+                  If something doesn’t deserve to exist, we don’t build it.
                 </p>
               </div>
 
@@ -89,8 +89,7 @@ export function AboutSection() {
                   Radical Transparency
                 </h3>
                 <p className="text-base sm:text-lg text-muted-foreground leading-relaxed cursor-text select-text">
-                  Every line of code, every decision, every commit - public. We're fully open source on GitHub. 
-                  No hidden agendas, no corporate secrecy. Just pure transparency and community-driven innovation.
+                  ONE is open source and community-governed. Contributions matter more than titles, funding, or popularity. We treat software as shared infrastructure, something to be understood, improved, and maintained collectively.
                 </p>
               </div>
 
@@ -101,8 +100,11 @@ export function AboutSection() {
                   Fair Economics
                 </h3>
                 <p className="text-base sm:text-lg text-muted-foreground leading-relaxed cursor-text select-text">
-                  40% of ALL revenue goes to Node owners (you), 50% to ONE care (charity helping the world), 
-                  10% to founders. This isn't just a company - it's a movement toward fair, community-owned technology.
+                  ONE is designed to reward those who are involved, either as EXPL Node owners or as ONE Creators:
+                  45% goes to EXPL Node owners
+                  45% to ONE Creators
+                  10% to the foundational team
+                  This isn't your typical company. It’s a community-owned, shared system designed to grow infinitely and create multiple passive income channels, all without relying on third parties and operating in a fully decentralized environment.
                 </p>
               </div>
             </motion.div>
