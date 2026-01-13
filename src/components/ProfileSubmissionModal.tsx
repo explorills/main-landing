@@ -72,13 +72,13 @@ export function ProfileSubmissionModal({ open, onOpenChange }: ProfileSubmission
       newErrors.profiles = 'At least one profile link is required'
     }
 
-    // GitHub URL validation
-    if (githubUrl.trim() && !githubUrl.includes('github.com')) {
+    // GitHub URL validation - flexible, case insensitive
+    if (githubUrl.trim() && !githubUrl.toLowerCase().includes('github.com')) {
       newErrors.githubUrl = 'Please enter a valid GitHub URL'
     }
 
-    // LinkedIn URL validation  
-    if (linkedinUrl.trim() && !linkedinUrl.includes('linkedin.com')) {
+    // LinkedIn URL validation - flexible, case insensitive
+    if (linkedinUrl.trim() && !linkedinUrl.toLowerCase().includes('linkedin.com')) {
       newErrors.linkedinUrl = 'Please enter a valid LinkedIn URL'
     }
 
@@ -94,9 +94,13 @@ export function ProfileSubmissionModal({ open, onOpenChange }: ProfileSubmission
   }
 
   const handleSubmit = async () => {
-    if (!validateForm()) return
+    if (!validateForm()) {
+      console.log('Form validation failed:', errors)
+      return
+    }
 
     setIsSubmitting(true)
+    console.log('Submitting application to:', API_URL)
 
     try {
       const response = await fetch(`${API_URL}/api/applications`, {
@@ -113,7 +117,9 @@ export function ProfileSubmissionModal({ open, onOpenChange }: ProfileSubmission
         }),
       })
 
+      console.log('Response status:', response.status)
       const data = await response.json()
+      console.log('Response data:', data)
 
       if (!response.ok) {
         throw new Error(data.error || 'Failed to submit profile')
@@ -323,6 +329,7 @@ export function ProfileSubmissionModal({ open, onOpenChange }: ProfileSubmission
 
         <DialogFooter className="flex flex-col sm:flex-row gap-3">
           <Button
+            type="button"
             variant="outline"
             onClick={() => handleOpenChange(false)}
             disabled={isSubmitting}
@@ -331,6 +338,7 @@ export function ProfileSubmissionModal({ open, onOpenChange }: ProfileSubmission
             Cancel
           </Button>
           <Button
+            type="button"
             onClick={handleSubmit}
             disabled={isSubmitting}
             className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground"
