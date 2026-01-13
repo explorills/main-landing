@@ -227,7 +227,7 @@ export function TeamSection() {
               </h3>
 
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                We're not hiring at the moment, <span className="text-foreground font-semibold">BUT</span> feel free to register your profile in our database and we will review it <span className="whitespace-nowrap">(technical or non-technical)</span>, whether you share our vision and want to contribute right away, or if you'd like us to consider your profile once recruitment opens.
+                We're not hiring at the moment <span className="text-foreground font-semibold">BUT</span> feel free to register your profile in our database and we will review it <span className="whitespace-nowrap">(technical or non-technical)</span>, whether you share our vision and want to contribute right away, or if you'd like us to consider your profile once recruitment opens.
               </p>
 
               <Button
