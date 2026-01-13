@@ -254,7 +254,7 @@ export function ProfileSubmissionModal({ open, onOpenChange }: ProfileSubmission
                 Profile Links <span className="text-primary">*</span>
               </Label>
               <p className="text-sm text-muted-foreground">
-                At least one profile link is required (GitHub or LinkedIn)
+                At least one profile link is required
               </p>
             </div>
 
