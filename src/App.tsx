@@ -409,16 +409,16 @@ function App() {
                   </p>
                   <div className="space-y-2 text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed text-left">
                     <p className="flex gap-4 items-center">
-                      <span className="inline-flex items-center justify-center w-[1.5em] h-[1.5em] rounded-full bg-primary/20 text-primary font-bold flex-shrink-0 text-base sm:text-lg">1</span>
-                      <span className="flex-1">A 45% lifetime proportional share of revenue from the entire ecosystem.</span>
-                    </p>
-                    <p className="flex gap-4 items-center">
-                      <span className="inline-flex items-center justify-center w-[1.5em] h-[1.5em] rounded-full bg-primary/20 text-primary font-bold flex-shrink-0 text-base sm:text-lg">2</span>
+                      <span className="inline-flex items-center justify-center w-[2em] h-[2em] rounded-full bg-primary/20 text-primary font-bold flex-shrink-0 text-xl sm:text-2xl">1</span>
                       <span className="flex-1">Minting up to 125,000 EXPL over 731 days.</span>
                     </p>
                     <p className="flex gap-4 items-center">
-                      <span className="inline-flex items-center justify-center w-[1.5em] h-[1.5em] rounded-full bg-primary/20 text-primary font-bold flex-shrink-0 text-base sm:text-lg">3</span>
+                      <span className="inline-flex items-center justify-center w-[2em] h-[2em] rounded-full bg-primary/20 text-primary font-bold flex-shrink-0 text-xl sm:text-2xl">2</span>
                       <span className="flex-1">Voting power across all projects.</span>
+                    </p>
+                    <p className="flex gap-4 items-center">
+                      <span className="inline-flex items-center justify-center w-[2em] h-[2em] rounded-full bg-primary/20 text-primary font-bold flex-shrink-0 text-xl sm:text-2xl">3</span>
+                      <span className="flex-1">A 45% lifetime proportional share of revenue from the entire ecosystem.</span>
                     </p>
                   </div>
                 </div>
