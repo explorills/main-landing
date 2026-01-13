@@ -15,7 +15,7 @@ const faqs: FAQItem[] = [
   },
   {
     question: "How does revenue work?",
-    answer: "ONE is designed to reward those who are involved, either as EXPL Node owners or as ONE Creators: 45% goes to EXPL Node owners 45% to ONE Creators 10% to the foundational team This isn't your typical company. It's a community-owned, shared system designed to grow infinitely and create multiple passive income channels, all without relying on third parties and operating in a fully decentralized environment.",
+    answer: "ONE rewards everyone involved, whether you're an EXPL Node owner or a ONE Creator: 45% of total ecosystem revenue goes to EXPL Node owners, 45% to ONE Creators, and 10% to the founding team. This isn't your typical company. It’s a community-driven system built to scale infinitely and generate multiple streams of passive income, completely independent of third parties in a fully decentralized environment.",
   },
   {
     question: "How transparent is ONE?",
