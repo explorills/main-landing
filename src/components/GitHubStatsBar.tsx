@@ -136,14 +136,36 @@ function LiveIndicator({ status }: { status: 'connecting' | 'connected' | 'disco
       className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/60 border border-border/30"
     >
       <div className="relative flex items-center justify-center w-3 h-3">
+        {/* Center dot */}
         <div
-          className="w-2 h-2 rounded-full"
+          className="absolute w-2 h-2 rounded-full"
           style={{ 
             backgroundColor: color,
-            boxShadow: isActive ? `0 0 8px ${color}` : 'none',
-            animation: isActive ? 'pulse-glow 2s ease-in-out infinite' : 'none'
+            boxShadow: isActive ? `0 0 4px ${color}` : 'none',
+            zIndex: 10
           }}
         />
+        {/* Expanding ripples - only show when active */}
+        {isActive && (
+          <>
+            <div
+              className="absolute w-2 h-2 rounded-full"
+              style={{
+                backgroundColor: color,
+                animation: 'live-ripple 2s ease-out infinite',
+                animationDelay: '0s'
+              }}
+            />
+            <div
+              className="absolute w-2 h-2 rounded-full"
+              style={{
+                backgroundColor: color,
+                animation: 'live-ripple 2s ease-out infinite',
+                animationDelay: '1s'
+              }}
+            />
+          </>
+        )}
       </div>
       <span className="text-xs font-medium" style={{ color }}>{text}</span>
       <Icon size={14} weight="bold" style={{ color }} />
