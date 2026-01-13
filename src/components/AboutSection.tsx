@@ -98,47 +98,7 @@ export function AboutSection() {
             </motion.div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="grid grid-cols-1 sm:grid-cols-3 gap-6"
-          >
-            {[
-              {
-                title: 'Open Source',
-                value: '100%',
-                description: 'Fully transparent code',
-              },
-              {
-                title: 'Community',
-                value: '1M',
-                description: 'Total EXPL Nodes',
-              },
-              {
-                title: 'Revenue Share',
-                value: '40%',
-                description: 'To Node owners',
-              },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.5 + index * 0.1 }}
-                className="relative group"
-              >
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-b from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative p-6 rounded-lg border border-border/30 backdrop-blur-sm bg-card/20 text-center">
-                  <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">{stat.value}</div>
-                  <div className="text-sm font-semibold text-foreground mb-1">{stat.title}</div>
-                  <div className="text-xs text-muted-foreground">{stat.description}</div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+
         </motion.div>
       </div>
     </section>

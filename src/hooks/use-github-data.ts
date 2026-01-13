@@ -17,12 +17,17 @@ export function useGitHubData(projectName: string) {
     const stats = repoStats[repoName]
     
     if (stats) {
+      const lastCommitDate = new Date(stats.lastCommitDate)
+      const now = new Date()
+      const daysSinceLastCommit = Math.floor((now.getTime() - lastCommitDate.getTime()) / (1000 * 60 * 60 * 24))
+      
       setData({
         daysSinceStart: stats.daysSinceCreation,
         githubData: {
           commitCount: stats.commits,
           lastCommitDate: stats.lastCommitDate,
           daysSinceCreation: stats.daysSinceCreation,
+          daysSinceLastCommit,
           isActive: stats.commits > 0,
         }
       })

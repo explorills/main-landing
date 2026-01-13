@@ -12,6 +12,7 @@ export interface ProjectGitHubData {
   commitCount: number
   lastCommitDate: string
   daysSinceCreation: number
+  daysSinceLastCommit: number
   isActive: boolean
 }
 
@@ -71,12 +72,17 @@ export async function getProjectData(projectName: string): Promise<{
     const repoStats = allStats.get(repoName)
     
     if (repoStats) {
+      const lastCommitDate = new Date(repoStats.lastCommitDate)
+      const now = new Date()
+      const daysSinceLastCommit = Math.floor((now.getTime() - lastCommitDate.getTime()) / (1000 * 60 * 60 * 24))
+      
       return {
         daysSinceStart: repoStats.daysSinceCreation,
         githubData: {
           commitCount: repoStats.commits,
           lastCommitDate: repoStats.lastCommitDate,
           daysSinceCreation: repoStats.daysSinceCreation,
+          daysSinceLastCommit,
           isActive: repoStats.commits > 0,
         }
       }

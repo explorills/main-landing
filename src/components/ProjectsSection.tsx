@@ -50,7 +50,6 @@ const projectsDetails: ProjectDetails[] = [
     color: '#a147e1',
     status: 'Deployed',
     description: '',
-    url: 'https://expl.one',
   },
   {
     name: 'pump',
@@ -164,7 +163,13 @@ function ProjectItem({ project, compact }: { project: ProjectDetails; compact?: 
           </div>
           <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <Calendar size={12} weight="bold" />
-            <span>{githubData.daysSinceStart}d</span>
+            <span>
+              {githubData.githubData?.daysSinceLastCommit === 0
+                ? 'today'
+                : githubData.githubData?.daysSinceLastCommit === 1
+                ? 'yesterday'
+                : `${githubData.githubData?.daysSinceLastCommit || 0}d`}
+            </span>
           </div>
         </div>
       )}
