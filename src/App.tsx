@@ -403,7 +403,7 @@ function App() {
                 className="max-w-3xl mx-auto space-y-6 px-4"
               >
                 <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                  Each EXPL Node grants a 45% lifetime proportional share of revenue from the entire ecosystem, minting up to 125,000 EXPL over 731 days, and voting power across all projects.
+                  Each EXPL Node grants: <span className="inline-flex items-center justify-center w-[1.2em] h-[1.2em] rounded-full bg-primary/20 text-primary font-bold mr-1">1</span>A 45% lifetime proportional share of revenue from the entire ecosystem.<span className="inline-flex items-center justify-center w-[1.2em] h-[1.2em] rounded-full bg-primary/20 text-primary font-bold mx-1">2</span>Minting up to 125,000 EXPL over 731 days.<span className="inline-flex items-center justify-center w-[1.2em] h-[1.2em] rounded-full bg-primary/20 text-primary font-bold mx-1">3</span>Voting power across all projects.
                 </p>
               </motion.div>
 
