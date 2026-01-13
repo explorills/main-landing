@@ -442,7 +442,7 @@ function App() {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="pt-4"
+                className="pt-0"
               >
                 <motion.a
                   href="https://node.expl.one"
