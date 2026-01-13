@@ -30,7 +30,7 @@ export function AboutSection() {
             <span className="text-primary glow-accent">ONE</span>
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Building with Purpose
+            Building with Purpose.
           </p>
         </motion.div>
 
@@ -49,10 +49,10 @@ export function AboutSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
             >
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed cursor-text select-text text-center">
-                We're escaping digital chaos. Instead of thousands of 
+                We're escaping digital chaos-thousands of 
                 mediocre apps drowning in AI slop, bots, spam, and endless 
-                options, we build HUMAN-VERIFIABLE, HUMAN-TRANSPARENT, 
-                HUMAN-SHAPED one ecosystem, with its singular economic model 
+              options, building <span className="whitespace-nowrap">HUMAN-VERIFIABLE</span>, <span className="whitespace-nowrap">HUMAN-TRANSPARENT</span>, 
+              <span className="whitespace-nowrap"> HUMAN-SHAPED</span> one perfect ecosystem, with its own singular economic model 
                 <span className="text-primary whitespace-nowrap"> Powered by EXPL Nodes</span>
               </p>
             </motion.div>
