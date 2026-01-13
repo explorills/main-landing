@@ -71,7 +71,7 @@ function DialogHeader({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="dialog-header"
-      className={cn("sticky top-0 z-10 bg-inherit px-6 pt-6 pb-4 border-b border-border/30 flex flex-col gap-2 text-center sm:text-left", className)}
+      className={cn("sticky top-0 z-10 bg-inherit px-6 pt-6 pb-4 border-b border-border/30 flex flex-col gap-2 text-left", className)}
       {...props}
     />
   )

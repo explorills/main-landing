@@ -157,16 +157,11 @@ export function ProfileSubmissionModal({ open, onOpenChange }: ProfileSubmission
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent className="sm:max-w-[540px] max-h-[90vh] overflow-y-auto overflow-x-hidden bg-card/95 backdrop-blur-xl border-border/50">
-        <DialogHeader className="space-y-3 flex-row items-start justify-between gap-4">
-          <div className="flex-1 space-y-2">
-            <DialogTitle className="text-2xl font-bold text-foreground flex items-center gap-2">
-              <Briefcase size={28} weight="duotone" className="text-primary" />
-              Submit Your Profile
-            </DialogTitle>
-            <DialogDescription className="text-muted-foreground text-base">
-              Register your interest in being part of EXPL ONE. We'll review your profile and reach out when opportunities arise.
-            </DialogDescription>
-          </div>
+        <DialogHeader className="flex-row items-center justify-between gap-2">
+          <DialogTitle className="text-lg sm:text-2xl font-bold text-foreground flex items-center gap-2 whitespace-nowrap">
+            <Briefcase size={24} className="text-primary flex-shrink-0 sm:w-7 sm:h-7" weight="duotone" />
+            Submit Your Profile
+          </DialogTitle>
           <DialogClose className="flex-shrink-0 w-10 h-10 rounded-full bg-muted/50 hover:bg-muted flex items-center justify-center transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
             <X size={22} weight="bold" className="text-foreground" />
             <span className="sr-only">Close</span>
@@ -174,6 +169,10 @@ export function ProfileSubmissionModal({ open, onOpenChange }: ProfileSubmission
         </DialogHeader>
 
         <div className="space-y-6 px-6 py-4 overflow-y-auto">
+          <DialogDescription className="text-muted-foreground text-sm sm:text-base text-left">
+            Register your interest in being part of EXPL ONE. We'll review your profile and reach out when opportunities arise.
+          </DialogDescription>
+
           {/* 1. Work Fields */}
           <div className="space-y-2">
             <Label htmlFor="workFields" className="text-base font-medium text-foreground">
