@@ -78,6 +78,13 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
+  // Disable browser scroll restoration to prevent cached scroll position
+  useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual'
+    }
+  }, [])
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % ecosystemProjects.length)
@@ -86,19 +93,16 @@ function App() {
     return () => clearInterval(interval)
   }, [])
 
-  // Handle initial scroll - scroll to hash target or top
+  // Always start from top on page load/refresh and clear hash
   useEffect(() => {
-    const hash = window.location.hash
-    if (hash) {
-      // Wait for page to render before scrolling to hash
-      setTimeout(() => {
-        const element = document.querySelector(hash)
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-        }
-      }, 100)
-    } else {
-      window.scrollTo(0, 0)
+    // Force immediate scroll to top
+    window.scrollTo(0, 0)
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+    
+    // Clear any hash from URL
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname)
     }
   }, [])
 
@@ -109,8 +113,6 @@ function App() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-
 
   return (
     <div className="min-h-screen text-foreground pb-16">
