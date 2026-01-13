@@ -113,7 +113,7 @@ const statusCategories: ProjectStatus[] = ['Deployed', 'In Progress', 'Coming So
 
 function ProjectItem({ project, compact }: { project: ProjectDetails; compact?: boolean }) {
   const { data: githubData } = useGitHubData(project.name)
-  const hasLink = project.status === 'Deployed' || project.status === 'In Progress'
+  const hasLink = (project.status === 'Deployed' || project.status === 'In Progress') && project.url
 
   if (compact) {
     return (
