@@ -86,9 +86,20 @@ function App() {
     return () => clearInterval(interval)
   }, [])
 
-  // Scroll to top on page load/refresh
+  // Handle initial scroll - scroll to hash target or top
   useEffect(() => {
-    window.scrollTo(0, 0)
+    const hash = window.location.hash
+    if (hash) {
+      // Wait for page to render before scrolling to hash
+      setTimeout(() => {
+        const element = document.querySelector(hash)
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 100)
+    } else {
+      window.scrollTo(0, 0)
+    }
   }, [])
 
   useEffect(() => {
@@ -404,7 +415,7 @@ function App() {
                 className="max-w-5xl mx-auto space-y-4 px-4"
               >
                 <div className="text-center">
-                  <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed font-bold mb-3">
+                  <p className="text-lg sm:text-xl md:text-2xl text-white leading-relaxed font-bold mb-3">
                     Each EXPL Node grants
                   </p>
                   <div className="space-y-2 text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed text-left">
