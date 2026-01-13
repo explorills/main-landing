@@ -182,6 +182,7 @@ function App() {
               <a href="#projects" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Projects</a>
               <a href="#about" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">About Us</a>
               <a href="#team" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Team</a>
+              <a href="#contribute" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Contribute</a>
               <a href="#faq" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">FAQ</a>
             </motion.nav>
             <motion.button
@@ -224,6 +225,7 @@ function App() {
             <a href="#projects" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Projects</a>
             <a href="#about" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">About Us</a>
             <a href="#team" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Team</a>
+            <a href="#contribute" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">Contribute</a>
             <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors cursor-pointer">FAQ</a>
           </div>
         </motion.div>

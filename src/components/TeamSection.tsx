@@ -1,6 +1,9 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/card'
-import { Envelope, LinkedinLogo } from '@phosphor-icons/react'
+import { Button } from '@/components/ui/button'
+import { LinkedinLogo, UserPlus } from '@phosphor-icons/react'
+import { ProfileSubmissionModal } from '@/components/ProfileSubmissionModal'
 import giorgioImage from '@/assets/images/giorgio-orb-orbeliani.jpg'
 import likaImage from '@/assets/images/lika-biniashvili.jpeg'
 
@@ -152,6 +155,8 @@ function TeamMemberCard({ member, index }: { member: TeamMember; index: number }
 }
 
 export function TeamSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   return (
     <section className="relative py-12 px-4">
       <div className="absolute inset-0">
@@ -192,6 +197,7 @@ export function TeamSection() {
         </div>
 
         <motion.div
+          id="contribute"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -214,41 +220,51 @@ export function TeamSection() {
                 transition={{ duration: 0.5, delay: 0.7 }}
                 className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4"
               >
-                <Envelope size={32} weight="duotone" className="text-primary" />
+                <UserPlus size={32} weight="duotone" className="text-primary" />
               </motion.div>
 
               <h3 className="text-2xl sm:text-3xl font-bold text-foreground">
                 Interested in being part of what we're building?
               </h3>
 
-              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-                We're not hiring at the moment <span className="text-foreground font-semibold">BUT</span> if you share our vision and would like to volunteer/contribute (technical or non-technical)  contact us at:
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+                We're not hiring at the moment, <span className="text-foreground font-semibold">BUT</span> feel free to register your profile in our database and we will review it <span className="whitespace-nowrap">(technical or non-technical)</span>, whether you share our vision and want to contribute right away, or if you'd like us to consider your profile once recruitment opens.
               </p>
 
-              <motion.a
-                href="mailto:team@expl.one"
-                className="inline-flex items-center gap-2 text-xl sm:text-2xl font-semibold text-primary hover:text-primary/80 transition-colors duration-300"
-                whileHover={{ scale: 1.05 }}
+              <motion.div
+                whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <span>team@expl.one</span>
-                <motion.span
-                  animate={{
-                    x: [0, 4, 0],
-                  }}
-                  transition={{
-                    duration: 1.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
+                <Button
+                  onClick={() => setIsModalOpen(true)}
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8 py-6 rounded-full font-semibold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all duration-300"
                 >
-                  →
-                </motion.span>
-              </motion.a>
+                  <span>Submit Your Profile</span>
+                  <motion.span
+                    animate={{
+                      x: [0, 4, 0],
+                    }}
+                    transition={{
+                      duration: 1.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    className="ml-2"
+                  >
+                    →
+                  </motion.span>
+                </Button>
+              </motion.div>
             </div>
           </Card>
         </motion.div>
       </div>
+
+      <ProfileSubmissionModal 
+        open={isModalOpen} 
+        onOpenChange={setIsModalOpen} 
+      />
     </section>
   )
 }
