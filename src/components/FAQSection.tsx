@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-import { CaretDown } from '@phosphor-icons/react'
+import { CaretDown, ArrowRight } from '@phosphor-icons/react'
 
 interface FAQItem {
   question: string
@@ -97,7 +97,7 @@ function FAQItem({ item, index, isOpen, onToggle }: { item: FAQItem; index: numb
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 hover:bg-primary/20 text-primary text-sm font-medium transition-colors duration-200 border border-primary/20 hover:border-primary/40"
                 >
                   {link.text}
-                  <span className="text-xs">→</span>
+                  <ArrowRight size={14} weight="bold" />
                 </a>
               ))}
             </div>
@@ -193,7 +193,7 @@ export function FAQSection() {
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold transition-all duration-200 shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/40"
             >
               Join Discord
-              <span>→</span>
+              <ArrowRight size={18} weight="bold" />
             </a>
             <a
               href="https://docs.expl.one"
@@ -202,7 +202,7 @@ export function FAQSection() {
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card/50 hover:bg-card border border-border/50 hover:border-primary/50 text-foreground font-semibold transition-all duration-200"
             >
               Read Docs
-              <span>→</span>
+              <ArrowRight size={18} weight="bold" />
             </a>
           </div>
         </motion.div>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowRight } from '@phosphor-icons/react'
 import { 
   Dialog, 
   DialogContent, 
@@ -364,7 +365,7 @@ export function ProfileSubmissionModal({ open, onOpenChange }: ProfileSubmission
                   className="flex items-center gap-2"
                 >
                   Submit Profile
-                  <span>→</span>
+                  <ArrowRight size={16} weight="bold" />
                 </motion.span>
               )}
             </AnimatePresence>
