@@ -197,14 +197,13 @@ export function TeamSection() {
         </div>
 
         <motion.div
-          id="contribute"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-4xl mx-auto"
         >
-          <Card className="relative overflow-hidden group">
+          <Card id="contribute" className="relative overflow-hidden group scroll-mt-35">
             <motion.div
               className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               style={{

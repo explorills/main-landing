@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { ArrowRight } from '@phosphor-icons/react'
 
 export function AboutSection() {
   return (
@@ -30,7 +31,7 @@ export function AboutSection() {
             <span className="text-primary glow-accent">ONE</span>
           </h2>
           <p className="text-lg sm:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Escaping digital chaos, building with purpose
+            Building with Purpose
           </p>
         </motion.div>
 
@@ -54,8 +55,17 @@ export function AboutSection() {
                   Why ONE Exists
                 </h3>
                 <p className="text-base sm:text-lg text-muted-foreground leading-relaxed cursor-text select-text">
-                  We're escaping digital chaos. Instead of thousands of mediocre apps drowning in AI slop and endless options, 
-                  we build ONE perfect tool per category. Quality over quantity. Singularity over noise.
+                  We're escaping digital chaos. Instead of thousands of 
+                  mediocre apps drowning in AI slop, bots, spam, and endless 
+                  options, we build HUMAN-VERIFIABLE, HUMAN-TRANSPARENT, 
+                  HUMAN-SHAPED{' '}
+                  <span className="whitespace-nowrap">
+                    <ArrowRight size={18} weight="bold" className="inline-block -translate-y-[0.5px] text-primary" />{' '}
+                    ONE perfect
+                  </span>{' '}
+                  ecosystem, with its singular 
+                  economic model {' '}
+                  <span className="text-primary whitespace-nowrap">// Powered by EXPL Nodes</span>
                 </p>
               </div>
 
