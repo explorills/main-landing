@@ -11,34 +11,15 @@ interface FAQItem {
 const faqs: FAQItem[] = [
   {
     question: "Why does ONE exist?",
-    answer: "We're escaping digital chaos. Instead of thousands of mediocre apps drowning in AI slop and endless options, we build ONE perfect tool per category. Quality over quantity. Singularity over noise.",
-  },
-  {
-    question: "How is ONE different?",
-    answer: "We're open source, community-driven, and non-capitalistic. No profit-hungry tech giants here - we create what we love because the purpose IS the creation. The community decides what's worth building, not investors or user metrics.",
-  },
-  {
-    question: "What's an EXPL Node?",
-    answer: "Your stake in the entire ecosystem. One Node = shareholder status in ALL 10 projects. It's the backbone of our economy, decentralization, and governance. Plus, you earn 171 EXPL daily for 731 days (125,000 EXPL total per Node).",
-    links: [
-      { text: "Tokenomics", url: "https://docs.expl.one/tokenomics/supply/" },
-    ],
-  },
-  {
-    question: "What do Node owners get?",
-    answer: "40% of ALL revenue from every project. Not one app - the entire ecosystem. You're not just a user, you're a co-owner earning from pump, network, world, and everything we build.",
+    answer: "Every product in the ONE ecosystem exists for a clear reason, serves a defined role, and is built to be stable before it is expanded. We value coherence over scale and depth over speed. If something doesn't deserve to exist, we don't build it.",
   },
   {
     question: "How does revenue work?",
-    answer: "Simple: 40% to Node owners (you), 50% to ONE care (charity helping the world), 10% to founders. Fair economics powered by Web3 and AI for independence and efficiency.",
-  },
-  {
-    question: "How many Nodes exist?",
-    answer: "1 million total across three batches: 12k (first), 88k (second), 900k (third). Get in early or miss your chance at ecosystem ownership.",
+    answer: "ONE is designed to reward those who are involved, either as EXPL Node owners or as ONE Creators: 45% goes to EXPL Node owners 45% to ONE Creators 10% to the foundational team This isn't your typical company. It's a community-owned, shared system designed to grow infinitely and create multiple passive income channels, all without relying on third parties and operating in a fully decentralized environment.",
   },
   {
     question: "How transparent is ONE?",
-    answer: "Fully open source on GitHub. Every line of code, every decision, every commit - public. No hidden agendas, no corporate secrecy. Just pure transparency.",
+    answer: "ONE is open source and community-governed. Contributions matter more than titles, funding, or popularity. We treat software as shared infrastructure, something to be understood, improved, and maintained collectively.",
     links: [
       { text: "View GitHub", url: "https://github.com/explorills" },
     ],
