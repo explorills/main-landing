@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
+import { ArrowRight } from '@phosphor-icons/react'
 import { FAQSection } from '@/components/FAQSection'
 import { TeamSection } from '@/components/TeamSection'
 import { AboutSection } from '@/components/AboutSection'
@@ -400,11 +401,27 @@ function App() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                className="max-w-3xl mx-auto space-y-6 px-4"
+                className="max-w-5xl mx-auto space-y-4 px-4"
               >
-                <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed">
-                  Each EXPL Node grants: <span className="inline-flex items-center justify-center w-[1.2em] h-[1.2em] rounded-full bg-primary/20 text-primary font-bold mr-1">1</span>A 45% lifetime proportional share of revenue from the entire ecosystem.<span className="inline-flex items-center justify-center w-[1.2em] h-[1.2em] rounded-full bg-primary/20 text-primary font-bold mx-1">2</span>Minting up to 125,000 EXPL over 731 days.<span className="inline-flex items-center justify-center w-[1.2em] h-[1.2em] rounded-full bg-primary/20 text-primary font-bold mx-1">3</span>Voting power across all projects.
-                </p>
+                <div className="text-center">
+                  <p className="text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed font-bold mb-3">
+                    Each EXPL Node grants
+                  </p>
+                  <div className="space-y-2 text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed text-left">
+                    <p className="flex gap-4 items-center">
+                      <span className="inline-flex items-center justify-center w-[1.5em] h-[1.5em] rounded-full bg-primary/20 text-primary font-bold flex-shrink-0 text-base sm:text-lg">1</span>
+                      <span className="flex-1">A 45% lifetime proportional share of revenue from the entire ecosystem.</span>
+                    </p>
+                    <p className="flex gap-4 items-center">
+                      <span className="inline-flex items-center justify-center w-[1.5em] h-[1.5em] rounded-full bg-primary/20 text-primary font-bold flex-shrink-0 text-base sm:text-lg">2</span>
+                      <span className="flex-1">Minting up to 125,000 EXPL over 731 days.</span>
+                    </p>
+                    <p className="flex gap-4 items-center">
+                      <span className="inline-flex items-center justify-center w-[1.5em] h-[1.5em] rounded-full bg-primary/20 text-primary font-bold flex-shrink-0 text-base sm:text-lg">3</span>
+                      <span className="flex-1">Voting power across all projects.</span>
+                    </p>
+                  </div>
+                </div>
               </motion.div>
 
               <motion.div
@@ -447,7 +464,7 @@ function App() {
                           ease: "easeInOut",
                         }}
                       >
-                        →
+                        <ArrowRight size={24} weight="bold" />
                       </motion.span>
                     </span>
                   </div>
