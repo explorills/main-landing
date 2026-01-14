@@ -51,11 +51,8 @@ The landing page fetches and displays:
 
 This provides transparency into the ecosystem's open-source development.
 
-```
-
 **[ONE ecosystem](https://expl.one) // powered by [EXPL Nodes](https://node.expl.one)**
 
-```
 ## License
 
 MIT
