@@ -10,21 +10,76 @@ interface FAQItem {
 
 const faqs: FAQItem[] = [
   {
-    question: "Why does ONE exist?",
-    answer: "Every product in the ONE ecosystem exists for a clear reason, serves a defined role, and is built to be stable before it is expanded. We value coherence over scale and depth over speed. If something doesn't deserve to exist, we don't build it.",
+    question: "What is EXPL.ONE / the ONE ecosystem?",
+    answer:
+      "ONE is a decentralized ecosystem made up of multiple independent projects operating under a shared infrastructure. The ecosystem is powered by EXPL Nodes, which form the backbone for distribution, participation, and on-chain operations. Everything is designed to function transparently without centralized control.",
+    links: [
+      { text: "Read the overview", url: "https://docs.expl.one" },
+    ],
+  },
+  {
+    question: "What are EXPL Nodes?",
+    answer:
+      "EXPL Nodes are ERC721 node licenses that power the ONE ecosystem. Node owners operate infrastructure, participate in distribution mechanisms, and receive ecosystem rewards. Nodes exist on Ethereum and Flare and are designed to be immutable, verifiable, and decentralized.",
+    links: [
+      { text: "Node documentation", url: "https://docs.expl.one/nodes/node-nft-licenses" },
+      { text: "Get a node", url: "https://node.expl.one" },
+    ],
   },
   {
     question: "How does revenue work?",
-    answer: "ONE rewards everyone involved, whether you're an EXPL Node owner or a ONE Creator: 45% of total ecosystem revenue goes to EXPL Node owners, 45% to ONE Creators, and 10% to the founding team. This isn't your typical company. It’s a community-driven system built to scale infinitely and generate multiple streams of passive income, completely independent of third parties in a fully decentralized environment.",
+    answer:
+      "All ecosystem revenue is distributed automatically through smart contracts. 45% goes to EXPL Node owners, 45% to ONE Creators, and 10% to the founding team. This model removes intermediaries and allows contributors and operators to earn directly from ecosystem activity.",
+    links: [
+      { text: "Distribution framework", url: "https://docs.expl.one/distribution-framework/introduction" },
+    ],
   },
   {
-    question: "How transparent is ONE?",
-    answer: "ONE is open source and community-governed. Contributions matter more than titles, funding, or popularity. We treat software as shared infrastructure, something to be understood, improved, and maintained collectively.",
+    question: "What is EXPL and how is it distributed?",
+    answer:
+      "EXPL is the ecosystem token with a fixed maximum supply. Distribution occurs through node-based minting and direct mint mechanisms tied to ecosystem participation. Tokens are routed through non-custodial escrows and reward flows defined on-chain.",
     links: [
-      { text: "View GitHub", url: "https://github.com/explorills" },
+      { text: "Tokenomics", url: "https://docs.expl.one/tokenomics/introduction" },
+    ],
+  },
+  {
+    question: "What projects exist inside the ONE ecosystem?",
+    answer:
+      "The ONE ecosystem consists of multiple products and layers, including ONE pump, ONE network, and other exploration-focused initiatives. Each project serves a distinct role while sharing the same infrastructure and distribution logic.",
+    links: [
+      { text: "ONE pump", url: "https://pump.expl.one" },
+      { text: "ONE network", url: "https://network.expl.one" },
+      { text: "ONE world", url: "https://world.expl.one" },
+    ],
+  },
+  {
+    question: "How do I buy an EXPL Node?",
+    answer:
+      "EXPL Nodes can be purchased through the official node portal. The documentation explains the full process, supported wallets, and security considerations to ensure a safe purchase.",
+    links: [
+      { text: "How to purchase a node", url: "https://docs.expl.one/nodes/how-to-purchase-node" },
+      { text: "Node portal", url: "https://node.expl.one" },
+    ],
+  },
+  {
+    question: "What is the node escrow?",
+    answer:
+      "Nodes are initially held in a non-custodial escrow contract. Once all predefined node IDs are minted, the escrow is released automatically, allowing owners to withdraw their nodes. Ownership is always verifiable on-chain.",
+    links: [
+      { text: "Node escrow explained", url: "https://docs.expl.one/nodes/node-escrow" },
+    ],
+  },
+  {
+    question: "Where can I find official links and community channels?",
+    answer:
+      "All official resources, including GitHub repositories, social channels, and support links, are maintained in a single verified location to prevent confusion and impersonation.",
+    links: [
+      { text: "Official links", url: "https://docs.expl.one/additional-information/official-links" },
     ],
   },
 ]
+
+
 
 function FAQItem({ item, index, isOpen, onToggle }: { item: FAQItem; index: number; isOpen: boolean; onToggle: () => void }) {
 
