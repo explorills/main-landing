@@ -1,6 +1,10 @@
 # Helper files directory (reference templates)
 helper-files/
 
+# Nested development repos (cloned separately, not part of main repo)
+z-1-claude-commands/
+z-2-components-materials/
+
 # Environment variables
 .env
 .env.local

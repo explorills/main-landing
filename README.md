@@ -57,4 +57,4 @@ This provides transparency into the ecosystem's open-source development.
 
 MIT
 
-2026 All Rights Reserved
+All Rights Reserved

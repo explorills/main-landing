@@ -4,41 +4,41 @@
   This file references all sitemaps from sub-projects in the ONE Ecosystem.
   
   AI Agents: When adding a new sub-project, add its sitemap URL here.
-  Last Updated: 2025-12-13
+  Last Updated: 2026-01-20
 -->
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <!-- Main Landing Page -->
   <sitemap>
     <loc>https://expl.one/sitemap.xml</loc>
-    <lastmod>2025-12-13</lastmod>
+    <lastmod>2026-01-20</lastmod>
   </sitemap>
   
   <!-- Sub-Project Sitemaps (add as projects go live) -->
   <!-- 
   <sitemap>
     <loc>https://pump.expl.one/sitemap.xml</loc>
-    <lastmod>2025-12-13</lastmod>
+    <lastmod>2026-01-20</lastmod>
   </sitemap>
   
   <sitemap>
     <loc>https://network.expl.one/sitemap.xml</loc>
-    <lastmod>2025-12-13</lastmod>
+    <lastmod>2026-01-20</lastmod>
   </sitemap>
   
   <sitemap>
     <loc>https://world.expl.one/sitemap.xml</loc>
-    <lastmod>2025-12-13</lastmod>
+    <lastmod>2026-01-20</lastmod>
   </sitemap>
   
   <sitemap>
     <loc>https://node.expl.one/sitemap.xml</loc>
-    <lastmod>2025-12-13</lastmod>
+    <lastmod>2026-01-20</lastmod>
   </sitemap>
   
   <sitemap>
     <loc>https://docs.expl.one/sitemap.xml</loc>
-    <lastmod>2025-12-13</lastmod>
+    <lastmod>2026-01-20</lastmod>
   </sitemap>
   -->
   

@@ -1,6 +1,6 @@
 # robots.txt for EXPL.ONE - ONE Ecosystem
 # https://expl.one
-# Last Updated: 2025-12-13
+# Last Updated: 2026-01-20
 
 # ==========================================
 # ALLOW ALL SEARCH ENGINE CRAWLERS

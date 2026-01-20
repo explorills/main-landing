@@ -8,7 +8,7 @@
   <!-- Homepage - Main Landing Page -->
   <url>
     <loc>https://expl.one/</loc>
-    <lastmod>2025-12-13</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -25,35 +25,35 @@
   <!-- Section anchors for enhanced crawling -->
   <url>
     <loc>https://expl.one/#why-node</loc>
-    <lastmod>2025-12-13</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://expl.one/#projects</loc>
-    <lastmod>2025-12-13</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <url>
     <loc>https://expl.one/#about</loc>
-    <lastmod>2025-12-13</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
     <loc>https://expl.one/#team</loc>
-    <lastmod>2025-12-13</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>https://expl.one/#faq</loc>
-    <lastmod>2025-12-13</lastmod>
+    <lastmod>2026-01-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
