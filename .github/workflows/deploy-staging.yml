@@ -18,10 +18,30 @@ jobs:
       with:
         bun-version: latest
 
+    - name: Install Puppeteer dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          libatk1.0-0 \
+          libatk-bridge2.0-0 \
+          libcups2 \
+          libxkbcommon0 \
+          libxdamage1 \
+          libgbm1 \
+          libpango-1.0-0 \
+          libcairo2 \
+          libasound2t64 \
+          libatspi2.0-0 \
+          libxcomposite1 \
+          libxrandr2 \
+          libnss3 \
+          libxss1 \
+          fonts-liberation
+
     - name: Install dependencies
       run: bun install --frozen-lockfile
 
-    - name: Build project
+    - name: Build project with SSG pre-rendering
       run: bun run build
 
     - name: Configure AWS credentials

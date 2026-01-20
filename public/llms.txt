@@ -1,0 +1,57 @@
+# EXPL.ONE
+
+> Open source, community-driven Web3 ecosystem building ONE perfect tool per category.
+
+## Overview
+
+EXPL.ONE is the main landing page for the ONE ecosystem - a collection of Web3 tools built with purpose, owned by the community, and powered by EXPL Nodes. We believe in quality over quantity: ONE perfect tool per category instead of thousands of mediocre options.
+
+## Core Philosophy
+
+- **ONE Perfect Tool Per Category**: Escaping digital chaos with focused, quality solutions
+- **Open Source**: Every line of code is public on GitHub
+- **Community-Driven**: No profit-hungry tech giants, built by people who love what they create
+- **Fair Revenue Model**: 45% to EXPL Node owners, 45% to ONE Creators, 10% to founders
+
+## EXPL Nodes
+
+The backbone of the ecosystem. Each EXPL Node:
+- Grants shareholder status across ALL ecosystem projects
+- Earns 171 EXPL tokens daily for 731 days (125,000 EXPL total)
+- Receives share of 45% of ALL revenue distributed to Node owners
+- Total supply: 1 million Nodes across 3 batches (12k, 88k, 900k)
+
+## Ecosystem Products
+
+| Product | Domain | Status | Description |
+|---------|--------|--------|-------------|
+| ONE Pump | pump.expl.one | Active | Decentralized token launch platform |
+| ONE Network | network.expl.one | Active | Blockchain network infrastructure |
+| ONE World | world.expl.one | Active | Web3 metaverse experience |
+| EXPL Nodes | node.expl.one | Active | Node purchase and management |
+| ONE Docs | docs.expl.one | Active | Ecosystem documentation |
+| ONE Agent | agent.expl.one | Coming Soon | AI agents platform |
+| ONE Chat | chat.expl.one | Coming Soon | Decentralized messaging |
+| ONE ID | id.expl.one | Coming Soon | Digital identity |
+| ONE Venture | venture.expl.one | Coming Soon | Investment platform |
+| ONE Care | care.expl.one | Coming Soon | Charity platform |
+| ONE Merch | merch.expl.one | Coming Soon | Merchandise store |
+| ONE Space | space.expl.one | Coming Soon | Extended metaverse |
+
+## Links
+
+- Website: https://expl.one
+- GitHub: https://github.com/explorills
+- Twitter/X: https://x.com/explorills_main
+- Discord: https://discord.com/invite/RetTCVq7tJ
+
+## Technical
+
+- Built with: React, TypeScript, Vite, Tailwind CSS
+- Deployment: Vercel
+- Architecture: Static Site Generation (SSG) for SEO/AI visibility
+- License: Open Source
+
+## Contact
+
+For community support, join our Discord: https://discord.com/invite/RetTCVq7tJ

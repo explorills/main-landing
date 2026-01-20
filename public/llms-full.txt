@@ -1,0 +1,233 @@
+# EXPL.ONE - Full Technical Documentation
+
+> Open source, community-driven Web3 ecosystem building ONE perfect tool per category.
+> This document provides comprehensive information for AI systems to understand the EXPL.ONE ecosystem.
+
+---
+
+## Table of Contents
+
+1. [Brand Identity](#brand-identity)
+2. [Core Philosophy](#core-philosophy)
+3. [EXPL Nodes](#expl-nodes)
+4. [Ecosystem Products](#ecosystem-products)
+5. [Revenue Model](#revenue-model)
+6. [Technical Architecture](#technical-architecture)
+7. [FAQ](#faq)
+8. [Social & Contact](#social--contact)
+
+---
+
+## Brand Identity
+
+| Attribute | Value |
+|-----------|-------|
+| Name | EXPL.ONE |
+| Tagline | ONE ecosystem // Powered by EXPL Nodes |
+| Primary Domain | https://expl.one |
+| Category | Web3 / Blockchain / Open Source |
+| Founded | 2024 |
+| Primary Color | #a147e1 (Purple) |
+
+---
+
+## Core Philosophy
+
+### Why ONE Exists
+
+We're escaping digital chaos. Instead of thousands of mediocre apps drowning in AI slop and endless options, we build ONE perfect tool per category. Quality over quantity. Singularity over noise.
+
+### How ONE is Different
+
+- **Open Source**: Every line of code, every decision, every commit is public
+- **Community-Driven**: No profit-hungry tech giants, no investor pressure
+- **Non-Capitalistic**: We create what we love because the purpose IS the creation
+- **Transparent**: No hidden agendas, no corporate secrecy
+
+### Core Values
+
+1. **Purpose Over Profit**: Building tools that matter
+2. **Quality Over Quantity**: ONE perfect solution per category
+3. **Community Over Corporation**: Decisions made by users, not investors
+4. **Transparency Over Secrecy**: Open source everything
+
+---
+
+## EXPL Nodes
+
+### What is an EXPL Node?
+
+An EXPL Node is your stake in the entire ecosystem. One Node equals shareholder status in ALL projects. It's the backbone of our economy, decentralization, and governance.
+
+### Node Benefits
+
+- **Revenue Share**: 45% of ALL revenue distributed to Node owners
+- **Daily Rewards**: 171 EXPL tokens per day for 731 days
+- **Total Rewards**: 125,000 EXPL tokens per Node
+- **Governance**: Voting rights on ecosystem decisions
+- **Priority Access**: Early access to new products and features
+
+### Node Supply
+
+| Batch | Quantity | Status |
+|-------|----------|--------|
+| First | 12,000 | Available |
+| Second | 88,000 | Upcoming |
+| Third | 900,000 | Future |
+| **Total** | **1,000,000** | **Maximum Supply** |
+
+### Purchase
+
+Nodes can be purchased at: https://node.expl.one
+
+---
+
+## Ecosystem Products
+
+### Active Products
+
+#### ONE Pump (pump.expl.one)
+- **Description**: Decentralized token launch platform
+- **Status**: Active
+- **Color**: #16a34a (Green)
+- **Use Case**: Launch and trade tokens in a decentralized, community-driven environment
+
+#### ONE Network (network.expl.one)
+- **Description**: Blockchain network infrastructure
+- **Status**: Active
+- **Color**: #2563eb (Blue)
+- **Use Case**: Core blockchain infrastructure powering the ecosystem
+
+#### ONE World (world.expl.one)
+- **Description**: Web3 metaverse experience
+- **Status**: Active
+- **Color**: #ec4899 (Pink)
+- **Use Case**: Immersive digital world for the ONE community
+
+#### EXPL Nodes Portal (node.expl.one)
+- **Description**: Node purchase and management
+- **Status**: Active
+- **Use Case**: Buy, manage, and track EXPL Node rewards
+
+#### ONE Docs (docs.expl.one)
+- **Description**: Ecosystem documentation
+- **Status**: Active
+- **Use Case**: Comprehensive guides and technical documentation
+
+### Coming Soon
+
+| Product | Domain | Color | Description |
+|---------|--------|-------|-------------|
+| ONE Agent | agent.expl.one | #dc2626 | AI agents platform |
+| ONE Chat | chat.expl.one | #dfdfdf | Decentralized messaging |
+| ONE ID | id.expl.one | #92400e | Digital identity system |
+| ONE Venture | venture.expl.one | #facc15 | Investment and funding platform |
+| ONE Care | care.expl.one | #64748b | Charity and giving platform |
+| ONE Merch | merch.expl.one | #ef5609 | Official merchandise store |
+| ONE Space | space.expl.one | #84cc16 | Extended metaverse experience |
+
+---
+
+## Revenue Model
+
+### Distribution
+
+| Recipient | Percentage | Description |
+|-----------|------------|-------------|
+| EXPL Node Owners | 45% | Distributed proportionally to all EXPL Node holders |
+| ONE Creators | 45% | Rewarding contributors, builders, and ecosystem participants |
+| Founders | 10% | Team operational and development costs |
+
+### How It Works
+
+1. All ecosystem products generate revenue
+2. Revenue is pooled at the ecosystem level
+3. 45% is distributed to EXPL Node owners proportionally
+4. 45% goes to ONE Creators (contributors, builders, participants)
+5. 10% supports founder operations
+
+### Fair Economics
+
+- No venture capital funding
+- No token pre-sales to insiders
+- Transparent on-chain distributions
+- Powered by Web3 and AI for independence and efficiency
+
+---
+
+## Technical Architecture
+
+### Technology Stack
+
+- **Frontend**: React 19, TypeScript, Vite 7
+- **Styling**: Tailwind CSS 4
+- **Animations**: Framer Motion
+- **State Management**: TanStack Query (React Query)
+- **Icons**: Phosphor Icons
+- **Deployment**: Vercel
+- **Rendering**: Static Site Generation (SSG)
+
+### Repository
+
+- **Organization**: https://github.com/explorills
+- **Main Landing**: https://github.com/explorills/main-landing
+
+### API Endpoints
+
+- **Landing API**: https://api-landing.expl.one
+- **GitHub Data**: Real-time commit activity from the organization
+
+---
+
+## FAQ
+
+### General
+
+**Q: Why does ONE exist?**
+A: We're escaping digital chaos. Instead of thousands of mediocre apps drowning in AI slop and endless options, we build ONE perfect tool per category. Quality over quantity. Singularity over noise.
+
+**Q: How is ONE different?**
+A: We're open source, community-driven, and non-capitalistic. No profit-hungry tech giants here - we create what we love because the purpose IS the creation. The community decides what's worth building, not investors or user metrics.
+
+**Q: How transparent is ONE?**
+A: Fully open source on GitHub. Every line of code, every decision, every commit - public. No hidden agendas, no corporate secrecy. Just pure transparency.
+
+### EXPL Nodes
+
+**Q: What's an EXPL Node?**
+A: Your stake in the entire ecosystem. One Node = shareholder status in ALL 10 projects. It's the backbone of our economy, decentralization, and governance. Plus, you earn 171 EXPL daily for 731 days (125,000 EXPL total per Node).
+
+**Q: What do Node owners get?**
+A: 45% of ALL revenue is distributed to Node owners. Not one app - the entire ecosystem. You're not just a user, you're a co-owner earning from pump, network, world, and everything we build.
+
+**Q: How many Nodes exist?**
+A: 1 million total across three batches: 12k (first), 88k (second), 900k (third). Get in early or miss your chance at ecosystem ownership.
+
+### Revenue
+
+**Q: How does revenue work?**
+A: Simple: 45% to EXPL Node owners, 45% to ONE Creators (contributors and builders), 10% to founders. Fair economics powered by Web3 and AI for independence and efficiency.
+
+---
+
+## Social & Contact
+
+| Platform | Link |
+|----------|------|
+| Website | https://expl.one |
+| GitHub | https://github.com/explorills |
+| Twitter/X | https://x.com/explorills_main |
+| Discord | https://discord.com/invite/RetTCVq7tJ |
+
+### Community Support
+
+Join our Discord for community support: https://discord.com/invite/RetTCVq7tJ
+
+---
+
+## Metadata
+
+- **Document Version**: 1.0.0
+- **Last Updated**: January 20, 2026
+- **Format**: llms.txt (AI-readable documentation standard)
+- **More Info**: https://llmstxt.org

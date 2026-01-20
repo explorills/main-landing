@@ -105,8 +105,13 @@ User-agent: MJ12bot
 Allow: /
 
 # ==========================================
-# SITEMAP & HOST
+# SITEMAP & AI DOCUMENTATION
 # ==========================================
 Sitemap: https://expl.one/sitemap.xml
 Sitemap: https://expl.one/sitemap-index.xml
 Host: https://expl.one
+
+# LLMs.txt - AI-readable documentation (https://llmstxt.org)
+# These files provide structured information for AI systems
+LLMs-Txt: https://expl.one/llms.txt
+LLMs-Txt-Full: https://expl.one/llms-full.txt

@@ -129,7 +129,7 @@ Replace `[VARIABLES]` with project-specific values:
     <!-- Primary Meta Tags -->
     <title>[PROJECT_NAME] - [TAGLINE] | ONE Ecosystem</title>
     <meta name="title" content="[PROJECT_NAME] - [TAGLINE] | ONE Ecosystem" />
-    <meta name="description" content="[DESCRIPTION_150_CHARS]. Part of the ONE ecosystem: open source, community-driven, 40% revenue to EXPL Node owners." />
+    <meta name="description" content="[DESCRIPTION_150_CHARS]. Part of the ONE ecosystem: open source, community-driven. 45% revenue to Node owners, 45% to Creators." />
     <meta name="keywords" content="[PROJECT_KEYWORDS], web3, blockchain, crypto, nodes, EXPL Nodes, decentralized, open source" />
     <meta name="author" content="EXPL.ONE Team" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-video-preview:-1" />

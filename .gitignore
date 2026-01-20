@@ -155,5 +155,3 @@ backend
 .vscode
 
 /.github/agents
-
-claude-local
