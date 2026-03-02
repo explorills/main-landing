@@ -85,7 +85,9 @@ const projectsDetails: ProjectDetails[] = [
   {
     name: 'ID',
     color: '#92400e',
-    status: 'Coming Soon',
+    status: 'In Progress',
+    description: 'Universal digital identity for the ONE ecosystem',
+    url: 'https://id.expl.one',
   },
   {
     name: 'venture',

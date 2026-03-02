@@ -29,7 +29,7 @@ export const projectToRepoMap: Record<string, string> = {
   world: 'world-soon',
   agent: 'expl-one-ai',
   chat: 'spark-chat-interface',
-  ID: 'user-dashboard',
+  ID: 'one-id',
   venture: 'ventures-soon',
   care: 'care-soon',
   merch: 'shop-soon',
