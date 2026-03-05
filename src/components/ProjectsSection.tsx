@@ -90,6 +90,13 @@ const projectsDetails: ProjectDetails[] = [
     url: 'https://id.expl.one',
   },
   {
+    name: 'box',
+    color: '#7c3aed',
+    status: 'In Progress',
+    description: 'Mystery experience platform coming soon',
+    url: 'https://box.expl.one',
+  },
+  {
     name: 'venture',
     color: '#facc15',
     status: 'Coming Soon',

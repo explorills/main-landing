@@ -18,6 +18,7 @@ const ecosystemProjects = [
   { name: 'agent', color: '#dc2626' },
   { name: 'chat', color: '#dfdfdf' },
   { name: 'ID', color: '#92400e' },
+  { name: 'box', color: '#7c3aed' },
   { name: 'venture', color: '#facc15' },
   { name: 'care', color: '#64748b' },
   { name: 'merch', color: '#ef5609' },
