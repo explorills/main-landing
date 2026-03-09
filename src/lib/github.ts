@@ -30,6 +30,7 @@ export const projectToRepoMap: Record<string, string> = {
   agent: 'expl-one-ai',
   chat: 'spark-chat-interface',
   ID: 'one-id',
+  box: 'one-box',
   venture: 'ventures-soon',
   care: 'care-soon',
   merch: 'shop-soon',
