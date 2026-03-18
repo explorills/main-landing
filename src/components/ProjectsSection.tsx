@@ -97,6 +97,13 @@ const projectsDetails: ProjectDetails[] = [
     url: 'https://box.expl.one',
   },
   {
+    name: 'deal',
+    color: '#06b6d4',
+    status: 'In Progress',
+    description: 'EVM-compatible NFT marketplace',
+    url: 'https://deal.expl.one',
+  },
+  {
     name: 'venture',
     color: '#facc15',
     status: 'Coming Soon',
