@@ -11,18 +11,18 @@ import { PoweredByExplNodes } from '@/components/PoweredByExplNodes'
 
 // Projects for navbar title rotation (includes ecosystem)
 const ecosystemProjects = [
-  { name: 'ecosystem', color: '#a147e1' },
-  { name: 'pump', color: '#16a34a' },
-  { name: 'network', color: '#2563eb' },
-  { name: 'world', color: '#ec4899' },
+  { name: 'ecosystem', color: '#a147e1', url: 'https://expl.one' },
+  { name: 'pump', color: '#16a34a', url: 'https://pump.expl.one' },
+  { name: 'network', color: '#2563eb', url: 'https://network.expl.one' },
+  { name: 'world', color: '#ec4899', url: 'https://world.expl.one' },
   { name: 'agent', color: '#dc2626' },
   { name: 'chat', color: '#dfdfdf' },
-  { name: 'ID', color: '#92400e' },
-  { name: 'box', color: '#7c3aed' },
-  { name: 'deal', color: '#06b6d4' },
+  { name: 'ID', color: '#92400e', url: 'https://id.expl.one' },
+  { name: 'box', color: '#7c3aed', url: 'https://box.expl.one' },
+  { name: 'deal', color: '#06b6d4', url: 'https://deal.expl.one' },
   { name: 'venture', color: '#facc15' },
   { name: 'care', color: '#64748b' },
-  { name: 'merch', color: '#ef5609' },
+  { name: 'chain', color: '#2563eb', url: 'https://chain.expl.one' },
   { name: 'space', color: '#84cc16' },
 ]
 
@@ -79,12 +79,18 @@ function App() {
   const [scrolled, setScrolled] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [ringReady, setRingReady] = useState(false)
 
   // Disable browser scroll restoration to prevent cached scroll position
   useEffect(() => {
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual'
     }
+  }, [])
+
+  // Prevent ring flash — wait one frame for Framer Motion to apply initial states
+  useEffect(() => {
+    requestAnimationFrame(() => setRingReady(true))
   }, [])
 
   useEffect(() => {
@@ -268,12 +274,20 @@ function App() {
           
           <div className="relative z-10 w-full max-w-7xl mx-auto flex items-center justify-center" style={{ height: '100%' }}>
             {/* Ring container: uses min of available width/height to never cut */}
-            <div className="relative" style={{ width: 'min(100%, 100vh - 200px, 768px)', aspectRatio: '1/1' }}>
+            <div className="relative" style={{ width: 'min(100%, 100vh - 200px, 768px)', aspectRatio: '1/1', visibility: ringReady ? 'visible' : 'hidden' }}>
               {heroRingProjects.map((project, index) => {
                 const angle = (index / heroRingProjects.length) * 2 * Math.PI - Math.PI / 2
                 const radius = typeof window !== 'undefined' && window.innerWidth < 640 ? 35 : 42
                 const x = 50 + radius * Math.cos(angle)
                 const y = 50 + radius * Math.sin(angle)
+
+                const handleClick = () => {
+                  if (project.url) {
+                    window.open(project.url, '_blank', 'noopener,noreferrer')
+                  } else {
+                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
+                  }
+                }
 
                 return (
                   <motion.div
@@ -304,6 +318,7 @@ function App() {
                         willChange: 'transform',
                       }}
                       className="relative group cursor-pointer"
+                      onClick={handleClick}
                     >
                       <div
                         className="absolute inset-0 rounded-full blur-xl opacity-40 group-hover:opacity-70 transition-opacity duration-300"

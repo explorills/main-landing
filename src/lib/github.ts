@@ -34,7 +34,7 @@ export const projectToRepoMap: Record<string, string> = {
   deal: 'one-deal',
   venture: 'ventures-soon',
   care: 'care-soon',
-  merch: 'shop-soon',
+  chain: 'one-chain-landing',
   space: 'world-soon',
 }
 

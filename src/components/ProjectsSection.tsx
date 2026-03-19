@@ -114,9 +114,11 @@ const projectsDetails: ProjectDetails[] = [
     status: 'Coming Soon',
   },
   {
-    name: 'merch',
-    color: '#ef5609',
-    status: 'Coming Soon',
+    name: 'chain',
+    color: '#2563eb',
+    status: 'Deployed',
+    description: 'Sovereign gas-free EVM blockchain for the ONE ecosystem',
+    url: 'https://chain.expl.one',
   },
   {
     name: 'space',
