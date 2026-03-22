@@ -29,68 +29,17 @@ const ecosystemProjects = [
 // Projects for hero ring (excludes ecosystem - it's in the center)
 const heroRingProjects = ecosystemProjects.filter(p => p.name !== 'ecosystem')
 
-function AnimatedWord() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % ecosystemProjects.length)
-    }, 2000)
-    
-    return () => clearInterval(interval)
-  }, [])
-
-  const currentProject = ecosystemProjects[currentIndex]
-  const nextProject = ecosystemProjects[(currentIndex + 1) % ecosystemProjects.length]
-
-  return (
-    <span className="relative inline-block min-w-[200px] sm:min-w-[300px] md:min-w-[400px] lg:min-w-[500px]">
-      <motion.span
-        key={currentIndex}
-        initial={{ y: 50, opacity: 0, filter: 'blur(8px)' }}
-        animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-        exit={{ y: -50, opacity: 0, filter: 'blur(8px)' }}
-        transition={{
-          duration: 0.6,
-          ease: [0.16, 1, 0.3, 1],
-        }}
-        className="absolute inset-0 flex items-center justify-center"
-        style={{ 
-          color: currentProject.color,
-          textShadow: `0 0 20px ${currentProject.color}, 0 0 40px ${currentProject.color}, 0 0 60px ${currentProject.color}40`
-        }}
-      >
-        <span className="relative">
-          {currentProject.name}
-          <span
-            className="absolute inset-0 blur-2xl opacity-60"
-            style={{ color: currentProject.color }}
-          >
-            {currentProject.name}
-          </span>
-        </span>
-      </motion.span>
-      <span className="opacity-0">{nextProject.name}</span>
-    </span>
-  )
-}
-
 function App() {
   const [scrolled, setScrolled] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [ringReady, setRingReady] = useState(false)
+  const [ringReady] = useState(true)
 
   // Disable browser scroll restoration to prevent cached scroll position
   useEffect(() => {
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual'
     }
-  }, [])
-
-  // Prevent ring flash — wait one frame for Framer Motion to apply initial states
-  useEffect(() => {
-    requestAnimationFrame(() => setRingReady(true))
   }, [])
 
   useEffect(() => {
