@@ -28,7 +28,7 @@ export const projectToRepoMap: Record<string, string> = {
   network: 'expl-nodes-dashboard',
   world: 'world-soon',
   agent: 'expl-one-ai',
-  chat: 'spark-chat-interface',
+  chat: 'one-chat',
   ID: 'one-id',
   box: 'one-box',
   deal: 'one-deal',

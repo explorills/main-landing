@@ -80,7 +80,9 @@ const projectsDetails: ProjectDetails[] = [
   {
     name: 'chat',
     color: '#dfdfdf',
-    status: 'Coming Soon',
+    status: 'In Progress',
+    description: 'Real-time messaging for the ONE ecosystem',
+    url: 'https://chat.expl.one',
   },
   {
     name: 'ID',

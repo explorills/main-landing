@@ -16,7 +16,7 @@ const ecosystemProjects = [
   { name: 'network', color: '#2563eb', url: 'https://network.expl.one' },
   { name: 'world', color: '#ec4899', url: 'https://world.expl.one' },
   { name: 'agent', color: '#dc2626' },
-  { name: 'chat', color: '#dfdfdf' },
+  { name: 'chat', color: '#dfdfdf', url: 'https://chat.expl.one' },
   { name: 'ID', color: '#92400e', url: 'https://id.expl.one' },
   { name: 'box', color: '#7c3aed', url: 'https://box.expl.one' },
   { name: 'deal', color: '#06b6d4', url: 'https://deal.expl.one' },
