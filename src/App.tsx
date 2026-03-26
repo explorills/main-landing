@@ -231,11 +231,7 @@ function App() {
                 const y = 50 + radius * Math.sin(angle)
 
                 const handleClick = () => {
-                  if (project.url) {
-                    window.open(project.url, '_blank', 'noopener,noreferrer')
-                  } else {
-                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
-                  }
+                  document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
                 }
 
                 return (
