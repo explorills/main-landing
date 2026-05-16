@@ -53,7 +53,7 @@ export function AboutSection() {
                 mediocre apps drowning in AI slop, bots, spam, and endless 
               options, building <span className="whitespace-nowrap">HUMAN-VERIFIABLE</span>, <span className="whitespace-nowrap">HUMAN-TRANSPARENT</span>, 
               <span className="whitespace-nowrap"> HUMAN-SHAPED</span> one perfect ecosystem, with its own singular economic model 
-                <span className="text-primary whitespace-nowrap"> Powered by EXPL Nodes</span>
+                <span className="text-primary whitespace-nowrap"> Powered by EXPL nodes</span>
               </p>
             </motion.div>
           </div>

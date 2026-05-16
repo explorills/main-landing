@@ -1,7 +1,7 @@
 /**
  * PoweredByExplNodes - Universal tagline component for ONE ecosystem
  * 
- * A self-contained, reusable component that displays the "// Powered by EXPL Nodes"
+ * A self-contained, reusable component that displays the "// Powered by EXPL nodes"
  * badge with consistent styling, 3D effects, and animations across all ONE projects.
  * 
  * USAGE:
@@ -141,7 +141,7 @@ export function PoweredByExplNodes({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      // Powered by EXPL Nodes
+      // Powered by EXPL nodes
     </a>
   )
 }

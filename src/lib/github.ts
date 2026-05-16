@@ -1,3 +1,10 @@
+// Single source of GitHub stats for the landing page.
+//
+// The backend computes everything (commit counts across all branches, per repo
+// and in total) and serves it from a cache. The page fetches it ONCE per load
+// via fetchSiteStats() — the in-flight promise + cache below guarantee that a
+// single /api/stats request is shared by every component on the page.
+
 const API_URL = 'https://api-landing.expl.one'
 
 export interface RepoStats {
@@ -8,6 +15,15 @@ export interface RepoStats {
   createdAt: string
 }
 
+export interface GlobalStats {
+  lastUpdate: string
+  today: number
+  thisWeek: number
+  thisMonth: number
+  thisYear: number
+  total: number
+}
+
 export interface ProjectGitHubData {
   commitCount: number
   lastCommitDate: string
@@ -16,12 +32,12 @@ export interface ProjectGitHubData {
   isActive: boolean
 }
 
-// Cache for repo stats
-let cachedRepoStats: Map<string, RepoStats> = new Map()
-let lastFetchTime = 0
-const CACHE_DURATION = 60 * 1000 // 1 minute
+export interface SiteStats {
+  global: GlobalStats
+  repos: Record<string, RepoStats>
+}
 
-// Map project names to their actual repo names
+// Maps a project card name to its actual GitHub repository name.
 export const projectToRepoMap: Record<string, string> = {
   ecosystem: 'main-landing',
   pump: 'expl-one-pump',
@@ -38,67 +54,60 @@ export const projectToRepoMap: Record<string, string> = {
   space: 'world-soon',
 }
 
-export async function fetchAllRepoStats(): Promise<Map<string, RepoStats>> {
-  const now = Date.now()
-  
-  if (cachedRepoStats.size > 0 && (now - lastFetchTime) < CACHE_DURATION) {
-    return cachedRepoStats
-  }
-  
-  try {
-    const response = await fetch(`${API_URL}/api/stats`)
-    if (!response.ok) throw new Error('Failed to fetch stats')
-    
-    const data = await response.json()
-    
-    if (data.repos) {
-      cachedRepoStats = new Map(Object.entries(data.repos))
-      lastFetchTime = now
-    }
-    
-    return cachedRepoStats
-  } catch (error) {
-    console.error('Error fetching repo stats:', error)
-    return cachedRepoStats
-  }
-}
+let cache: SiteStats | null = null
+let inFlight: Promise<SiteStats> | null = null
 
-export async function getProjectData(projectName: string): Promise<{
-  daysSinceStart: number
-  githubData: ProjectGitHubData | null
-} | null> {
-  try {
-    const allStats = await fetchAllRepoStats()
-    const repoName = projectToRepoMap[projectName] || projectName
-    
-    const repoStats = allStats.get(repoName)
-    
-    if (repoStats) {
-      const lastCommitDate = new Date(repoStats.lastCommitDate)
-      const now = new Date()
-      const daysSinceLastCommit = Math.floor((now.getTime() - lastCommitDate.getTime()) / (1000 * 60 * 60 * 24))
-      
-      return {
-        daysSinceStart: repoStats.daysSinceCreation,
-        githubData: {
-          commitCount: repoStats.commits,
-          lastCommitDate: repoStats.lastCommitDate,
-          daysSinceCreation: repoStats.daysSinceCreation,
-          daysSinceLastCommit,
-          isActive: repoStats.commits > 0,
+// Fetch the stats snapshot. Resolves from cache after the first successful call;
+// concurrent callers share one in-flight request. A failed request is not
+// cached, so a later call will retry.
+export async function fetchSiteStats(): Promise<SiteStats> {
+  if (cache) return cache
+
+  if (!inFlight) {
+    inFlight = fetch(`${API_URL}/api/stats`)
+      .then(async (res) => {
+        if (!res.ok) throw new Error(`Stats request failed: ${res.status}`)
+        const data = await res.json()
+        const result: SiteStats = {
+          global: {
+            lastUpdate: data.lastUpdate ?? '',
+            today: data.today ?? 0,
+            thisWeek: data.thisWeek ?? 0,
+            thisMonth: data.thisMonth ?? 0,
+            thisYear: data.thisYear ?? 0,
+            total: data.total ?? 0,
+          },
+          repos: data.repos ?? {},
         }
-      }
-    }
-    
-    return null
-  } catch (error) {
-    console.error('Error getting project data:', error)
-    return null
+        cache = result
+        return result
+      })
+      .finally(() => {
+        inFlight = null
+      })
   }
+
+  return inFlight
 }
 
-// Subscribe to real-time updates
-export function updateRepoStatsCache(repos: Record<string, RepoStats>) {
-  cachedRepoStats = new Map(Object.entries(repos))
-  lastFetchTime = Date.now()
+// Derive a project card's GitHub data from an already-fetched stats snapshot.
+export function getProjectGitHubData(
+  projectName: string,
+  repos: Record<string, RepoStats>
+): ProjectGitHubData | null {
+  const repoName = projectToRepoMap[projectName] || projectName
+  const repo = repos[repoName]
+  if (!repo) return null
+
+  const daysSinceLastCommit = Math.floor(
+    (Date.now() - new Date(repo.lastCommitDate).getTime()) / 86_400_000
+  )
+
+  return {
+    commitCount: repo.commits,
+    lastCommitDate: repo.lastCommitDate,
+    daysSinceCreation: repo.daysSinceCreation,
+    daysSinceLastCommit,
+    isActive: repo.commits > 0,
+  }
 }

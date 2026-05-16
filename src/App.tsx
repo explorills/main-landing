@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion, useAnimationControls } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { ArrowRight } from '@phosphor-icons/react'
 import { FAQSection } from '@/components/FAQSection'
@@ -34,6 +34,8 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [ringReady] = useState(true)
+  const logoControls = useAnimationControls()
+  const titleControls = useAnimationControls()
 
   // Disable browser scroll restoration to prevent cached scroll position
   useEffect(() => {
@@ -46,9 +48,21 @@ function App() {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % ecosystemProjects.length)
     }, 2000)
-    
+
     return () => clearInterval(interval)
   }, [])
+
+  // Pulse the logo + title on the exact frame the project name switches
+  useEffect(() => {
+    logoControls.start({
+      scale: [1, 1.08, 1],
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+    })
+    titleControls.start({
+      scale: [1, 1.03, 1],
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+    })
+  }, [currentIndex, logoControls, titleControls])
 
   // Always start from top on page load/refresh and clear hash
   useEffect(() => {
@@ -101,20 +115,17 @@ function App() {
                   loading="eager"
                   width="64"
                   height="64"
-                  animate={{ scale: [1, 1.08, 1] }}
-                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 1.5 }}
+                  animate={logoControls}
                   style={{ willChange: 'transform' }}
                 />
               </a>
-              <motion.div 
-                className="flex flex-col gap-1"
-                animate={{ scale: [1, 1.03, 1] }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1], repeat: Infinity, repeatDelay: 1.5 }}
+              <motion.div
+                className="flex flex-col gap-1 items-center"
+                animate={titleControls}
                 style={{ willChange: 'transform' }}
               >
-                <div className="flex items-center gap-2">
-                  <span className="text-[24px] sm:text-[26px] font-bold text-white">ONE</span>
-                  <span className="relative inline-block min-w-[80px] sm:min-w-[120px]">
+                <div className="flex items-center justify-center">
+                  <span className="relative inline-block min-w-[80px] sm:min-w-[120px] text-center">
                     <motion.span
                       key={currentIndex}
                       initial={{ y: 20, opacity: 0, filter: 'blur(4px)' }}
@@ -124,16 +135,16 @@ function App() {
                         duration: 0.5,
                         ease: [0.16, 1, 0.3, 1],
                       }}
-                      className="absolute left-0 top-1/2 -translate-y-1/2 text-[22px] sm:text-2xl font-bold whitespace-nowrap"
-                      style={{ color: ecosystemProjects[currentIndex].color }}
+                      className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 text-[22px] sm:text-2xl font-bold whitespace-nowrap"
+                      style={{ color: ecosystemProjects[currentIndex].name === 'ecosystem' ? undefined : ecosystemProjects[currentIndex].color }}
                     >
-                      <span className="relative">
-                        {ecosystemProjects[currentIndex].name}
+                      <span className={`relative ${ecosystemProjects[currentIndex].name === 'ecosystem' ? 'text-primary glow-accent' : ''}`}>
+                        {ecosystemProjects[currentIndex].name === 'ecosystem' ? 'ONE' : ecosystemProjects[currentIndex].name.toUpperCase()}
                         <span
                           className="absolute inset-0 blur-2xl opacity-50"
                           style={{ color: ecosystemProjects[currentIndex].color }}
                         >
-                          {ecosystemProjects[currentIndex].name}
+                          {ecosystemProjects[currentIndex].name === 'ecosystem' ? 'ONE' : ecosystemProjects[currentIndex].name.toUpperCase()}
                         </span>
                       </span>
                     </motion.span>
@@ -271,7 +282,7 @@ function App() {
                       />
                       <div className="relative px-4 py-2 sm:px-6 sm:py-3 rounded-full border border-border/50 backdrop-blur-sm bg-background/30 group-hover:border-primary/50 transition-all duration-300 cursor-pointer">
                         <span className="text-sm sm:text-base lg:text-lg font-medium whitespace-nowrap cursor-pointer">
-                          <span className="opacity-60 cursor-pointer">ONE</span> <span style={{ color: project.color }} className="cursor-pointer">{project.name}</span>
+                          <span style={{ color: project.color }} className="cursor-pointer">{project.name.toUpperCase()}</span>
                         </span>
                       </div>
                     </motion.div>
@@ -347,7 +358,7 @@ function App() {
                 <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight px-4">
                   <span className="text-foreground">A single </span>
                   <span className="relative inline-block">
-                    <span className="text-primary glow-accent-strong">EXPL Node</span>
+                    <span className="text-primary glow-accent-strong">EXPL node</span>
                     <motion.span
                       className="absolute -inset-2 rounded-lg bg-primary/10 -z-10"
                       animate={{
@@ -380,7 +391,7 @@ function App() {
               >
                 <div className="text-center">
                   <p className="text-lg sm:text-xl md:text-2xl text-white leading-relaxed font-bold mb-3">
-                    Each EXPL Node grants
+                    Each EXPL node grants
                   </p>
                   <div className="space-y-2 text-lg sm:text-xl md:text-2xl text-muted-foreground leading-relaxed text-left">
                     <p className="flex gap-4 items-center">
@@ -428,7 +439,7 @@ function App() {
                   />
                   <div className="relative px-8 sm:px-12 py-4 sm:py-6 rounded-full bg-primary text-primary-foreground font-semibold text-lg sm:text-xl md:text-2xl border-2 border-primary/50 shadow-lg shadow-primary/25 group-hover:shadow-xl group-hover:shadow-primary/40 transition-all duration-300">
                     <span className="flex items-center gap-3">
-                      <span>Mint Your EXPL Node</span>
+                      <span>Mint Your EXPL node</span>
                       <motion.span
                         animate={{
                           x: [0, 4, 0],
