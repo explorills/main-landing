@@ -144,7 +144,9 @@ function ProjectItem({ project, compact }: { project: ProjectDetails; compact?: 
             style={{ backgroundColor: project.color }}
           />
           <span className="text-sm font-medium text-foreground cursor-text select-text">
-            ONE <span style={{ color: project.color }}>{project.name}</span>
+            <span style={{ color: project.color }}>
+              {project.name === 'ecosystem' ? 'EXPL.ONE' : project.name.toUpperCase()}
+            </span>
           </span>
         </div>
       </div>
@@ -161,7 +163,9 @@ function ProjectItem({ project, compact }: { project: ProjectDetails; compact?: 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1">
             <h3 className="text-base font-semibold text-foreground cursor-text select-text">
-              ONE <span style={{ color: project.color }}>{project.name}</span>
+              <span style={{ color: project.color }}>
+              {project.name === 'ecosystem' ? 'EXPL.ONE' : project.name.toUpperCase()}
+            </span>
             </h3>
             {hasLink && (
               <ArrowUpRight className="text-primary flex-shrink-0" size={16} weight="bold" />

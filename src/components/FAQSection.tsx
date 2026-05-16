@@ -12,15 +12,15 @@ const faqs: FAQItem[] = [
   {
     question: "What is EXPL.ONE / the ONE ecosystem?",
     answer:
-      "ONE is a decentralized ecosystem made up of multiple independent projects operating under a shared infrastructure. The ecosystem is powered by EXPL Nodes, which form the backbone for distribution, participation, and on-chain operations. Everything is designed to function transparently without centralized control.",
+      "ONE is a decentralized ecosystem made up of multiple independent projects operating under a shared infrastructure. The ecosystem is powered by EXPL nodes, which form the backbone for distribution, participation, and on-chain operations. Everything is designed to function transparently without centralized control.",
     links: [
       { text: "Read the overview", url: "https://docs.expl.one" },
     ],
   },
   {
-    question: "What are EXPL Nodes?",
+    question: "What are EXPL nodes?",
     answer:
-      "EXPL Nodes are ERC721 node licenses that power the ONE ecosystem. Node owners operate infrastructure, participate in distribution mechanisms, and receive ecosystem rewards. Nodes exist on Ethereum and Flare and are designed to be immutable, verifiable, and decentralized.",
+      "EXPL nodes are ERC721 node licenses that power the ONE ecosystem. Node owners operate infrastructure, participate in distribution mechanisms, and receive ecosystem rewards. Nodes exist on Ethereum and Flare and are designed to be immutable, verifiable, and decentralized.",
     links: [
       { text: "Node documentation", url: "https://docs.expl.one/nodes/node-nft-licenses" },
       { text: "Get a node", url: "https://node.expl.one" },
@@ -29,7 +29,7 @@ const faqs: FAQItem[] = [
   {
     question: "How does revenue work?",
     answer:
-      "All ecosystem revenue is distributed automatically through smart contracts. 45% goes to EXPL Node owners, 45% to ONE Creators, and 10% to the founding team. This model removes intermediaries and allows contributors and operators to earn directly from ecosystem activity.",
+      "All ecosystem revenue is distributed automatically through smart contracts. 45% goes to EXPL node owners, 45% to ONE Creators, and 10% to the founding team. This model removes intermediaries and allows contributors and operators to earn directly from ecosystem activity.",
     links: [
       { text: "Distribution framework", url: "https://docs.expl.one/distribution-framework/introduction" },
     ],
@@ -45,17 +45,17 @@ const faqs: FAQItem[] = [
   {
     question: "What projects exist inside the ONE ecosystem?",
     answer:
-      "The ONE ecosystem consists of multiple products and layers, including ONE pump, ONE network, and other exploration-focused initiatives. Each project serves a distinct role while sharing the same infrastructure and distribution logic.",
+      "The ONE ecosystem consists of multiple products and layers, including PUMP, NETWORK, and other exploration-focused initiatives. Each project serves a distinct role while sharing the same infrastructure and distribution logic.",
     links: [
-      { text: "ONE pump", url: "https://pump.expl.one" },
-      { text: "ONE network", url: "https://network.expl.one" },
-      { text: "ONE world", url: "https://world.expl.one" },
+      { text: "PUMP", url: "https://pump.expl.one" },
+      { text: "NETWORK", url: "https://network.expl.one" },
+      { text: "WORLD", url: "https://world.expl.one" },
     ],
   },
   {
-    question: "How do I buy an EXPL Node?",
+    question: "How do I buy an EXPL node?",
     answer:
-      "EXPL Nodes can be purchased through the official node portal. The documentation explains the full process, supported wallets, and security considerations to ensure a safe purchase.",
+      "EXPL nodes can be purchased through the official node portal. The documentation explains the full process, supported wallets, and security considerations to ensure a safe purchase.",
     links: [
       { text: "How to purchase a node", url: "https://docs.expl.one/nodes/how-to-purchase-node" },
       { text: "Node portal", url: "https://node.expl.one" },
@@ -186,7 +186,7 @@ export function FAQSection() {
               <span className="text-primary glow-accent">Answered.</span>
             </h2>
             <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
-              Everything you need to know about the EXPL Nodes and ONE ecosystem.
+              Everything you need to know about the EXPL nodes and ONE ecosystem.
             </p>
           </motion.div>
         </motion.div>
